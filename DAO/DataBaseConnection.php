@@ -13,8 +13,8 @@ class DataBaseConnection {
             $this->db = '231185';
             $this->user = '231185';
         } else {
-            $this->db = '231185';
-            $this->user = '231185';
+            $this->db = '257831';
+            $this->user = '257831';
         }
     }
 

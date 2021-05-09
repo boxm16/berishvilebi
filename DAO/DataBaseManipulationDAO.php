@@ -2,7 +2,7 @@
 
 require_once 'DataBaseConnection.php';
 
-class DataBaseManipulationDAO {
+class DataBaseManipulationDao {
 
     private $connection;
 
@@ -102,13 +102,7 @@ class DataBaseManipulationDAO {
     public function createLastUploadTable() {
         $sql = "CREATE TABLE `last_upload` (
   `number` VARCHAR(10) NOT NULL,
-  `date_stamp` DATE NOT NULL,
-   CONSTRAINT `number`
-    FOREIGN KEY (`number`)
-    REFERENCES `route` (`number`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-";
+  `date_stamp` DATE NOT NULL);";
         try {
             $this->connection->exec($sql);
             echo "Table 'last_upload' created successfully" . "<br>";
@@ -152,7 +146,7 @@ class DataBaseManipulationDAO {
     `date_stamp` DATE NOT NULL,
     CONSTRAINT `report_id`
     FOREIGN KEY (`report_id`)
-    REFERENCES `report_tech` (`id`)
+    REFERENCES `cron_job` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION);";
 

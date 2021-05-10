@@ -34,6 +34,18 @@ class CronJobDao {
         }
     }
 
+    public function deleteUploadTask() {
+        $sql = "DELETE FROM cron_job WHERE type='uploading';";
+        try {
+            $statement = $this->connection->prepare($sql);
+            $statement->execute();
+            echo "Upload task has been deleted successfully from cron_job table.<br>";
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+    }
+
     public function registerNewUpload() {
         $sql = "INSERT INTO cron_job (type, value_1) VALUES ('uploading', '8');";
         //hre value_1 is starting row for chunk

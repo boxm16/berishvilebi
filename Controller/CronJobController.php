@@ -16,7 +16,7 @@ class CronJobController {
     function __construct() {
         $this->lastChunk = false;
         $this->cronJobDao = new CronJobDao();
-        $this->routeDao=new RouteDao();
+        $this->routeDao = new RouteDao();
     }
 
     public function getUploadingStatus(): bool {
@@ -25,6 +25,7 @@ class CronJobController {
 
     public function registerNewUpload() {
         $this->cronJobDao->deleteLastUploadedData();
+        $this->cronJobDao->deleteUploadTask();//in case there still is one working, maybe later i`ll leave two and more upload tasks in cron job
         $this->cronJobDao->registerNewUpload();
     }
 

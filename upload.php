@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {//first checking if request commming from submit o
 
 
 
-    if ($_FILES["fileToUpload"]["size"] > 12582910) {//12MB=12582912bytes-sheizleba shevamciro
+    if ($_FILES["fileToUpload"]["size"] > 10485760) {//10MB
         $errorMessage = "ფაილის ზომა დაშვებულზე დიდია.";
         $uploadOk = 0;
     }
@@ -102,12 +102,12 @@ if (isset($_POST["submit"])) {//first checking if request commming from submit o
                                 </tr>
                                 <tr>
                                     <td>
-                                <center> <input  form-control-file type="file" name="fileToUpload" id="fileToUpload"></center>
+                                <center> <input  form-control-file type="file" name="fileToUpload" id="fileToUpload" ></center>
                                 </td>
                                 </tr> 
                                 <tr>
                                     <td>
-                                <center><input class="btn btn-lg btn-primary" type="submit" value="ატვირთვა" name="submit"></center>  
+                                <center><input class="btn btn-lg btn-primary" type="submit" value="ატვირთვა" name="submit" id="sbmt"></center>  
                                 </td>
                                 </tr>
                             </table>
@@ -119,6 +119,26 @@ if (isset($_POST["submit"])) {//first checking if request commming from submit o
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            document.getElementById("fileToUpload").addEventListener("change", function (event) {
+                var oFile = document.getElementById("fileToUpload").files[0]; // <input type="file" id="fileUpload" accept=".jpg,.png,.gif,.jpeg"/>
+                if (oFile.size > 10485760) //10 MB for bytes.
+                {
+                    alert("ფაილის ზომა დასაშვებზე (10MB) დიდია !");
+                    event.preventDefault();
+                }
+            });
+            document.getElementById("sbmt").addEventListener("click", function (event) {
+                var oFile = document.getElementById("fileToUpload").files[0]; // <input type="file" id="fileUpload" accept=".jpg,.png,.gif,.jpeg"/>
+                if (oFile.size > 10485760) //10 MB for bytes.
+                {
+                    alert("ფაილის ზომა დასაშვებზე (10MB) დიდია!");
+                    event.preventDefault();
+                }
+            });
 
+
+
+        </script>
     </body>
 </html>

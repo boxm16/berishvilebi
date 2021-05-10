@@ -12,7 +12,7 @@ class RouteDao {
     }
 
     public function getRouteNumbers() {
-
+        $returnArray = array();
         $sql = "SELECT number FROM route";
         try {
 
@@ -86,8 +86,8 @@ class RouteDao {
             }
         }
     }
-    
-     public function getLastUploadedData() {
+
+    public function getLastUploadedData() {
         try {
             $sql = "SELECT DISTINCT t1.number, date_stamp FROM last_upload t1 INNER JOIN route t2 ON t1.number=t2.number ORDER BY prefix, suffix, date_stamp DESC";
             $result = $this->connection->query($sql)->fetchAll();

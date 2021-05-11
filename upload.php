@@ -75,7 +75,6 @@ if (isset($_POST["submit"])) {//first checking if request commming from submit o
 
                     <nav class="navbar fixed-top navbar-light bg-light">
                         <a class="btn btn-primary" href="index.php" style="font-size: 20px">საწყისი გვერდი</a>
-
                     </nav>
 
 

@@ -150,7 +150,10 @@ if ($isUploading) {
         <div class="container">
             <div class="row">
                 <div class="col">
+
                     <nav class="navbar fixed-top navbar-light bg-light">
+                        <a class="btn btn-primary" href="index.php" style="font-size: 20px">საწყისი გვერდი</a>
+
                         <div style="padding-left:  20%">
                             <table >
                                 <thead>
@@ -168,6 +171,7 @@ if ($isUploading) {
                                 </thead>
                             </table>
                         </div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                     </nav>
                 </div>
             </div><hr><hr><hr><hr>
@@ -320,7 +324,7 @@ if ($isUploading) {
                                 </li>
                                 <li>
 
-                                    <button class="btn btn-primary" type="button " onclick="submitLink('reports_2.0.php')" >
+                                    <button class="btn btn-primary" type="button " onclick="submitLink('reports.php', '_self')" >
                                         რეპორტების შექმნა
                                     </button>
 
@@ -394,10 +398,9 @@ if ($isUploading) {
                                             mainCheckBox.checked = true;
                                         }
                                         //this is to turn a link  into submit button
-                                        function submitLink(target) {
-
-                                            form.target = "_blank";
-                                            form.action = target;
+                                        function submitLink(action, target) {
+                                            form.action = action;
+                                            form.target = target;
                                             routes_dates.value = collectSellectedCheckBoxes();
                                             form.submit();
                                         }

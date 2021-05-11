@@ -264,7 +264,7 @@ if ($isUploading) {
                                 </a>
                             </li>
                             <li>
-                                <a href="#" onclick="submitLink('reportFactory.php')">
+                                <a href="#" onclick="submitLink('reportFactory.php', '_self')">
                                     <i class="fa fa-cog" aria-hidden="true"></i> რეპორტების მომზადება
                                 </a>
                             </li>
@@ -366,10 +366,9 @@ if ($isUploading) {
                                         mainCheckBox.checked = true;
                                     }
                                     //this is to turn a link  into submit button
-                                    function submitLink(target) {
-
-                                        form.target = "_blank";
-                                        form.action = target;
+                                    function submitLink(action, target) {
+                                        form.action = action;
+                                        form.target = target;
                                         routes_dates.value = collectSellectedCheckBoxes();
                                         form.submit();
                                     }

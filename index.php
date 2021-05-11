@@ -264,7 +264,7 @@ if ($isUploading) {
                                 </a>
                             </li>
                             <li>
-                                <a href="#" onclick="submitLink('reportMaker_2.0.php')">
+                                <a href="#" onclick="submitLink('reportFactory.php')">
                                     <i class="fa fa-cog" aria-hidden="true"></i> რეპორტების მომზადება
                                 </a>
                             </li>

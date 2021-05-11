@@ -1,6 +1,6 @@
 <?php
 
-require_once 'DAO/DataBaseManipulationDAO.php';
+require_once 'DAO/DataBaseManipulationDao.php';
 
 class DataBaseManipulationController {
 

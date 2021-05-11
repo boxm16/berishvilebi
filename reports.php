@@ -1,15 +1,12 @@
 <?php
-require_once 'Controller/CronJobController.php';
-require_once 'Controller/IndexController.php';
+require_once 'Controller/ReportController.php';
+$reportController = new ReportController();
 
-$cronJobController = new CronJobController();
-$isUploading = $cronJobController->getUploadingStatus();
-if ($isUploading) {
-    $lastUploadedData = array();
-} else {
-    $indexController = new IndexController();
-    $lastUploadedData = $indexController->getLastUploadedData();
+if (isset($_POST["routeDetailsReport"]) || isset($_POST["intervalsReport"]) || isset($_POST["excelFormReport"])) {
+    $requestedReportsData = $_POST;
+    $reportController->registerReports($requestedReportsData);
 }
+//$reportList = $reportController->getReportList();
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +15,7 @@ if ($isUploading) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-       
+
     </head>
     <body>
         <div class="container">

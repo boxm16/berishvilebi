@@ -59,6 +59,7 @@ class ReportController {
         $limit = 50000;
         $result = $this->reportDao->getRegisteredRouteDetailsReportLimitedData($reportId, $limit, $reportId);
         $reportChunk = $this->checkReportChunk($result, $limit, $reportId);
+        $routeNumbersToBeDeleted = $this->createRouteDetailsXLSX($reportChunk); //returns data to be deleted
     }
 
     private function checkReportChunk($reportChunk, $limit, $reportId) {
@@ -67,9 +68,9 @@ class ReportController {
             return $reportChunk;
         } else {
             $index = count($reportChunk) - 1;
-            $lastRouteNumber = $reportChunk($index)["route_number"];
+            $lastRouteNumber = $reportChunk[$index]["route_number"];
             while ($index > -1) {
-                $routeNumber = $reportChunk($index)["route_number"];
+                $routeNumber = $reportChunk[$index]["route_number"];
                 if ($routeNumber != $lastRouteNumber) {
                     array_splice($reportChunk, $index);
                     return $reportChunk;
@@ -78,6 +79,10 @@ class ReportController {
             }
             return $reportChunk;
         }
+    }
+
+    private function createRouteDetailsXLSX($reportChunk): array {
+        return array();
     }
 
 }

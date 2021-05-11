@@ -20,12 +20,12 @@ class CronJobController {
     }
 
     public function getUploadingStatus(): bool {
-        return ($this->cronJobDao->getUploadingJobId() == null) ? false : true;
+        return ($this->cronJobDao->getUploadingCronJobId() == null) ? false : true;
     }
 
     public function registerNewUpload() {
         $this->cronJobDao->deleteLastUploadedData();
-        $this->cronJobDao->deleteUploadTask();//in case there still is one working, maybe later i`ll leave two and more upload tasks in cron job
+        $this->cronJobDao->deleteUploadTask(); //in case there still is one working, maybe later i`ll leave two and more upload tasks in cron job
         $this->cronJobDao->registerNewUpload();
     }
 
@@ -367,6 +367,11 @@ class CronJobController {
 
             $this->routeDao->insertTripPeriods($tripPeriodsForInsertion);
         }
+    }
+
+// =========//==========//===========//==================//==============/////=======
+    public function getRouteDetailsReportIds(): array {
+        return $this->cronJobDao->getRouteDetailsReportsCronJobIds();
     }
 
 }

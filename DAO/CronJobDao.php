@@ -11,7 +11,7 @@ class CronJobDao {
         $this->connection = $dataBaseConnection->getLocalhostConnection();
     }
 
-    public function getUploadingJobId() {
+    public function getUploadingCronJobId() {
         $sql = "SELECT id FROM cron_job WHERE type='uploading' LIMIT 1"; //maybe, later, limit 1 will be removed
         try {
             $result = $this->connection->query($sql)->fetch();
@@ -121,6 +121,23 @@ class CronJobDao {
             $statement->bindParam(1, $endRow);
             $statement->execute();
             echo "Next chunk with EndRow=$endRow registered successfully into database. <br>";
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+    }
+
+    //-----------------------------//---------------------------------//
+    public function getRouteDetailsReportsCronJobIds(): array {
+        $RouteDetailsReportsIds = array();
+        $sql = "SELECT id FROM cron_job WHERE type='routeDetailsReport';";
+        try {
+            $result = $this->connection->query($sql)->fetchAll();
+            foreach ($result as $row) {
+                $routeDetailsReportId = $row["id"];
+                array_push($RouteDetailsReportsIds, $routeDetailsReportId);
+            }
+            return $RouteDetailsReportsIds;
         } catch (\PDOException $e) {
             echo $e->getMessage() . " Error Code:";
             echo $e->getCode() . "<br>";

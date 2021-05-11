@@ -10,7 +10,7 @@ class ReportDao {
     }
 
     public function registerRouteDetailsReport() {
-        $sql = "INSERT INTO cron_job (type, value_1) VALUES ('routeDetails' , '1')";
+        $sql = "INSERT INTO cron_job (type, value_1) VALUES ('routeDetailsReport' , '1')";
 
         try {
             $this->connection->beginTransaction();
@@ -92,7 +92,7 @@ class ReportDao {
     public function getRegisteredRouteDetailsReportLimitedData($reportId, $limit) {
 
 
-        $sql = "SELECT * FROM trip_period t1 INNER JOIN trip_voucher t2 ON t1.trip_voucher_number=t2.number INNER JOIN reports_routes_dates t3 ON t2.date_stamp=t3.date_stamp AND t2.route_number=t3.route_number INNER JOIN report_tech t4 ON t4.id=t3.report_id WHERE  t4.id=$reportId LIMIT $limit ;";
+        $sql = "SELECT * FROM trip_period t1 INNER JOIN trip_voucher t2 ON t1.trip_voucher_number=t2.number INNER JOIN reports_routes_dates t3 ON t2.date_stamp=t3.date_stamp AND t2.route_number=t3.route_number INNER JOIN cron_job t4 ON t4.id=t3.report_id WHERE  t4.id=$reportId LIMIT $limit ;";
 
         try {
             $result = $this->connection->query($sql)->fetchAll();

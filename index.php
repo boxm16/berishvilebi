@@ -269,8 +269,8 @@ if ($isUploading) {
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <i class="fa fa-cog" aria-hidden="true"></i> -----
+                                <a href="#" onclick="submitLink('reports.php', '_blank')">
+                                    <i class="fa fa-cog" aria-hidden="true"></i> რეპორტები
                                 </a>
                             </li>
                             <a href="#">

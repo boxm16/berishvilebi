@@ -20,7 +20,8 @@ class DataBaseManipulationDao {
   `b_point` VARCHAR(100) NULL,
    PRIMARY KEY (`number`))
    ENGINE = InnoDB
-   DEFAULT CHARACTER SET = utf8;
+   DEFAULT CHARACTER SET = utf8
+   COLLATE=utf8_general_ci ;
    ";
         try {
             $this->connection->exec($sql);
@@ -53,7 +54,8 @@ class DataBaseManipulationDao {
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
     ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8;
+    DEFAULT CHARACTER SET = utf8
+    COLLATE=utf8_general_ci;
    ";
         try {
             $this->connection->exec($sql);
@@ -85,6 +87,7 @@ class DataBaseManipulationDao {
     ON UPDATE NO ACTION)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8
+    COLLATE=utf8_general_ci;
    ";
         try {
             $this->connection->exec($sql);
@@ -101,8 +104,11 @@ class DataBaseManipulationDao {
 
     public function createLastUploadTable() {
         $sql = "CREATE TABLE `last_upload` (
-  `number` VARCHAR(10) NOT NULL,
-  `date_stamp` DATE NOT NULL);";
+   `number` VARCHAR(10) NOT NULL,
+   `date_stamp` DATE NOT NULL)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8
+    COLLATE=utf8_general_ci;";
         try {
             $this->connection->exec($sql);
             echo "Table 'last_upload' created successfully" . "<br>";
@@ -124,7 +130,10 @@ class DataBaseManipulationDao {
   `value_2` VARCHAR(10) NULL,
   `value_3` VARCHAR(10) NULL,
   `value_4` VARCHAR(10) NULL,
-   PRIMARY KEY (`id`));
+   PRIMARY KEY (`id`))
+   ENGINE = InnoDB
+   DEFAULT CHARACTER SET = utf8
+   COLLATE=utf8_general_ci;
    ";
         try {
             $this->connection->exec($sql);
@@ -148,7 +157,10 @@ class DataBaseManipulationDao {
     FOREIGN KEY (`report_id`)
     REFERENCES `cron_job` (`id`)
     ON DELETE CASCADE
-    ON UPDATE NO ACTION);";
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8
+    COLLATE=utf8_general_ci;";
 
 
 

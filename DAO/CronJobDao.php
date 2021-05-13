@@ -27,7 +27,7 @@ class CronJobDao {
         try {
             $statement = $this->connection->prepare($sql);
             $statement->execute();
-            echo "All data has been deleted successfully from last_upload table.<br>";
+           // echo "All data has been deleted successfully from last_upload table.<br>";
         } catch (\PDOException $e) {
             echo $e->getMessage() . " Error Code:";
             echo $e->getCode() . "<br>";
@@ -39,7 +39,7 @@ class CronJobDao {
         try {
             $statement = $this->connection->prepare($sql);
             $statement->execute();
-            echo "Upload task has been deleted successfully from cron_job table.<br>";
+          //  echo "Upload task has been deleted successfully from cron_job table.<br>";
         } catch (\PDOException $e) {
             echo $e->getMessage() . " Error Code:";
             echo $e->getCode() . "<br>";

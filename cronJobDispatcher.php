@@ -7,6 +7,7 @@ $cronJobController = new CronJobController();
 if (isset($_GET["uploadingStatusRequest"])) {//this request comes from index.php ajax every second
     if ($cronJobController->getUploadingStatus()) {
         echo "uploading";
+        //dont wright anything here, i need word 'uploading' to be alone
     } else {
         echo "ready<br>";
     }
@@ -25,6 +26,7 @@ if (isset($_GET["uploadingStatusRequest"])) {//this request comes from index.php
             echo "ready<br>";
         }
     }
+    $e = microtime(true);
+    echo "<br> Display time required:" . ($e - $s);
 }
-$e = microtime(true);
-echo "<br> Display time required:" . ($e - $s);
+

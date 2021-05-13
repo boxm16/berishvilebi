@@ -121,13 +121,13 @@ if ($isUploading) {
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         let uploadingStatusDisplay = document.getElementById(\"uploadingStatusDisplay\");
-                        if (this.responseText == \"uploading\") {
+                        if (this.responseText =='uploading') {
                             uploadingStatusDisplay.innerHTML = \"მიმდინარეობს ატვირთული ფაილის მონაცემთა ბაზაში გადატანა\"
                             uploadingStatusDisplay.style.color = \"#ff0000\";
                         } else {
                             uploadingStatusDisplay.innerHTML = \"ფაილის მონაცემთა ბაზაში გადატანა დასრილებულია\"
                             uploadingStatusDisplay.style.color = \"green\";
-                            location.reload();
+                           location.reload();
                         }
 
                     }

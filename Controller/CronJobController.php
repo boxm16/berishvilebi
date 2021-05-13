@@ -22,6 +22,9 @@ class CronJobController {
     public function getUploadingStatus(): bool {
         return ($this->cronJobDao->getUploadingCronJobId() == null) ? false : true;
     }
+    public function getLastUploadedRow(){
+        return $this->cronJobDao->getLastUploadedRow();
+    }
 
     public function registerNewUpload() {
         $this->cronJobDao->deleteLastUploadedData();

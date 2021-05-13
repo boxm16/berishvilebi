@@ -21,6 +21,16 @@ class CronJobDao {
             echo $e->getCode() . "<br>";
         }
     }
+    public function getLastUploadedRow(){
+       $sql = "SELECT value_1 FROM cron_job WHERE type='uploading' LIMIT 1"; //maybe, later, limit 1 will be removed
+        try {
+            $result = $this->connection->query($sql)->fetch();
+            return $result["value_1"];
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        } 
+    }
 
     public function deleteLastUploadedData() {
         $sql = "DELETE FROM last_upload;";

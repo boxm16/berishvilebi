@@ -121,8 +121,12 @@ if ($isUploading) {
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         let uploadingStatusDisplay = document.getElementById(\"uploadingStatusDisplay\");
-                        if (this.responseText =='uploading') {
-                            uploadingStatusDisplay.innerHTML = \"მიმდინარეობს ატვირთული ფაილის მონაცემთა ბაზაში გადატანა\"
+                        let response=this.responseText; 
+                        console.log(response);
+                        if (response.includes('uploading')) {
+                        let splittedResponse=response.split(':');
+                        let lastUploadedRow=splittedResponse[1];
+                            uploadingStatusDisplay.innerHTML = \"მიმდინარეობს ატვირთული ფაილის მონაცემთა ბაზაში გადატანა. ბოლო ატვირთული რიგის ნომერი:\"+lastUploadedRow;
                             uploadingStatusDisplay.style.color = \"#ff0000\";
                         } else {
                             uploadingStatusDisplay.innerHTML = \"ფაილის მონაცემთა ბაზაში გადატანა დასრილებულია\"

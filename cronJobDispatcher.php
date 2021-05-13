@@ -2,7 +2,7 @@
 
 require_once 'Controller/CronJobController.php';
 require_once 'Controller/ReportController.php';
-$s = microtime(true);
+//$s = microtime(true);
 $cronJobController = new CronJobController();
 if (isset($_GET["uploadingStatusRequest"])) {//this request comes from index.php ajax every second
     if ($cronJobController->getUploadingStatus()) {
@@ -26,7 +26,7 @@ if (isset($_GET["uploadingStatusRequest"])) {//this request comes from index.php
             echo "ready<br>";
         }
     }
-    $e = microtime(true);
-    echo "<br> Display time required:" . ($e - $s);
+   // $e = microtime(true);
+   // echo "<br> Display time required:" . ($e - $s);
 }
 

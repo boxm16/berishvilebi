@@ -35,7 +35,7 @@ if (isset($_POST["submit"])) {//first checking if request commming from submit o
 // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], "uploads/uploadedExcelFile.xlsx")) {
-            echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+            //echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
 
             //this part for registering new upload into database (tech table)
             //so that now its a cron`s job to run and insert into database part by part all xlsx file

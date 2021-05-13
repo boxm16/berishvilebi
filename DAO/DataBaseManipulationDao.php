@@ -167,5 +167,71 @@ class DataBaseManipulationDao {
             }
         }
     }
+//---------------------
+    public function dropRouteTable() {
+        $sql = "DROP TABLE route;";
+        try {
+            $this->connection->exec($sql);
+            echo "Table 'route' deleted successfully" . "<br>";
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+    }
+
+    public function dropTripVoucherTable() {
+       $sql = "DROP TABLE trip_voucher;";
+        try {
+            $this->connection->exec($sql);
+            echo "Table 'trip_voucher' deleted successfully" . "<br>";
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+    }
+
+    public function dropTripPeriodTable() {
+         $sql = "DROP TABLE trip_period;";
+        try {
+            $this->connection->exec($sql);
+            echo "Table 'trip_period' deleted successfully" . "<br>";
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+    }
+
+    public function dropLastUploadTable() {
+        $sql = "DROP TABLE last_upload;";
+        try {
+            $this->connection->exec($sql);
+            echo "Table 'las_upload' deleted successfully" . "<br>";
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+    }
+
+    public function dropCronJobTable() {
+        $sql = "DROP TABLE cron_job;";
+        try {
+            $this->connection->exec($sql);
+            echo "Table 'cron_job' deleted successfully" . "<br>";
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+    }
+
+    public function dropReportsRoutesDatesTable() {
+         $sql = "DROP TABLE reports_routes_dates;";
+        try {
+            $this->connection->exec($sql);
+            echo "Table 'reports_routes_dates' deleted successfully" . "<br>";
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+    }
 
 }

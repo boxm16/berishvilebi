@@ -33,5 +33,29 @@ class DataBaseManipulationController {
     public function createReportsRoutesDatesTable() {
          $this->dbManDao->createReportsRoutesDatesTable();
     }
+    //-------------------------
+     public function dropRouteTable() {
+        $this->dbManDao->dropRouteTable();
+    }
+
+    public function dropTripVoucherTable() {
+        $this->dbManDao->dropTripVoucherTable();
+    }
+
+    public function dropTripPeriodTable() {
+        $this->dbManDao->dropTripPeriodTable();
+    }
+
+    public function dropLastUploadTable() {
+        $this->dbManDao->dropLastUploadTable();
+    }
+
+    public function dropCronJobTable() {
+        $this->dbManDao->dropCronJobTable();
+    }
+
+    public function dropReportsRoutesDatesTable() {
+         $this->dbManDao->dropReportsRoutesDatesTable();
+    }
 
 }

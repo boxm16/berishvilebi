@@ -121,7 +121,7 @@ if (isset($_POST["submit"])) {//first checking if request commming from submit o
         <script>
             document.getElementById("fileToUpload").addEventListener("change", function (event) {
                 var oFile = document.getElementById("fileToUpload").files[0]; // <input type="file" id="fileUpload" accept=".jpg,.png,.gif,.jpeg"/>
-                if (oFile.size > 10485760) //10 MB for bytes.
+                if (oFile.size > 26214400) //25 MB for bytes.
                 {
                     alert("ფაილის ზომა დასაშვებზე (10MB) დიდია !");
                     event.preventDefault();
@@ -129,7 +129,7 @@ if (isset($_POST["submit"])) {//first checking if request commming from submit o
             });
             document.getElementById("sbmt").addEventListener("click", function (event) {
                 var oFile = document.getElementById("fileToUpload").files[0]; // <input type="file" id="fileUpload" accept=".jpg,.png,.gif,.jpeg"/>
-                if (oFile.size > 10485760) //10 MB for bytes.
+                if (oFile.size > 26214400) //25 MB for bytes.
                 {
                     alert("ფაილის ზომა დასაშვებზე (10MB) დიდია!");
                     event.preventDefault();

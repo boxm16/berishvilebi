@@ -16,6 +16,7 @@ $dbManController = new DataBaseManipulationController();
             <button type="submit">Create Tables</button>
 
         </form>
+
         <?php
         if (isset($_POST["createTables"])) {
             //precedence is important, there are primary-foreign keys rstrictions
@@ -25,6 +26,23 @@ $dbManController = new DataBaseManipulationController();
             $dbManController->createLastUploadTable();
             $dbManController->createCronJobTable();
             $dbManController->createReportsRoutesDatesTable();
+        }
+        ?>
+        <hr>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <input hidden name="dropTables">
+            <button type="submit">Drop Tables</button>
+
+        </form>
+        <?php
+        if (isset($_POST["dropTables"])) {
+            //precedence is important, there are primary-foreign keys rstrictions
+            $dbManController->dropTripPeriodTable();
+            $dbManController->dropTripVoucherTable();
+            $dbManController->dropLastUploadTable();
+            $dbManController->dropReportsRoutesDatesTable();
+            $dbManController->dropCronJobTable();
+            $dbManController->dropRouteTable();
         }
         ?>
 

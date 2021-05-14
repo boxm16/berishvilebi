@@ -2,28 +2,6 @@
 $s = microtime(true);
 $start_memory = memory_get_usage();
 
-
-
-$_ = $_SERVER['_'];
-
-function onShutdown() {
-    global $_, $argv;
-    echo "I am restarting...\n";
-    exec($_, $argv);
-}
-
-register_shutdown_function("onShutdown");
-echo "I am a PHP job\n";
-for ($i = 0; $i < 1000; $i++) {
-    // Do something
-    // Oopsss!
-    if (13 === rand(1, 100)) {
-        die;
-    }
-}
-
-
-
 if (isset($_POST["timeout"])) {
 
     $counter = $_POST["counter"];

@@ -25,7 +25,7 @@ class DataBaseConnection {
         }
     }
 
-    public function getLocalhostConnection_X() {
+    public function getLocalhostConnection() {
         $host = 'localhost';
         $db = $this->db;
         $user = $this->user;
@@ -47,7 +47,7 @@ class DataBaseConnection {
         }
     }
 
-    public function getLocalhostConnection() {
+    public function getLocalhostConnection_X() {
         $host = "remotemysql.com";
         $db = "C1Vlp1x4Mf";
         $user = "C1Vlp1x4Mf";

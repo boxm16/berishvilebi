@@ -37,7 +37,7 @@ class CronJobController {
         $start_memory = memory_get_usage(); //to measure variable size, see foot
 
         $nextChunkStartingRow = $this->cronJobDao->getUploadingStartRowIndex();
-        $chunkMaxLength = 3000; //this number is pretty much optimal, already checked, but try again ,if you want
+        $chunkMaxLength = 1000; //this number is pretty much optimal, already checked, but try again ,if you want
         $nextChunkLastRow = $nextChunkStartingRow + $chunkMaxLength;
         $spreadsheet = $this->readExcelFile($nextChunkStartingRow, $nextChunkLastRow);
         $nextChunkEndRow = $this->getNextChunkEndRow($spreadsheet, $nextChunkLastRow, $chunkMaxLength);

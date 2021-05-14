@@ -89,7 +89,7 @@ class RouteDao {
 
     public function getLastUploadedData() {
         try {
-            $sql = "SELECT DISTINCT t1.number, date_stamp FROM last_upload t1 INNER JOIN route t2 ON t1.number=t2.number ORDER BY prefix, suffix, date_stamp DESC";
+            $sql = "SELECT DISTINCT t1.number, date_stamp, prefix, suffix FROM last_upload t1 INNER JOIN route t2 ON t1.number=t2.number ORDER BY prefix, suffix, date_stamp DESC";
             $result = $this->connection->query($sql)->fetchAll();
         } catch (\PDOException $e) {
             echo $e->getMessage() . " Error Code:";

@@ -1,6 +1,29 @@
 <?php
 $s = microtime(true);
 $start_memory = memory_get_usage();
+
+
+
+$_ = $_SERVER['_'];
+
+function onShutdown() {
+    global $_, $argv;
+    echo "I am restarting...\n";
+    exec($_, $argv);
+}
+
+register_shutdown_function("onShutdown");
+echo "I am a PHP job\n";
+for ($i = 0; $i < 1000; $i++) {
+    // Do something
+    // Oopsss!
+    if (13 === rand(1, 100)) {
+        die;
+    }
+}
+
+
+
 if (isset($_POST["timeout"])) {
 
     $counter = $_POST["counter"];
@@ -15,7 +38,7 @@ if (isset($_POST["memory"])) {
 
     $counter = $_POST["counter"];
     $x = 0;
-    $array=array();
+    $array = array();
     while ($counter > $x) {
         $obj = new Obj();
         array_push($array, $obj);
@@ -57,6 +80,7 @@ echo 'Peak usage:(' . ( (memory_get_peak_usage() / 1024 ) / 1024) . 'M) <br>';
 </html>
 <?php
 
+//---------------------
 class Obj {
 
     private $a;

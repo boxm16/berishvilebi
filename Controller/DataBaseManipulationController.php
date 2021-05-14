@@ -31,10 +31,11 @@ class DataBaseManipulationController {
     }
 
     public function createReportsRoutesDatesTable() {
-         $this->dbManDao->createReportsRoutesDatesTable();
+        $this->dbManDao->createReportsRoutesDatesTable();
     }
+
     //-------------------------
-     public function dropRouteTable() {
+    public function dropRouteTable() {
         $this->dbManDao->dropRouteTable();
     }
 
@@ -55,7 +56,12 @@ class DataBaseManipulationController {
     }
 
     public function dropReportsRoutesDatesTable() {
-         $this->dbManDao->dropReportsRoutesDatesTable();
+        $this->dbManDao->dropReportsRoutesDatesTable();
+    }
+
+//-------//-----------//-----------//-----------//--------
+    public function getDataBases() {
+        return $this->dbManDao->getDataBases();
     }
 
 }

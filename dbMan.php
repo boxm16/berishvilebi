@@ -47,5 +47,19 @@ $dbManController = new DataBaseManipulationController();
         ?>
 
         <hr>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <input hidden name="size">
+            <button type="submit">Show Size of all DataBases(at this moment)</button>
+        </form>
+        <?php
+        if (isset($_POST["size"])) {
+            $dataBases = $dbManController->getDataBases();
+            foreach ($dataBases as $db) {
+                $dbName = $db[0];
+                $dbSize = $db[1];
+                echo "Name:$dbName-Size:$dbSize<br>";
+            }
+        }
+        ?>
     </body>
 </html>

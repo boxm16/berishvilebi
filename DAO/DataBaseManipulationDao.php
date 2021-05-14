@@ -167,6 +167,7 @@ class DataBaseManipulationDao {
             }
         }
     }
+
 //---------------------
     public function dropRouteTable() {
         $sql = "DROP TABLE route;";
@@ -180,7 +181,7 @@ class DataBaseManipulationDao {
     }
 
     public function dropTripVoucherTable() {
-       $sql = "DROP TABLE trip_voucher;";
+        $sql = "DROP TABLE trip_voucher;";
         try {
             $this->connection->exec($sql);
             echo "Table 'trip_voucher' deleted successfully" . "<br>";
@@ -191,7 +192,7 @@ class DataBaseManipulationDao {
     }
 
     public function dropTripPeriodTable() {
-         $sql = "DROP TABLE trip_period;";
+        $sql = "DROP TABLE trip_period;";
         try {
             $this->connection->exec($sql);
             echo "Table 'trip_period' deleted successfully" . "<br>";
@@ -224,7 +225,7 @@ class DataBaseManipulationDao {
     }
 
     public function dropReportsRoutesDatesTable() {
-         $sql = "DROP TABLE reports_routes_dates;";
+        $sql = "DROP TABLE reports_routes_dates;";
         try {
             $this->connection->exec($sql);
             echo "Table 'reports_routes_dates' deleted successfully" . "<br>";
@@ -232,6 +233,30 @@ class DataBaseManipulationDao {
             echo $e->getMessage() . " Error Code:";
             echo $e->getCode() . "<br>";
         }
+    }
+
+    //---------//----------//-----------//------------
+
+    public function getDataBases() {
+        $sql = "SELECT table_schema AS 'Database', 
+     ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS 'Size' 
+     FROM information_schema.TABLES 
+     GROUP BY table_schema;"; //shows all databases and their size
+
+        $dataBases = array();
+        try {
+            $result = $this->connection->query($sql)->fetchAll();
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+        foreach ($result as $row) {
+            $dbName = $row["Database"];
+            $dbSize = $row["Size"];
+            $db = array($dbName, $dbSize);
+            array_push($dataBases, $db);
+        }
+        return $dataBases;
     }
 
 }

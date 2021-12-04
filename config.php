@@ -1,5 +1,5 @@
 <?php
-require_once 'Controller/dbManController.php';
+require_once 'Controller/DbManController.php';
 $dbManController = new DbManController();
 ?>
 <!DOCTYPE html>

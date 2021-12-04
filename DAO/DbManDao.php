@@ -19,8 +19,7 @@ class DbManDao {
   `first_name` VARCHAR(25) NOT NULL, 
   `second_name` VARCHAR(25) NULL,
   `nickname` VARCHAR(100) NULL,
-  `birth_date` DATE NULL,
-  `death_date` DATE NULL,
+  `alive` TINYINT(1) NULL,
    PRIMARY KEY (`id`))
    ENGINE = InnoDB
    DEFAULT CHARACTER SET = utf8;
@@ -39,34 +38,27 @@ class DbManDao {
     }
 
     public function createPersonChildTable() {
-        $sql = "CREATE TABLE `person_child` (
-  `father_id` INT(6) NOT NULL,
-  `mother_id` INT(6) NOT NULL,
+        $sql = "CREATE TABLE `parent_child` (
+  `parent_id` INT(6) NOT NULL,
   `child_id` INT(6) NOT NULL,
-  INDEX `father_id_idx` (`father_id` ASC) VISIBLE,
-  INDEX `nother_id_idx` (`mother_id` ASC) VISIBLE,
+  INDEX `parent_id_idx` (`parent_id` ASC) VISIBLE,
   INDEX `child-id_idx` (`child_id` ASC) VISIBLE,
-  CONSTRAINT `father_id`
-    FOREIGN KEY (`father_id`)
+  CONSTRAINT `parent_id`
+    FOREIGN KEY (`parent_id`)
     REFERENCES `person` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `mother_id`
-    FOREIGN KEY (`mother_id`)
-    REFERENCES `person` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `child-id`
+    CONSTRAINT `child-id`
     FOREIGN KEY (`child_id`)
     REFERENCES `person` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);";
         try {
             $this->connection->exec($sql);
-            echo "Table 'person_child' created successfully" . "<br>";
+            echo "Table 'parent_child' created successfully" . "<br>";
         } catch (\PDOException $e) {
             if ($e->getCode() == "42S01") {
-                echo "Table 'person_child' already exists" . "<br>";
+                echo "Table 'parent_child' already exists" . "<br>";
             } else {
                 echo $e->getMessage() . " Error Code:";
                 echo $e->getCode() . "<br>";
@@ -89,10 +81,10 @@ class DbManDao {
 
     public function deletePersonChildTable() {
 
-        $sql = "DROP TABLE person_child;";
+        $sql = "DROP TABLE parent_child;";
         try {
             $this->connection->exec($sql);
-            echo "Table 'person_child' deleted successfully" . "<br>";
+            echo "Table 'parent_child' deleted successfully" . "<br>";
         } catch (\PDOException $e) {
             echo $e->getMessage() . " Error Code:";
             echo $e->getCode() . "<br>";

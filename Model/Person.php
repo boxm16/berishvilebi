@@ -7,11 +7,8 @@ class Person {
     private $firstName;
     private $secondName;
     private $nickname;
-    private $birthDate;
-    private $deathDate;
-    private $fatherId;
-    private $motherId;
-    private $spouses;
+    private $alive;
+    private $parentId;
     private $children;
 
     function getId() {
@@ -34,24 +31,12 @@ class Person {
         return $this->nickname;
     }
 
-    function getBirthDate() {
-        return $this->birthDate;
+    function getAlive() {
+        return $this->alive;
     }
 
-    function getDeathDate() {
-        return $this->deathDate;
-    }
-
-    function getFatherId() {
-        return $this->fatherId;
-    }
-
-    function getMotherId() {
-        return $this->motherId;
-    }
-
-    function getSpouses() {
-        return $this->spouses;
+    function getParentId() {
+        return $this->parentId;
     }
 
     function getChildren() {
@@ -78,30 +63,17 @@ class Person {
         $this->nickname = $nickname;
     }
 
-    function setBirthDate($birthDate): void {
-        $this->birthDate = $birthDate;
+    function setAlive($alive): void {
+        $this->alive = $alive;
     }
 
-    function setDeathDate($deathDate): void {
-        $this->deathDate = $deathDate;
-    }
-
-    function setFatherId($fatherId): void {
-        $this->fatherId = $fatherId;
-    }
-
-    function setMotherId($motherId): void {
-        $this->motherId = $motherId;
-    }
-
-    function setSpouses($spouses): void {
-        $this->spouses = $spouses;
+    function setParentId($parentId): void {
+        $this->parentId = $parentId;
     }
 
     function setChildren($children): void {
         $this->children = $children;
     }
-
 
 
 }

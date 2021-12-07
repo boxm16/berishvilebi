@@ -1,8 +1,8 @@
 <?php
 require_once 'Controller/PersonController.php';
 $personController = new PersonController();
-$fullGenTree = $personController->getFullGenTree();
-var_dump($fullGenTree);
+//$fullGenTree = $personController->getFullGenTree();
+$generationsLayers = $personController->getGenerationsLayers();
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,9 +16,14 @@ var_dump($fullGenTree);
         <a href="admin.php">Go Admin</a>
         <br>
         <?php
-        $id = $fullGenTree->getId();
-        echo $fullGenTree->getFirstName() . " " . $fullGenTree->getSecondName();
-        echo "&nbsp<a href='addChild.php?id=$id'>შვილის დამატება</a>";
+        foreach ($generationsLayers as $generationLayer) {
+            foreach ($generationLayer as $person) {
+                echo $person->getFirstName() . " " . $person->getSecondName() . " ";
+                $id = $person->getId();
+                echo "<a href='addChild.php?id=$id'>შვილის დამატება</a> ";
+            }
+            echo "<hr>";
+        }
         ?>
 
     </body>

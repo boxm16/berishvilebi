@@ -8,6 +8,8 @@ class Person {
     private $secondName;
     private $nickname;
     private $lifeStatus;
+    private $birth_date;
+    private $death_date;
     private $parentId;
     private $children;
 
@@ -78,5 +80,23 @@ class Person {
     function setChildren($children): void {
         $this->children = $children;
     }
+    
+    function getBirth_date() {
+        return $this->birth_date;
+    }
+
+    function getDeath_date() {
+        return $this->death_date;
+    }
+
+    function setBirth_date($birth_date): void {
+        $this->birth_date = $birth_date;
+    }
+
+    function setDeath_date($death_date): void {
+        $this->death_date = $death_date;
+    }
+
+
 
 }

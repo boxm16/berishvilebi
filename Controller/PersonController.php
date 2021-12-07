@@ -27,6 +27,27 @@ class PersonController {
         return $persons[0];
     }
 
+    public function getGenerationsLayers() {
+        $persons = $this->personDao->getAllPersons();
+        $generationsLayers = $this->createGenerationsLayers($persons);
+        return $generationsLayers;
+    }
+
+    public function createGenerationsLayers($persons) {
+        $generationsLayers = array();
+        foreach ($persons as $person) {
+            $generation = $person->getGeneration();
+            if (array_key_exists($generation, $generationsLayers)) {
+                $sameGenerationsPersons = $generationsLayers[$generation];
+                array_push($sameGenerationsPersons, $person);
+                $generationsLayers[$generation] = $sameGenerationsPersons;
+            } else {
+                $generationsLayers[$generation] = array($person);
+            }
+        }
+        return $generationsLayers;
+    }
+
     public function getPerson($id) {
         return $person = $this->personDao->getPerson($id);
     }
@@ -57,7 +78,7 @@ class PersonController {
 
                 array_push($children, $child);
                 $potentialParent->setChildren($children);
-                $persons[$x]=$potentialParent;
+                $persons[$x] = $potentialParent;
                 return true;
             }
         } return false;

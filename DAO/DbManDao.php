@@ -15,11 +15,14 @@ class DbManDao {
 
         $sql = "CREATE TABLE `person` (
   `id` INT(6) NOT NULL AUTO_INCREMENT,
+  `parent_id` INT(6) NOT NULL,
   `generation` INT(3) NOT NULL,
   `first_name` VARCHAR(25) NOT NULL, 
   `second_name` VARCHAR(25) NULL,
   `nickname` VARCHAR(100) NULL,
-  `alive` TINYINT(1) NULL,
+  `life_status` VARCHAR(5) NULL,
+  `birth_date` VARCHAR(20) NULL,
+  `death_date` VARCHAR(20) NULL,
    PRIMARY KEY (`id`))
    ENGINE = InnoDB
    DEFAULT CHARACTER SET = utf8;
@@ -97,18 +100,21 @@ class DbManDao {
 
         $generation = $person->getGeneration();
         $firstName = $person->getFirstName();
+        $nickname = $person->getNickname();
         $secondName = $person->getSecondName();
-
-        $sql = "INSERT INTO person (first_name, second_name, generation) VALUES (:firstName , :secondName, :generation)";
+        $lifeStatus = $person->getLifeStatus();
+        $parentId = $person->getParentId();
+        $sql = "INSERT INTO person (generation, first_name, nickname, second_name, life_status, parent_id) VALUES (:generation, :firstName , :nickname, :secondName,  :lifeStatus, :parentId)";
 
 
         $statement = $this->connection->prepare($sql);
 
         $statement->bindValue(':generation', $generation);
         $statement->bindValue(':firstName', $firstName);
+        $statement->bindValue(':nickname', $nickname);
         $statement->bindValue(':secondName', $secondName);
-
-
+        $statement->bindValue(':lifeStatus', $lifeStatus);
+        $statement->bindValue(':parentId', $parentId);
 
         $inserted = $statement->execute();
 

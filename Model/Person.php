@@ -7,9 +7,13 @@ class Person {
     private $firstName;
     private $secondName;
     private $nickname;
-    private $alive;
+    private $lifeStatus;
     private $parentId;
     private $children;
+
+    function __construct() {
+        $this->children = array();
+    }
 
     function getId() {
         return $this->id;
@@ -31,8 +35,8 @@ class Person {
         return $this->nickname;
     }
 
-    function getAlive() {
-        return $this->alive;
+    function getLifeStatus() {
+        return $this->lifeStatus;
     }
 
     function getParentId() {
@@ -63,8 +67,8 @@ class Person {
         $this->nickname = $nickname;
     }
 
-    function setAlive($alive): void {
-        $this->alive = $alive;
+    function setLifeStatus($lifeStatus): void {
+        $this->lifeStatus = $lifeStatus;
     }
 
     function setParentId($parentId): void {
@@ -74,6 +78,5 @@ class Person {
     function setChildren($children): void {
         $this->children = $children;
     }
-
 
 }

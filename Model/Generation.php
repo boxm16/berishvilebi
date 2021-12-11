@@ -11,7 +11,7 @@ class Generation {
 
     function __construct() {
         $this->persons = array();
-        $this->orderedPersons=array();
+        $this->orderedPersons = array();
     }
 
     function getNumber() {
@@ -49,12 +49,12 @@ class Generation {
 
     function calculateSpaceForPersons() {
         if ($this->parentsGeneration == null) {
-             $this->orderedPersons=$this->persons;
+            $this->orderedPersons = $this->persons;
         } else {
             $this->orderedPersons = $this->reshapePersonsOrderByParentsOrder($this->parentsGeneration);
         }
 
-        $personXPoint = $this->xPoint - (count($this->persons) / 2 * 130);
+        $personXPoint = $this->xPoint - ((count($this->persons) - 1) * 65);
         $personYPoint = 60 + ($this->getNumber() * 100);
         foreach ($this->orderedPersons as $person) {
             $person->setMyX($personXPoint);
@@ -76,7 +76,7 @@ class Generation {
     }
 
     function reshapePersonsOrderByParentsOrder($parentsGeneration) {
-        
+
         $parents = $parentsGeneration->getPersons();
         foreach ($this->persons as $person) {
             $parentId = $person->getParentId();

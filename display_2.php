@@ -17,7 +17,7 @@ $personsMap = $personController->getPersonsMap();
 
 
         <button onclick="myFunction()">Scroll</button>
-
+        <hr>
 
         <svg width="<?php echo $svgWidth ?>" height="<?php echo $svgHeight ?>">
 
@@ -43,8 +43,12 @@ $personsMap = $personController->getPersonsMap();
         foreach ($personsMap as $person) {
             $x = $person->getMyX();
             $y = $person->getMyY();
-
-
+            $id = $person->getId();
+if($id==0){
+    $myId="myID";
+}else {
+   $myId=""; 
+}
 
             $firstdNameY = $y - 10;
             $secondNameY = $firstdNameY + 15;
@@ -52,7 +56,7 @@ $personsMap = $personController->getPersonsMap();
             $firstName = $person->getFirstName();
             $secondName = $person->getSecondName();
             $id = $person->getId();
-            echo "<ellipse id='myID' cx='$x' cy='$y' rx='60' ry='30'  style='fill:yellow;stroke:purple;stroke-width:2' />";
+            echo "<ellipse id='$myId' cx='$x' cy='$y' rx='60' ry='30'  style='fill:yellow;stroke:purple;stroke-width:2' />";
             echo "<text x='$x' y='$firstdNameY' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
         </text>;

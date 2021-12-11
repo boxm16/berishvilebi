@@ -37,6 +37,7 @@ if (isset($_POST["insertChild"])) {
         <title></title>
     </head>
     <body>
+        <a href="display_2.php">display_2</a>
         <h1>შვილის დამატება</h1>
         <h3>მშობელი</h3>
         <?php

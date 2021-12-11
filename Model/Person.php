@@ -12,6 +12,10 @@ class Person {
     private $death_date;
     private $parentId;
     private $children;
+    private $myX;
+    private $myY;
+    private $parentX;
+    private $parentY;
 
     function __construct() {
         $this->children = array();
@@ -80,7 +84,7 @@ class Person {
     function setChildren($children): void {
         $this->children = $children;
     }
-    
+
     function getBirth_date() {
         return $this->birth_date;
     }
@@ -97,6 +101,36 @@ class Person {
         $this->death_date = $death_date;
     }
 
+    function getMyX() {
+        return $this->myX;
+    }
 
+    function getMyY() {
+        return $this->myY;
+    }
+
+    function getParentX() {
+        return $this->parentX;
+    }
+
+    function getParentY() {
+        return $this->parentY;
+    }
+
+    function setMyX($myX): void {
+        $this->myX = $myX;
+    }
+
+    function setMyY($myY): void {
+        $this->myY = $myY;
+    }
+
+    function setParentX($parentX): void {
+        $this->parentX = $parentX;
+    }
+
+    function setParentY($parentY): void {
+        $this->parentY = $parentY;
+    }
 
 }

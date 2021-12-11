@@ -2,10 +2,15 @@
 
 require_once 'DAO/PersonDao.php';
 require_once 'Model/Person.php';
+require_once 'Model/Generation.php';
 
 class PersonController {
 
     private $personDao;
+    private $personsMap;
+    private $maxGenerationCount;
+    private $svgWidth;
+    private $svgHeight;
 
     public function __construct() {
         $this->personDao = new PersonDao();
@@ -31,6 +36,34 @@ class PersonController {
         $persons = $this->personDao->getAllPersons();
         $generationsLayers = $this->createGenerationsLayers($persons);
         return $generationsLayers;
+    }
+
+    public function getGenerations() {
+        $this->personsMap = $this->personDao->getPersonsMap();
+        $generations = $this->createGenerationsMap($this->personsMap);
+
+        $calculatedGenerations = $this->calculateSpaceForGenerations($generations);
+        return $calculatedGenerations;
+    }
+
+    public function createGenerationsMap($persons) {
+        $generationsMap = array();
+        foreach ($persons as $person) {
+            $generationNumber = $person->getGeneration();
+            if (array_key_exists($generationNumber, $generationsMap)) {
+                $generation = $generationsMap[$generationNumber];
+                $generation->addPerson($person);
+                $generationsMap[$generationNumber] = $generation;
+            } else {
+                $newGeneration = new Generation();
+                $newGeneration->setNumber($generationNumber);
+                $newGeneration->addPerson($person);
+                if ($generationNumber > 0) {
+                    $newGeneration->setParentsGeneration($generationsMap[$generationNumber-1]);
+                }
+                $generationsMap[$generationNumber] = $newGeneration;
+            }
+        } return $generationsMap;
     }
 
     public function createGenerationsLayers($persons) {
@@ -82,6 +115,48 @@ class PersonController {
                 return true;
             }
         } return false;
+    }
+
+    public function calculateSpaceForGenerations($generations) {
+        $maxLength = 0;
+        foreach ($generations as $generation) {
+            if ($generation->getCount() > $maxLength) {
+                $maxLength = $generation->getCount();
+            }
+        }
+        $this->maxGenerationCount = $maxLength;
+        $this->svgWidth = $maxLength * 150;
+        $this->svgHeight = count($generations) * 100;
+        foreach ($generations as $generation) {
+            $generation->setXPoint($this->svgWidth / 2);
+            $generation->calculateSpaceForPersons();
+        }
+        return $generations;
+    }
+
+    //----------
+    function getSvgWidth() {
+        return $this->svgWidth;
+    }
+
+    function getSvgHeight() {
+        return $this->svgHeight;
+    }
+
+    function setSvgWidth($svgWidth): void {
+        $this->svgWidth = $svgWidth;
+    }
+
+    function setSvgHeight($svgHeight): void {
+        $this->svgHeight = $svgHeight;
+    }
+
+    function getPersonsMap() {
+        return $this->personsMap;
+    }
+
+    function setPersonsMap($personsMap): void {
+        $this->personsMap = $personsMap;
     }
 
 }

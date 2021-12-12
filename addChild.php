@@ -59,7 +59,7 @@ if (isset($_POST["insertChild"])) {
 
             მეორე სახელი(ზედმეტსახელი) <input name="nickname" type="text">
 
-            გვარი <input name="secondName" type="text" value="ბერიშვილი">
+            გვარი <input name="secondName" type="text" value="<?php echo $parentSecondName ?>">
             <br><br>
             სტატუსი <select name="lifeStatus" >
                 <option value="alive">ცოცხალი</option>

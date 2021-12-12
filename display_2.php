@@ -43,13 +43,12 @@ $personsMap = $personController->getPersonsMap();
         foreach ($personsMap as $person) {
             $x = $person->getMyX();
             $y = $person->getMyY();
-            $id = $person->getId();
-if($id==0){
-    $myId="myID";
-}else {
-   $myId=""; 
-}
-
+            $generations = $person->getGeneration();
+            if ($generations == 0) {
+                $myId = "myID";
+            } else {
+                $myId = "";
+            }
             $firstdNameY = $y - 10;
             $secondNameY = $firstdNameY + 15;
             $addChildeLinkY = $secondNameY + 15;

@@ -4,6 +4,8 @@ class Person {
 
     private $id;
     private $generation;
+    private $positionX;
+    private $positionY;
     private $firstName;
     private $secondName;
     private $nickname;
@@ -12,10 +14,6 @@ class Person {
     private $death_date;
     private $parentId;
     private $children;
-    private $myX;
-    private $myY;
-    private $parentX;
-    private $parentY;
 
     function __construct() {
         $this->children = array();
@@ -27,6 +25,14 @@ class Person {
 
     function getGeneration() {
         return $this->generation;
+    }
+
+    function getPositionX() {
+        return $this->positionX;
+    }
+
+    function getPositionY() {
+        return $this->positionY;
     }
 
     function getFirstName() {
@@ -45,6 +51,14 @@ class Person {
         return $this->lifeStatus;
     }
 
+    function getBirth_date() {
+        return $this->birth_date;
+    }
+
+    function getDeath_date() {
+        return $this->death_date;
+    }
+
     function getParentId() {
         return $this->parentId;
     }
@@ -59,6 +73,14 @@ class Person {
 
     function setGeneration($generation): void {
         $this->generation = $generation;
+    }
+
+    function setPositionX($positionX): void {
+        $this->positionX = $positionX;
+    }
+
+    function setPositionY($positionY): void {
+        $this->positionY = $positionY;
     }
 
     function setFirstName($firstName): void {
@@ -77,22 +99,6 @@ class Person {
         $this->lifeStatus = $lifeStatus;
     }
 
-    function setParentId($parentId): void {
-        $this->parentId = $parentId;
-    }
-
-    function setChildren($children): void {
-        $this->children = $children;
-    }
-
-    function getBirth_date() {
-        return $this->birth_date;
-    }
-
-    function getDeath_date() {
-        return $this->death_date;
-    }
-
     function setBirth_date($birth_date): void {
         $this->birth_date = $birth_date;
     }
@@ -101,36 +107,14 @@ class Person {
         $this->death_date = $death_date;
     }
 
-    function getMyX() {
-        return $this->myX;
+    function setParentId($parentId): void {
+        $this->parentId = $parentId;
     }
 
-    function getMyY() {
-        return $this->myY;
+    function setChildren($children): void {
+        $this->children = $children;
     }
 
-    function getParentX() {
-        return $this->parentX;
-    }
 
-    function getParentY() {
-        return $this->parentY;
-    }
-
-    function setMyX($myX): void {
-        $this->myX = $myX;
-    }
-
-    function setMyY($myY): void {
-        $this->myY = $myY;
-    }
-
-    function setParentX($parentX): void {
-        $this->parentX = $parentX;
-    }
-
-    function setParentY($parentY): void {
-        $this->parentY = $parentY;
-    }
 
 }

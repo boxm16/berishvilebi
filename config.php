@@ -19,18 +19,25 @@ $dbManController = new DbManController();
         if (isset($_POST["createTables"])) {
             //precedence is important, there are primary-foreign keys rstrictions
             $dbManController->createTables();
-            
         }
         ?>
+
         <hr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-            <input hidden name="deleteTables">
-            <button type="submit">Delete Tables</button>
+            <input hidden name="setSpace">
+            Width:   <input type="number" name="width" value="1000"> &nbsp Height: <input type="number" name="height" value="1000"> 
+            <br>
+            <button type="submit">Set Space</button>
         </form>
         <?php
-        if (isset($_POST["deleteTables"])) {
-            //precedence is important, there are primary-foreign keys rstrictions
-            $dbManController->deleteTables();
+        if (isset($_POST["setSpace"])) {
+            if (isset($_POST["width"]) && isset($_POST["height"])) {
+                $width = $_POST["width"];
+                $height = $_POST["height"];
+                $dbManController->setSpace($width, $height);
+            } else {
+                echo "Something wrong happaned";
+            }
         }
         ?>
         <hr>
@@ -42,6 +49,18 @@ $dbManController = new DbManController();
         if (isset($_POST["insertMainPerson"])) {
             //precedence is important, there are primary-foreign keys rstrictions
             $dbManController->insertMainPerson();
+        }
+        ?>
+        <hr><hr>
+        <hr>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <input hidden name="deleteTables">
+            <button type="submit">Delete Tables</button>
+        </form>
+        <?php
+        if (isset($_POST["deleteTables"])) {
+            //precedence is important, there are primary-foreign keys rstrictions
+            $dbManController->deleteTables();
         }
         ?>
     </body>

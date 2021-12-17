@@ -88,6 +88,8 @@ class PersonDao {
             $personId = $personData["id"];
             $person->setId($personId);
             $person->setGeneration($personData["generation"]);
+            $person->setPositionX($personData["position_X"]);
+            $person->setPositionY($personData["position_Y"]);
             $person->setParentId($personData["parent_id"]);
             $person->setFirstName($personData["first_name"]);
             $person->setNickname($personData["nickname"]);

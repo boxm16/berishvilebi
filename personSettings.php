@@ -25,5 +25,6 @@ $person = $personController->getPerson($id);
         <?php
         echo $person->getFirstName();
         ?>
+        <a href='admin.php'>რუქაზე გადასვლა</a>
     </body>
 </html>

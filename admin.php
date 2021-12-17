@@ -36,6 +36,7 @@ $personsList = $personController->getAllPersons();
             <rect x="0" y="0"  width="<?php echo $svgWidth; ?>" height="<?php echo $svgHeight; ?>" style="fill: skyblue;"/>
             <?php
             foreach ($personsList as $person) {
+                $id = $person->getId();
                 $x = $person->getPositionX();
                 $y = $person->getPositionY();
                 $firstName = $person->getFirstName();
@@ -44,13 +45,13 @@ $personsList = $personController->getAllPersons();
                 $firstdNameY = $y - 10;
                 $secondNameX = $x;
                 $secondNameY = $firstdNameY + 15;
-                echo "<svg class='movingCircle' style='cursor: default' x='200' y='200'>";
-                echo "<g ondblclick='myFunction()'>";
-                echo "<circle  cx='$x' cy='$y' r='40' stroke='green' stroke-width='4' fill='yellow' />";
-                echo "<text x='$firstNameX' y='$firstdNameY' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
+                echo "<svg  class='movingCircle' style='cursor: default' x='$x' y='$y'>";
+                echo "<g id='$id' ondblclick='goPersonPage(event);'>";
+                echo "<circle  cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
+                echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
         </text>;
-        <text x='$secondNameX' y='$secondNameY' text-anchor='middle' fill='black' font-size='13px' font-family='Arial' dy='.3em'>
+        <text x='42' y='50' text-anchor='middle' fill='black' font-size='13px' font-family='Arial' dy='.3em'>
         $secondName      
         </text>";
                 echo "</g>";
@@ -60,32 +61,7 @@ $personsList = $personController->getAllPersons();
 
             </svg>
 
-            <!-- MODAL WINDOW FOR ADDING SON -->
-            <!-- Button trigger modal -->
-            <button id="modalButton" hidden type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
-            </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -148,6 +124,15 @@ $personsList = $personController->getAllPersons();
                     document.onmouseup = null;
                     document.onmousemove = null;
                 }
+            }
+
+            function goPersonPage(event) {
+
+
+                let id = event.target.parentNode.getAttribute("id");
+                let x = event.target.parentNode.parentNode.getAttribute("x");
+                let y = event.target.parentNode.parentNode.getAttribute("y");
+                location.href = "personSettings.php?id=" + id + "&x=" + x + "&y=" + y;
             }
         </script>
     </body>

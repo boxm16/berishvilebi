@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Dao/ConfigDao.php';
-require_once 'Dao/DbManDao.php';
+require_once 'DAO/ConfigDao.php';
+require_once 'DAO/DbManDao.php';
 
 class adminController {
 

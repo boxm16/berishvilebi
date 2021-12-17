@@ -38,7 +38,23 @@ $personsList = $personController->getAllPersons();
             foreach ($personsList as $person) {
                 $x = $person->getPositionX();
                 $y = $person->getPositionY();
-                echo "<circle  cx='$x' cy='$y' r='40' stroke='green' stroke-width='4' fill='yellow'  ondblclick='myFunction()' />";
+                $firstName = $person->getFirstName();
+                $secondName = $person->getSecondName();
+                $firstNameX = $x;
+                $firstdNameY = $y - 10;
+                $secondNameX = $x;
+                $secondNameY = $firstdNameY + 15;
+                echo "<svg class='movingCircle' style='cursor: default' x='200' y='200'>";
+                echo "<g ondblclick='myFunction()'>";
+                echo "<circle  cx='$x' cy='$y' r='40' stroke='green' stroke-width='4' fill='yellow' />";
+                echo "<text x='$firstNameX' y='$firstdNameY' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
+        $firstName 
+        </text>;
+        <text x='$secondNameX' y='$secondNameY' text-anchor='middle' fill='black' font-size='13px' font-family='Arial' dy='.3em'>
+        $secondName      
+        </text>";
+                echo "</g>";
+                echo "</svg>";
             }
             ?>
 
@@ -76,18 +92,18 @@ $personsList = $personController->getAllPersons();
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
 
-            var allCircles = document.querySelectorAll("circle");
-            allCircles.forEach(element => dragCirlce(element));
+            var allCircles = document.querySelectorAll(".movingCircle");
+            allCircles.forEach(element => dragMovingCirlce(element));
 
             function myFunction() {
                 let modalButton = (document.getElementById("modalButton"));
                 modalButton.click();
             }
 
-            function dragCirlce(elmnt) {
+            function dragMovingCirlce(elmnt) {
 
                 var mousePosStartX = 0, mousePosStartY = 0, mousePosEndX = 0, mousePosEndY = 0;
-                var circlePosStartX = 0, circlePosStartY = 0, circlePosEndX = 0, circlePosEndY = 0;
+                var movingCirclePosStartX = 0, movingCirclePosStartY = 0, movingCirclePosEndX = 0, movingCirclePosEndY = 0;
 
                 var diffPosX = 0, diffPosY = 0;
 
@@ -101,10 +117,10 @@ $personsList = $personController->getAllPersons();
                     // get the mouse cursor position at startup:
                     mousePosStartX = e.clientX;
                     mousePosStartY = e.clientY;
-                    circlePosStartX = elmnt.getAttribute("cx");
-                    circlePosStartY = elmnt.getAttribute("cy");
-                    diffPosX = circlePosStartX - mousePosStartX;
-                    diffPosY = circlePosStartY - mousePosStartY;
+                    movingCirclePosStartX = elmnt.getAttribute("x");
+                    movingCirclePosStartY = elmnt.getAttribute("y");
+                    diffPosX = movingCirclePosStartX - mousePosStartX;
+                    diffPosY = movingCirclePosStartY - mousePosStartY;
 
                     document.onmouseup = closeDragElement;
                     // call a function whenever the cursor moves:
@@ -119,11 +135,11 @@ $personsList = $personController->getAllPersons();
                     mousePosEndX = e.clientX;
                     mousePosEndY = e.clientY;
 
-                    circlePosEndX = mousePosEndX + diffPosX;
-                    circlePosEndY = mousePosEndY + diffPosY;
+                    movingCirclePosEndX = mousePosEndX + diffPosX;
+                    movingCirclePosEndY = mousePosEndY + diffPosY;
                     // set the element's new position:
-                    elmnt.setAttribute("cx", circlePosEndX);
-                    elmnt.setAttribute("cy", circlePosEndY);
+                    elmnt.setAttribute("x", movingCirclePosEndX);
+                    elmnt.setAttribute("y", movingCirclePosEndY);
 
                 }
 

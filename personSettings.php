@@ -135,11 +135,11 @@ $generation = $person->getGeneration();
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <h2>დარწმუნებული ხარ რომ გსურს პიროვნების წაშლა? მისი შემდეგი აღდგენა შეუძლებელია</h2>
+                                    <h2><p style="background-color: red">პიროვნების წაშლით იშლება მისი ყველა არსებული შთამომავალი.</p> დარწმუნებული ხარ რომ გსურს პიროვნების წაშლა?</h2>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">უკან დაბრუნება</button>
-                                    <button type="button" class="btn btn-primary">წაშლის დადასტურება</button>
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href = 'requestDispatcher.php?deleteId=<?php echo $id ?>';">წაშლის დადასტურება</button>
                                 </div>
                             </div>
                         </div>

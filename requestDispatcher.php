@@ -32,5 +32,8 @@ if (isset($_POST["insertChild"])) {
 
     header("Location: personSettings.php?id=$id&x=$x&y=$y");
 }
+if (isset($_GET["deleteId"])) {
+    $deleteId = $_GET["deleteId"];
+}
 var_dump($_POST);
-
+var_dump($_GET);

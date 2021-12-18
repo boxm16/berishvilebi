@@ -3,6 +3,7 @@
 class Person {
 
     private $id;
+    private $parentId;
     private $generation;
     private $positionX;
     private $positionY;
@@ -10,9 +11,8 @@ class Person {
     private $secondName;
     private $nickname;
     private $lifeStatus;
-    private $birth_date;
-    private $death_date;
-    private $parentId;
+    private $birthDate;
+    private $deathDate;
     private $children;
 
     function __construct() {
@@ -21,6 +21,10 @@ class Person {
 
     function getId() {
         return $this->id;
+    }
+
+    function getParentId() {
+        return $this->parentId;
     }
 
     function getGeneration() {
@@ -51,16 +55,12 @@ class Person {
         return $this->lifeStatus;
     }
 
-    function getBirth_date() {
-        return $this->birth_date;
+    function getBirthDate() {
+        return $this->birthDate;
     }
 
-    function getDeath_date() {
-        return $this->death_date;
-    }
-
-    function getParentId() {
-        return $this->parentId;
+    function getDeathDate() {
+        return $this->deathDate;
     }
 
     function getChildren() {
@@ -69,6 +69,10 @@ class Person {
 
     function setId($id): void {
         $this->id = $id;
+    }
+
+    function setParentId($parentId): void {
+        $this->parentId = $parentId;
     }
 
     function setGeneration($generation): void {
@@ -99,16 +103,12 @@ class Person {
         $this->lifeStatus = $lifeStatus;
     }
 
-    function setBirth_date($birth_date): void {
-        $this->birth_date = $birth_date;
+    function setBirthDate($birthDate): void {
+        $this->birthDate = $birthDate;
     }
 
-    function setDeath_date($death_date): void {
-        $this->death_date = $death_date;
-    }
-
-    function setParentId($parentId): void {
-        $this->parentId = $parentId;
+    function setDeathDate($deathDate): void {
+        $this->deathDate = $deathDate;
     }
 
     function setChildren($children): void {

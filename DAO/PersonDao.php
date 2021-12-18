@@ -16,25 +16,33 @@ class PersonDao {
 
         $parentId = $person->getParentId();
         $generation = $person->getGeneration();
+        $positionX = $person->getPositionX();
+        $positionY = $person->getPositionY();
         $firstName = $person->getFirstName();
         $secondName = $person->getSecondName();
         $nickname = $person->getNickname();
         $lifeStatus = $person->getLifeStatus();
+        $birthDate = $person->getBirthDate();
+        $deathDate = $person->getDeathDate();
 
-        $sql = "INSERT INTO person (parent_id, generation, first_name, second_name, nickname, life_status ) VALUES (:parentId, :generation, :firstName , :secondName, :nickname, :lifeStatus)";
+
+
+        $sql = "INSERT INTO person (parent_id, generation, position_X, position_Y, first_name, second_name, nickname, life_status, birth_date, death_date ) "
+                . "        VALUES (:parentId, :generation, :positionX, :positionY, :firstName, :secondName, :nickname, :lifeStatus, :birthDate, :deathDate)";
 
 
         $statement = $this->connection->prepare($sql);
 
         $statement->bindValue(':parentId', $parentId);
         $statement->bindValue(':generation', $generation);
+        $statement->bindValue(':positionX', $positionX);
+        $statement->bindValue(':positionY', $positionY);
         $statement->bindValue(':firstName', $firstName);
         $statement->bindValue(':secondName', $secondName);
-
         $statement->bindValue(':nickname', $nickname);
         $statement->bindValue(':lifeStatus', $lifeStatus);
-
-
+        $statement->bindValue(':birthDate', $birthDate);
+        $statement->bindValue(':deathDate', $deathDate);
 
         $inserted = $statement->execute();
 
@@ -114,6 +122,7 @@ class PersonDao {
         $person = new Person();
         foreach ($result as $personData) {
             $person->setId($personData["id"]);
+            $person->setParentId($personData["parent_id"]);
             $person->setGeneration($personData["generation"]);
             $person->setFirstName($personData["first_name"]);
             $person->setSecondName($personData["second_name"]);

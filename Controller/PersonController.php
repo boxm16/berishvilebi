@@ -18,5 +18,9 @@ class PersonController {
     public function getAllPersons() {
         return $this->personDao->getPersonsMap();
     }
+    
+    public function getPersonsChildren($id){
+       return $this->personDao->getPersonsChildren($id);  
+    }
 
 }

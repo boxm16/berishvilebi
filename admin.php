@@ -7,11 +7,17 @@ if (isset($_POST["setSpace"])) {
     $svgHeight = $_POST["svgHeight"];
     $adminController->updateSpace($svgWidth, $svgHeight);
 }
+
 $svgWidth = $adminController->getSvgWidth();
 $svgHeight = $adminController->getSvgHeight();
 
 $personController = new PersonController();
 $personsList = $personController->getAllPersons();
+if (isset($_GET["personInFocusId"])) {
+    $personInFocusId = $_GET["personInFocusId"];
+} else {
+    $personInFocusId = 1;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,11 +76,16 @@ $personsList = $personController->getAllPersons();
 
             var allCircles = document.querySelectorAll(".movingCircle");
             allCircles.forEach(element => dragMovingCirlce(element));
+            centerPersonInFocus();
+
+            //-----------------------------
 
             function myFunction() {
                 let modalButton = (document.getElementById("modalButton"));
                 modalButton.click();
             }
+
+
 
             function dragMovingCirlce(elmnt) {
 
@@ -126,6 +137,16 @@ $personsList = $personController->getAllPersons();
                 }
             }
 
+
+            function centerPersonInFocus() {
+                document.getElementById('<?php echo $personInFocusId ?>').scrollIntoView({
+                    behavior: 'auto',
+                    block: 'center',
+                    inline: 'center'
+                });
+            }
+
+            //----------------------------------------------------
             function goPersonPage(event) {
 
 

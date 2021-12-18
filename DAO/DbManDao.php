@@ -120,13 +120,13 @@ class DbManDao {
 
         $statement_width = $this->connection->prepare($sql_width);
         $statement_width->bindValue(':svg_width', $svg_width);
-        $inserted_width = $statement_width->execute();
+        $updated_width = $statement_width->execute();
 
         $statement_height = $this->connection->prepare($sql_height);
         $statement_height->bindValue(':svg_height', $svg_height);
-        $inserted_height = $statement_height->execute();
+        $updated_height = $statement_height->execute();
 
-        if ($inserted_width && $inserted_height) {
+        if ($updated_width && $updated_height) {
             echo 'Space Dimensions Changed!<br>';
         }
     }

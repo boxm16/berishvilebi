@@ -117,6 +117,8 @@ class PersonDao {
             $person->setGeneration($personData["generation"]);
             $person->setFirstName($personData["first_name"]);
             $person->setSecondName($personData["second_name"]);
+            $person->setPositionX($personData["position_X"]);
+            $person->setPositionY($personData["position_Y"]);
         }
 
         return $person;
@@ -144,6 +146,22 @@ class PersonDao {
         }
 
         return $children;
+    }
+
+    public function setPosition($id, $x, $y) {
+        $sql = "UPDATE person SET position_X=:positionX, position_Y=:positionY WHERE  id=:id;";
+
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':positionX', $x);
+        $statement->bindValue(':positionY', $y);
+        $statement->bindValue(':id', $id);
+        $updated = $statement->execute();
+
+
+        if ($updated) {
+            echo 'რუქაზე პიორვნების მდებარეობა შენახულია!<br>';
+        }
     }
 
 }

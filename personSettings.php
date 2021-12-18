@@ -22,9 +22,24 @@ $person = $personController->getPerson($id);
     </head>
     <body>
         <h1>პიროვნების მონაცემები</h1>
+
         <?php
-        echo $person->getFirstName();
+        if ($person->getPositionX() == $x && $person->getPositionY() == $y) {
+            //do nothing for now   
+        } else {
+            echo "<h2>რუქაზე პიორვნების მდებარეობა შეცვლილია</h2>"
+            . "<form action='requestDispatcher.php' method='POST'>"
+            . "<input hidden name='setNewPosition' value='1'>"
+            . "<input hidden name='id' value='$id'>"
+            . "<input hidden name='x' value='$x'>"
+            . "<input hidden name='y' value='$y'>"
+            . "<input type='submit' value='შეინახე ახალი მდებარეობა'>"
+            . "</form>";
+        }
+        echo "<hr>";
+        echo $person->getId() . " " . $person->getFirstName() . " " . $person->getNickname() . " " . $person->getSecondName();
         ?>
+        <br>
         <a href='admin.php'>რუქაზე გადასვლა</a>
     </body>
 </html>

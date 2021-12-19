@@ -2,6 +2,7 @@
 
 require_once 'DAO/PersonDao.php';
 require_once 'Model/Person.php';
+require_once 'Controller/PersonController.php';
 if (isset($_POST["setNewPosition"])) {
     $id = $_POST["id"];
     $x = $_POST["x"];
@@ -25,6 +26,8 @@ if (isset($_POST["insertChild"])) {
     $child->setLifeStatus($_POST["lifeStatus"]);
     $child->setBirthDate($_POST["birthDate"]);
     $child->setDeathDate($_POST["deathDate"]);
+    $child->setParentPositionX($x);
+    $child->setParentPositionY($y);
     $child->setPositionX($x + 10);
     $child->setPositionY($y + 10);
     $personDao = new PersonDao();
@@ -34,6 +37,17 @@ if (isset($_POST["insertChild"])) {
 }
 if (isset($_GET["deleteId"])) {
     $deleteId = $_GET["deleteId"];
+    if ($deleteId == 1) {
+        echo "You cant delete Main Person. This should not happen.";
+        exit;
+    }
+    $personController = new PersonController();
+
+    $personsDescendantsList = $personController->getPersonsDescendantsList($deleteId);
+    $personDao = new PersonDao();
+    $personDao->deletePersons($personsDescendantsList);
+    header("Location: admin.php");
+    exit;
 }
 var_dump($_POST);
 var_dump($_GET);

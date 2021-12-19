@@ -19,6 +19,8 @@ class DbManDao {
   `generation` INT(3) NOT NULL,
   `position_X` INT(5) NULL,
   `position_Y` INT(5) NULL,
+  `parent_position_X` INT(5) NULL,
+  `parent_position_Y` INT(5) NULL,
   `first_name` VARCHAR(25) NOT NULL, 
   `second_name` VARCHAR(25) NULL,
   `nickname` VARCHAR(100) NULL,

@@ -45,6 +45,8 @@ if (isset($_GET["personInFocusId"])) {
                 $id = $person->getId();
                 $x = $person->getPositionX();
                 $y = $person->getPositionY();
+                $parentPositionX = $person->getParentPositionX();
+                $parentPositionY = $person->getParentPositionY();
                 $firstName = $person->getFirstName();
                 $secondName = $person->getSecondName();
                 $firstNameX = $x;

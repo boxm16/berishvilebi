@@ -78,7 +78,7 @@ $generation = $person->getGeneration();
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" <?php if ($id == 1) echo "disabled" ?>>
                                             პიროვნების წაშლა
                                         </button> 
                                     </td>

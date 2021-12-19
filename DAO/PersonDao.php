@@ -18,6 +18,8 @@ class PersonDao {
         $generation = $person->getGeneration();
         $positionX = $person->getPositionX();
         $positionY = $person->getPositionY();
+        $parentPositionX = $person->getParentPositionX();
+        $parentPositionY = $person->getParentPositionY();
         $firstName = $person->getFirstName();
         $secondName = $person->getSecondName();
         $nickname = $person->getNickname();
@@ -170,6 +172,39 @@ class PersonDao {
 
         if ($updated) {
             echo 'რუქაზე პიორვნების მდებარეობა შენახულია!<br>';
+        }
+    }
+
+    public function deletePersons($personsDescendantsList) {
+        if (count($personsDescendantsList) > 0) {
+            $sql = "DELETE FROM person WHERE id IN ";
+            $sqlInPart = "(";
+            $index = 0;
+            foreach ($personsDescendantsList as $person) {
+                $perdonId = $person->getId();
+                $sqlInPart .= $perdonId;
+                if ($index == count($personsDescendantsList) - 1) {
+                    $sqlInPart .= ")";
+                } else {
+                    $sqlInPart .= ",";
+                }
+
+                $index++;
+            }
+            $sql .= $sqlInPart;
+
+
+            try {
+                $deleted = $this->connection->query($sql);
+                if ($deleted) {
+                    echo "Persons Deleted.";
+                }
+            } catch (\PDOException $e) {
+                echo $e->getMessage() . " Error Code:";
+                echo $e->getCode() . "<br>";
+            }
+        } else {
+            echo "nobody to delete";
         }
     }
 

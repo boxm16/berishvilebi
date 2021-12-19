@@ -7,6 +7,8 @@ class Person {
     private $generation;
     private $positionX;
     private $positionY;
+    private $parentPositionX;
+    private $parentPositionY;
     private $firstName;
     private $secondName;
     private $nickname;
@@ -37,6 +39,14 @@ class Person {
 
     function getPositionY() {
         return $this->positionY;
+    }
+
+    function getParentPositionX() {
+        return $this->parentPositionX;
+    }
+
+    function getParentPositionY() {
+        return $this->parentPositionY;
     }
 
     function getFirstName() {
@@ -87,6 +97,14 @@ class Person {
         $this->positionY = $positionY;
     }
 
+    function setParentPositionX($parentPositionX): void {
+        $this->parentPositionX = $parentPositionX;
+    }
+
+    function setParentPositionY($parentPositionY): void {
+        $this->parentPositionY = $parentPositionY;
+    }
+
     function setFirstName($firstName): void {
         $this->firstName = $firstName;
     }
@@ -114,7 +132,5 @@ class Person {
     function setChildren($children): void {
         $this->children = $children;
     }
-
-
 
 }

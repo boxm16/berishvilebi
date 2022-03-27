@@ -26,6 +26,48 @@ if (isset($_GET["personInFocusId"])) {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title></title>
+        <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <style>
+            body
+            {
+                padding:0px;
+                margin:0px;
+                width: 3300px;
+                height: 5000px
+            }
+
+            svg{
+
+                width:100%;
+                height:100%;
+                top:0px;
+                z-index:-1;
+            }
+
+            .table{
+                position:absolute;
+                cursor:pointer;	
+                border-top: solid 1px;
+            }
+
+            .table.node2 {
+                left: 353px;
+                top: 383px;
+            }
+
+            .td{			
+                padding-top: 0px;
+                padding-bottom: 0px;
+                padding-left: 7px;
+                padding-right: 7px;
+                border-style: solid;
+                border-top-width: 0px;
+                border-bottom-width: 1px;
+                border-left-width: 1px;
+                border-right-width: 1px;
+            }
+        </style>
     </head>
     <body>
         <div class="container-fluid">
@@ -40,8 +82,16 @@ if (isset($_GET["personInFocusId"])) {
             ?>
             <svg width="<?php echo $svgWidth; ?>" height="<?php echo $svgHeight; ?>">
             <rect x="0" y="0"  width="<?php echo $svgWidth; ?>" height="<?php echo $svgHeight; ?>" style="fill: skyblue;"/>
+            <line id='line' style='stroke:rgb(255,0,0)'></line>           
             <?php
+            $ind = 1;
+
             foreach ($personsList as $person) {
+                if ($ind == 1) {
+                    $cirlceId = 'cirlce1';
+                } if ($ind == 2) {
+                    $cirlceId = 'cirlce2';
+                }
                 $id = $person->getId();
                 $x = $person->getPositionX();
                 $y = $person->getPositionY();
@@ -53,9 +103,10 @@ if (isset($_GET["personInFocusId"])) {
                 $firstdNameY = $y - 10;
                 $secondNameX = $x;
                 $secondNameY = $firstdNameY + 15;
-                echo "<svg  class='movingCircle' style='cursor: default' x='$x' y='$y'>";
+                $node = 'movingCircle' . $ind;
+                echo "<svg  class='movingCircle $node' style='cursor: default' x='$x' y='$y'>";
                 echo "<g id='$id' ondblclick='goPersonPage(event);'>";
-                echo "<circle  cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
+                echo "<circle id='$cirlceId' cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
                 echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
         </text>;
@@ -64,31 +115,64 @@ if (isset($_GET["personInFocusId"])) {
         </text>";
                 echo "</g>";
                 echo "</svg>";
+                $ind++;
             }
             ?>
 
             </svg>
-
-
         </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
+            $(".movingCircle1").draggable(
+                    {
+                        drag: function () {
+                            //OUT
+                            var cirlce1 = $("#cirlce1");
+                            var cirlce1_position = cirlce1.offset();
+                            line_y_1 = cirlce1_position.top - 21;
+                            line_x_1 = cirlce1_position.left + 22;
+                            $('#line').attr({x1: line_x_1, y1: line_y_1})
+                        }
+                    });
+
+            $(".movingCircle2").draggable(
+                    {
+                        drag: function () {
+                            //IN
+                            var cirlce2 = $("#cirlce2");
+                            var cirlce2_position = cirlce2.offset();
+                            line_y_2 = cirlce2_position.top - 21;
+                            line_x_2 = cirlce2_position.left + 22;
+                            $('#line').attr({x2: line_x_2, y2: line_y_2})
+                        }
+                    });
+
+
+            //OUT
+            var cirlce1 = $("#cirlce1");
+            var cirlce1_position = cirlce1.offset();
+            line_y_1 = cirlce1_position.top - 21;
+            line_x_1 = cirlce1_position.left + 22;
+
+            //IN
+            var cirlce2 = $("#cirlce2");
+            var cirlce2_position = cirlce2.offset();
+            line_y_2 = cirlce2_position.top - 21;
+            line_x_2 = cirlce2_position.left + 22;
+
+            //LINE
+            $('#line').attr({
+                'x1': line_x_1,
+                'y1': line_y_1,
+                'x2': line_x_2,
+                'y2': line_y_2
+            });
+            //---------------------
 
             var allCircles = document.querySelectorAll(".movingCircle");
             allCircles.forEach(element => dragMovingCirlce(element));
             centerPersonInFocus();
 
             //-----------------------------
-
-            function myFunction() {
-                let modalButton = (document.getElementById("modalButton"));
-                modalButton.click();
-            }
-
-
-
             function dragMovingCirlce(elmnt) {
 
                 var mousePosStartX = 0, mousePosStartY = 0, mousePosEndX = 0, mousePosEndY = 0;
@@ -120,7 +204,7 @@ if (isset($_GET["personInFocusId"])) {
                     e = e || window.event;
                     e.preventDefault();
                     // calculate the new cursor position:
-
+ 
                     mousePosEndX = e.clientX;
                     mousePosEndY = e.clientY;
 
@@ -150,13 +234,12 @@ if (isset($_GET["personInFocusId"])) {
 
             //----------------------------------------------------
             function goPersonPage(event) {
-
-
                 let id = event.target.parentNode.getAttribute("id");
                 let x = event.target.parentNode.parentNode.getAttribute("x");
                 let y = event.target.parentNode.parentNode.getAttribute("y");
                 location.href = "personSettings.php?id=" + id + "&x=" + x + "&y=" + y;
             }
+
         </script>
     </body>
 </html>

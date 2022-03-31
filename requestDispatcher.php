@@ -9,6 +9,7 @@ if (isset($_POST["setNewPosition"])) {
     $y = $_POST["y"];
     $personDao = new PersonDao();
     $personDao->setPosition($id, $x, $y);
+    $personDao->setPositionAsParent($id, $x, $y);
     header("Location: admin.php?personInFocusId=$id");
 }
 if (isset($_POST["insertChild"])) {

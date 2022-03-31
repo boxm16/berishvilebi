@@ -101,6 +101,8 @@ class PersonDao {
             $person->setPositionX($personData["position_X"]);
             $person->setPositionY($personData["position_Y"]);
             $person->setParentId($personData["parent_id"]);
+            $person->setParentPositionX($personData["parent_position_X"]);
+            $person->setParentPositionY($personData["parent_position_Y"]);
             $person->setFirstName($personData["first_name"]);
             $person->setNickname($personData["nickname"]);
             $person->setSecondName($personData["second_name"]);
@@ -206,6 +208,17 @@ class PersonDao {
         } else {
             echo "nobody to delete";
         }
+    }
+
+    public function setPositionAsParent($id, $x, $y) {
+        $sql = "UPDATE person SET parent_position_X=:positionX, parent_position_Y=:positionY WHERE  parent_id=:id;";
+
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':positionX', $x);
+        $statement->bindValue(':positionY', $y);
+        $statement->bindValue(':id', $id);
+        $updated = $statement->execute();
     }
 
 }

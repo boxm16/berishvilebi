@@ -65,7 +65,7 @@ if (isset($_GET["personInFocusId"])) {
 
             foreach ($personsList as $person) {
                 if ($person->getParentId() != 0) {
-                    $x1 = $person->getParentPositionX() +42;
+                    $x1 = $person->getParentPositionX() + 42;
                     $y1 = $person->getParentPositionY() + 42;
                     $x2 = $person->getPositionX() + 42;
                     $y2 = $person->getPositionY() + 42;
@@ -112,31 +112,6 @@ if (isset($_GET["personInFocusId"])) {
             </svg>
         </div>
         <script>
-            $(".movingCircle1").draggable(
-                    {
-                        drag: function () {
-                            //OUT
-                            var cirlce1 = $("#cirlce1");
-                            var cirlce1_position = cirlce1.offset();
-                            line_y_1 = cirlce1_position.top - 21;
-                            line_x_1 = cirlce1_position.left + 22;
-                            $('#line').attr({x1: line_x_1, y1: line_y_1})
-                        }
-                    });
-
-            $(".movingCircle2").draggable(
-                    {
-                        drag: function () {
-                            //IN
-                            var cirlce2 = $("#cirlce2");
-                            var cirlce2_position = cirlce2.offset();
-                            line_y_2 = cirlce2_position.top - 21;
-                            line_x_2 = cirlce2_position.left + 22;
-                            $('#line').attr({x2: line_x_2, y2: line_y_2})
-                        }
-                    });
-
-
             //OUT
             var cirlce1 = $("#cirlce1");
             var cirlce1_position = cirlce1.offset();
@@ -198,8 +173,21 @@ if (isset($_GET["personInFocusId"])) {
                     elmnt.setAttribute("x", movingCirclePosEndX);
                     elmnt.setAttribute("y", movingCirclePosEndY);
 
+                    if (elemtn.id == 'movingCircle1') {
+                        var cirlce1 = $("#cirlce1");
+                        var cirlce1_position = cirlce1.offset();
+                        line_y_1 = cirlce1_position.top - 21;
+                        line_x_1 = cirlce1_position.left + 22;
+                        $('#line').attr({x1: line_x_1, y1: line_y_1})
+                    }
+                    if (elemtn.id == 'movingCircle2') {
+                        var cirlce2 = $("#cirlce2");
+                        var cirlce2_position = cirlce2.offset();
+                        line_y_2 = cirlce2_position.top - 21;
+                        line_x_2 = cirlce2_position.left + 22;
+                        $('#line').attr({x2: line_x_2, y2: line_y_2})
+                    }
                 }
-
                 function closeDragElement() {
                     /* stop moving when mouse button is released:*/
                     document.onmouseup = null;

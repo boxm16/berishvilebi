@@ -169,21 +169,17 @@ if (isset($_GET["personInFocusId"])) {
                     elmnt.setAttribute("y", movingCirclePosEndY);
                     let name = elmnt.getAttribute("name");
                     var parentChildren = name.split(':');
-                    var parentId=parentChildren[0];
+                    var parentId = parentChildren[0];
                     var children = parentChildren[1].split(',');
 
 
-                    if (elmnt.id == '1') {
-                        line_y_1 = movingCirclePosEndY + 42;
-                        line_x_1 = movingCirclePosEndX + 42;
-                        $('#line_3_1').attr({x1: line_x_1, y1: line_y_1})
-                    }
+
 
                     children.forEach((childId) => {
-                        console.log(childId)
+
                         line_y_1 = movingCirclePosEndY + 42;
                         line_x_1 = movingCirclePosEndX + 42;
-                        let meToChildLineId = '#line_'+childId+'_' + elmnt.id;
+                        let meToChildLineId = '#line_' + childId + '_' + elmnt.id;
                         $(meToChildLineId).attr({x1: line_x_1, y1: line_y_1})
 
                     })
@@ -192,7 +188,7 @@ if (isset($_GET["personInFocusId"])) {
 
                     line_y_2 = movingCirclePosEndY + 42;
                     line_x_2 = movingCirclePosEndX + 42;
-                    let meToParentId = '#line_' + elmnt.id + '_'+parentId;
+                    let meToParentId = '#line_' + elmnt.id + '_' + parentId;
                     $(meToParentId).attr({x2: line_x_2, y2: line_y_2})
 
                 }

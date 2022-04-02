@@ -169,24 +169,32 @@ if (isset($_GET["personInFocusId"])) {
                     elmnt.setAttribute("y", movingCirclePosEndY);
                     let name = elmnt.getAttribute("name");
                     var parentChildren = name.split(':');
-                    var parentId = parentChildren[0];
-                    console.log(parentId);
+                    var parentId=parentChildren[0];
+                    var children = parentChildren[1].split(',');
+
+
                     if (elmnt.id == '1') {
                         line_y_1 = movingCirclePosEndY + 42;
                         line_x_1 = movingCirclePosEndX + 42;
                         $('#line_3_1').attr({x1: line_x_1, y1: line_y_1})
                     }
-                    if (elmnt.id == '3') {
+
+                    children.forEach((childId) => {
+                        console.log(childId)
                         line_y_1 = movingCirclePosEndY + 42;
                         line_x_1 = movingCirclePosEndX + 42;
-                        let lineId='#line_7_3';
-                        $(lineId).attr({x1: line_x_1, y1: line_y_1})
+                        let meToChildLineId = '#line_'+childId+'_' + elmnt.id;
+                        $(meToChildLineId).attr({x1: line_x_1, y1: line_y_1})
 
-                        line_y_2 = movingCirclePosEndY + 42;
-                        line_x_2 = movingCirclePosEndX + 42;
+                    })
 
-                        $('#line_3_1').attr({x2: line_x_2, y2: line_y_2})
-                    }
+
+
+                    line_y_2 = movingCirclePosEndY + 42;
+                    line_x_2 = movingCirclePosEndX + 42;
+                    let meToParentId = '#line_' + elmnt.id + '_'+parentId;
+                    $(meToParentId).attr({x2: line_x_2, y2: line_y_2})
+
                 }
                 function closeDragElement() {
                     /* stop moving when mouse button is released:*/

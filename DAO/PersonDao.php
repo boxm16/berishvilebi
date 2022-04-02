@@ -29,13 +29,15 @@ class PersonDao {
 
 
 
-        $sql = "INSERT INTO person (parent_id, generation, position_X, position_Y, first_name, second_name, nickname, life_status, birth_date, death_date ) "
-                . "        VALUES (:parentId, :generation, :positionX, :positionY, :firstName, :secondName, :nickname, :lifeStatus, :birthDate, :deathDate)";
+        $sql = "INSERT INTO person (parent_id, parent_position_X, parent_position_Y, generation, position_X, position_Y, first_name, second_name, nickname, life_status, birth_date, death_date ) "
+                . "        VALUES (:parentId, :parent_position_X, :parent_position_Y, :generation, :positionX, :positionY, :firstName, :secondName, :nickname, :lifeStatus, :birthDate, :deathDate)";
 
 
         $statement = $this->connection->prepare($sql);
 
         $statement->bindValue(':parentId', $parentId);
+        $statement->bindValue(':parent_position_X', $parentPositionX);
+        $statement->bindValue(':parent_position_Y', $parentPositionY);
         $statement->bindValue(':generation', $generation);
         $statement->bindValue(':positionX', $positionX);
         $statement->bindValue(':positionY', $positionY);
@@ -93,6 +95,7 @@ class PersonDao {
         }
 // var_dump($result);
         $person = new Person();
+       
         foreach ($result as $personData) {
             $person = new Person();
             $personId = $personData["id"];
@@ -108,6 +111,16 @@ class PersonDao {
             $person->setSecondName($personData["second_name"]);
             $person->setLifeStatus($personData["life_status"]);
             $persons[$personId] = $person;
+            $parentId = $personData["parent_id"];
+            $id = $personData["id"];
+            if ($parentId == null) {
+                
+            } else {
+                $parent = $persons[$parentId];
+                $parent->addChild($person);
+
+                $persons[$parentId] = $parent;
+            }
         }
 
         return $persons;

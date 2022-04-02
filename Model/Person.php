@@ -133,4 +133,8 @@ class Person {
         $this->children = $children;
     }
 
+    public function addChild($child): void {
+        array_push($this->children, $child);
+    }
+
 }

@@ -65,6 +65,8 @@ if (isset($_GET["personInFocusId"])) {
 
             foreach ($personsList as $person) {
                 if ($person->getParentId() != 0) {
+                    $parentIde = $person->getParentId();
+                    $personId = $person->getId();
                     $x1 = $person->getParentPositionX() + 42;
                     $y1 = $person->getParentPositionY() + 42;
                     $x2 = $person->getPositionX() + 42;
@@ -76,11 +78,7 @@ if (isset($_GET["personInFocusId"])) {
 
             foreach ($personsList as $person) {
 
-                if ($ind == 1) {
-                    $cirlceId = 'cirlce1';
-                } if ($ind == 2) {
-                    $cirlceId = 'cirlce2';
-                }
+
                 $id = $person->getId();
                 $x = $person->getPositionX();
                 $y = $person->getPositionY();
@@ -92,11 +90,21 @@ if (isset($_GET["personInFocusId"])) {
                 $firstdNameY = $y - 10;
                 $secondNameX = $x;
                 $secondNameY = $firstdNameY + 15;
-                $node = 'movingCircle' . $ind;
 
-                echo "<svg  class='movingCircle $node' style='cursor: default' x='$x' y='$y' >";
+                $cirlceId = 'circle' . $id;
+                $parentId = $person->getParentId();
+                $children = $person->getChildren();
+              
+                $name = $parentId . ':';
+
+                foreach ($children as $child){
+                    $childId=$child->getId();
+                  $name=$name.$childId.',';  
+                }
+
+                echo "<svg id='$id' class='movingCircle' name='$name' style='cursor: default' x='$x' y='$y' >";
                 echo "<g id='$id' ondblclick='goPersonPage(event);'>";
-                echo "<circle id='$cirlceId' cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
+                echo "<circle id='$cirlceId'  cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
                 echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
         </text>;
@@ -112,19 +120,6 @@ if (isset($_GET["personInFocusId"])) {
             </svg>
         </div>
         <script>
-            //OUT
-            var cirlce1 = $("#cirlce1");
-            var cirlce1_position = cirlce1.offset();
-            line_y_1 = cirlce1_position.top - 21;
-            line_x_1 = cirlce1_position.left + 22;
-
-            //IN
-            var cirlce2 = $("#cirlce2");
-            var cirlce2_position = cirlce2.offset();
-            line_y_2 = cirlce2_position.top - 21;
-            line_x_2 = cirlce2_position.left + 22;
-
-
             //---------------------
 
             var allCircles = document.querySelectorAll(".movingCircle");
@@ -172,19 +167,16 @@ if (isset($_GET["personInFocusId"])) {
                     // set the element's new position:
                     elmnt.setAttribute("x", movingCirclePosEndX);
                     elmnt.setAttribute("y", movingCirclePosEndY);
-
-                    if (elemtn.id == 'movingCircle1') {
-                        var cirlce1 = $("#cirlce1");
-                        var cirlce1_position = cirlce1.offset();
-                        line_y_1 = cirlce1_position.top - 21;
-                        line_x_1 = cirlce1_position.left + 22;
+                    let name = elmnt.getAttribute("name");
+                    console.log(name);
+                    if (elmnt.id == '1') {
+                        line_y_1 = movingCirclePosEndY + 42;
+                        line_x_1 = movingCirclePosEndX + 42;
                         $('#line').attr({x1: line_x_1, y1: line_y_1})
                     }
-                    if (elemtn.id == 'movingCircle2') {
-                        var cirlce2 = $("#cirlce2");
-                        var cirlce2_position = cirlce2.offset();
-                        line_y_2 = cirlce2_position.top - 21;
-                        line_x_2 = cirlce2_position.left + 22;
+                    if (elmnt.id == '3') {
+                        line_y_2 = movingCirclePosEndY + 42;
+                        line_x_2 = movingCirclePosEndX + 42;
                         $('#line').attr({x2: line_x_2, y2: line_y_2})
                     }
                 }

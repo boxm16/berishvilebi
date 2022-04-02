@@ -63,7 +63,7 @@ if (isset($_GET["personInFocusId"])) {
             <?php
             foreach ($personsList as $person) {
                 if ($person->getParentId() == 0) {
-                    
+                    //no need for line, line goes only from child to parent  
                 } else {
                     $parentId = $person->getParentId();
                     $personId = $person->getId();
@@ -79,7 +79,6 @@ if (isset($_GET["personInFocusId"])) {
 
             foreach ($personsList as $person) {
 
-
                 $id = $person->getId();
                 $x = $person->getPositionX();
                 $y = $person->getPositionY();
@@ -92,12 +91,10 @@ if (isset($_GET["personInFocusId"])) {
                 $secondNameX = $x;
                 $secondNameY = $firstdNameY + 15;
 
-
                 $parentId = $person->getParentId();
                 $children = $person->getChildren();
-
                 $name = $parentId . ':';
-
+//name actually is code for for a person, it contains parent Id and children ids
                 foreach ($children as $child) {
                     $childId = $child->getId();
                     $name = $name . $childId . ',';
@@ -131,13 +128,9 @@ if (isset($_GET["personInFocusId"])) {
 
                 var mousePosStartX = 0, mousePosStartY = 0, mousePosEndX = 0, mousePosEndY = 0;
                 var movingCirclePosStartX = 0, movingCirclePosStartY = 0, movingCirclePosEndX = 0, movingCirclePosEndY = 0;
-
                 var diffPosX = 0, diffPosY = 0;
-
                 elmnt.onmousedown = dragMouseDown;
-
                 function dragMouseDown(e) {
-
                     e = e || window.event;
                     e.preventDefault();
                     // get the mouse cursor position at startup:
@@ -157,7 +150,6 @@ if (isset($_GET["personInFocusId"])) {
                     e = e || window.event;
                     e.preventDefault();
                     // calculate the new cursor position:
-
                     mousePosEndX = e.clientX;
                     mousePosEndY = e.clientY;
 

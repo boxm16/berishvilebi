@@ -59,16 +59,27 @@ if (isset($_GET["personInFocusId"])) {
             ?>
             <svg width="<?php echo $svgWidth; ?>" height="<?php echo $svgHeight; ?>">
             <rect x="0" y="0"  width="<?php echo $svgWidth; ?>" height="<?php echo $svgHeight; ?>" style="fill: skyblue;"/>
-            <line id='line' style='stroke:rgb(255,0,0)'></line>           
+
             <?php
-            $ind = 1;
+            foreach ($personsList as $person) {
+                if ($person->getParentId() == 0) {
+                    
+                } else {
+                    $parentId = $person->getParentId();
+                    $personId = $person->getId();
+                    $x1 = $person->getParentPositionX() + 42;
+                    $y1 = $person->getParentPositionY() + 42;
+                    $x2 = $person->getPositionX() + 42;
+                    $y2 = $person->getPositionY() + 42;
+                    $lineId = 'line_' . $personId . '_' . $parentId;
+
+                    echo "<line id='$lineId' x1='$x1' y1='$y1' x2='$x2' y2='$y2' style='stroke:rgb(255,0,0)'></line>";
+                }
+            }
 
             foreach ($personsList as $person) {
-                if ($ind == 1) {
-                    $cirlceId = 'cirlce1';
-                } if ($ind == 2) {
-                    $cirlceId = 'cirlce2';
-                }
+
+
                 $id = $person->getId();
                 $x = $person->getPositionX();
                 $y = $person->getPositionY();
@@ -80,10 +91,21 @@ if (isset($_GET["personInFocusId"])) {
                 $firstdNameY = $y - 10;
                 $secondNameX = $x;
                 $secondNameY = $firstdNameY + 15;
-                $node = 'movingCircle' . $ind;
-                echo "<svg  class='movingCircle $node' style='cursor: default' x='$x' y='$y' >";
+
+
+                $parentId = $person->getParentId();
+                $children = $person->getChildren();
+
+                $name = $parentId . ':';
+
+                foreach ($children as $child) {
+                    $childId = $child->getId();
+                    $name = $name . $childId . ',';
+                }
+
+                echo "<svg id='$id' class='movingCircle' name='$name' style='cursor: default' x='$x' y='$y' >";
                 echo "<g id='$id' ondblclick='goPersonPage(event);'>";
-                echo "<circle id='$cirlceId' cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
+                echo "<circle   cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
                 echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
         </text>;
@@ -92,57 +114,12 @@ if (isset($_GET["personInFocusId"])) {
         </text>";
                 echo "</g>";
                 echo "</svg>";
-                $ind++;
             }
             ?>
 
             </svg>
         </div>
         <script>
-            $(".movingCircle1").draggable(
-                    {
-                        drag: function () {
-                            //OUT
-                            var cirlce1 = $("#cirlce1");
-                            var cirlce1_position = cirlce1.offset();
-                            line_y_1 = cirlce1_position.top - 21;
-                            line_x_1 = cirlce1_position.left + 22;
-                            $('#line').attr({x1: line_x_1, y1: line_y_1})
-                        }
-                    });
-
-            $(".movingCircle2").draggable(
-                    {
-                        drag: function () {
-                            //IN
-                            var cirlce2 = $("#cirlce2");
-                            var cirlce2_position = cirlce2.offset();
-                            line_y_2 = cirlce2_position.top - 21;
-                            line_x_2 = cirlce2_position.left + 22;
-                            $('#line').attr({x2: line_x_2, y2: line_y_2})
-                        }
-                    });
-
-
-            //OUT
-            var cirlce1 = $("#cirlce1");
-            var cirlce1_position = cirlce1.offset();
-            line_y_1 = cirlce1_position.top - 21;
-            line_x_1 = cirlce1_position.left + 22;
-
-            //IN
-            var cirlce2 = $("#cirlce2");
-            var cirlce2_position = cirlce2.offset();
-            line_y_2 = cirlce2_position.top - 21;
-            line_x_2 = cirlce2_position.left + 22;
-
-            //LINE
-            $('#line').attr({
-                'x1': line_x_1,
-                'y1': line_y_1,
-                'x2': line_x_2,
-                'y2': line_y_2
-            });
             //---------------------
 
             var allCircles = document.querySelectorAll(".movingCircle");
@@ -158,7 +135,6 @@ if (isset($_GET["personInFocusId"])) {
                 var diffPosX = 0, diffPosY = 0;
 
                 elmnt.onmousedown = dragMouseDown;
-
 
                 function dragMouseDown(e) {
 
@@ -191,8 +167,24 @@ if (isset($_GET["personInFocusId"])) {
                     elmnt.setAttribute("x", movingCirclePosEndX);
                     elmnt.setAttribute("y", movingCirclePosEndY);
 
-                }
+                    let name = elmnt.getAttribute("name");
+                    let parentChildren = name.split(':');
+                    let parentId = parentChildren[0];
+                    let children = parentChildren[1].split(',');
 
+                    children.forEach((childId) => {
+                        line_y_1 = movingCirclePosEndY + 42;
+                        line_x_1 = movingCirclePosEndX + 42;
+                        let meToChildLineId = '#line_' + childId + '_' + elmnt.id;
+                        $(meToChildLineId).attr({x1: line_x_1, y1: line_y_1})
+                    })
+
+                    line_y_2 = movingCirclePosEndY + 42;
+                    line_x_2 = movingCirclePosEndX + 42;
+                    let meToParentId = '#line_' + elmnt.id + '_' + parentId;
+                    $(meToParentId).attr({x2: line_x_2, y2: line_y_2})
+
+                }
                 function closeDragElement() {
                     /* stop moving when mouse button is released:*/
                     document.onmouseup = null;

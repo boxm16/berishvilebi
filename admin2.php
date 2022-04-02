@@ -61,18 +61,19 @@ if (isset($_GET["personInFocusId"])) {
             <rect x="0" y="0"  width="<?php echo $svgWidth; ?>" height="<?php echo $svgHeight; ?>" style="fill: skyblue;"/>
 
             <?php
-            $ind = 1;
-
             foreach ($personsList as $person) {
-                if ($person->getParentId() != 0) {
-                    $parentIde = $person->getParentId();
+                if ($person->getParentId() == 0) {
+                    
+                } else {
+                    $parentId = $person->getParentId();
                     $personId = $person->getId();
                     $x1 = $person->getParentPositionX() + 42;
                     $y1 = $person->getParentPositionY() + 42;
                     $x2 = $person->getPositionX() + 42;
                     $y2 = $person->getPositionY() + 42;
+                    $lineId = 'line_' . $personId . '_' . $parentId;
 
-                    echo "<line id='line' x1='$x1' y1='$y1' x2='$x2' y2='$y2' style='stroke:rgb(255,0,0)'></line>";
+                    echo "<line id='$lineId' x1='$x1' y1='$y1' x2='$x2' y2='$y2' style='stroke:rgb(255,0,0)'></line>";
                 }
             }
 
@@ -91,20 +92,20 @@ if (isset($_GET["personInFocusId"])) {
                 $secondNameX = $x;
                 $secondNameY = $firstdNameY + 15;
 
-                $cirlceId = 'circle' . $id;
+
                 $parentId = $person->getParentId();
                 $children = $person->getChildren();
-              
+
                 $name = $parentId . ':';
 
-                foreach ($children as $child){
-                    $childId=$child->getId();
-                  $name=$name.$childId.',';  
+                foreach ($children as $child) {
+                    $childId = $child->getId();
+                    $name = $name . $childId . ',';
                 }
 
                 echo "<svg id='$id' class='movingCircle' name='$name' style='cursor: default' x='$x' y='$y' >";
                 echo "<g id='$id' ondblclick='goPersonPage(event);'>";
-                echo "<circle id='$cirlceId'  cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
+                echo "<circle   cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
                 echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
         </text>;
@@ -113,7 +114,6 @@ if (isset($_GET["personInFocusId"])) {
         </text>";
                 echo "</g>";
                 echo "</svg>";
-                $ind++;
             }
             ?>
 
@@ -168,16 +168,24 @@ if (isset($_GET["personInFocusId"])) {
                     elmnt.setAttribute("x", movingCirclePosEndX);
                     elmnt.setAttribute("y", movingCirclePosEndY);
                     let name = elmnt.getAttribute("name");
-                    console.log(name);
+                    var parentChildren = name.split(':');
+                    var parentId = parentChildren[0];
+                    console.log(parentId);
                     if (elmnt.id == '1') {
                         line_y_1 = movingCirclePosEndY + 42;
                         line_x_1 = movingCirclePosEndX + 42;
-                        $('#line').attr({x1: line_x_1, y1: line_y_1})
+                        $('#line_3_1').attr({x1: line_x_1, y1: line_y_1})
                     }
                     if (elmnt.id == '3') {
+                        line_y_1 = movingCirclePosEndY + 42;
+                        line_x_1 = movingCirclePosEndX + 42;
+                        let lineId='#line_7_3';
+                        $(lineId).attr({x1: line_x_1, y1: line_y_1})
+
                         line_y_2 = movingCirclePosEndY + 42;
                         line_x_2 = movingCirclePosEndX + 42;
-                        $('#line').attr({x2: line_x_2, y2: line_y_2})
+
+                        $('#line_3_1').attr({x2: line_x_2, y2: line_y_2})
                     }
                 }
                 function closeDragElement() {

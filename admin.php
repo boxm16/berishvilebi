@@ -48,6 +48,7 @@ if (isset($_GET["personInFocusId"])) {
     </head>
     <body>
         <div class="container-fluid">
+            <a href="config.php">GO TO CONFIG</a>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <input hidden name="setSpace">
                 სივრცის სიგანე:   <input type="number" name="svgWidth" value="<?php echo $svgWidth; ?>"> &nbsp სივრცის სიმაღლე: <input type="number" name="svgHeight" value="<?php echo $svgHeight; ?>"> 

@@ -51,7 +51,6 @@ $dbManController = new DbManController();
             $dbManController->insertMainPerson();
         }
         ?>
-        <hr><hr>
         <hr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <input hidden name="deleteTables">
@@ -63,5 +62,9 @@ $dbManController = new DbManController();
             $dbManController->deleteTables();
         }
         ?>
+        <hr>
+        <a href="admin.php">GO TO ADMIN</a>
+        <hr>
+        <a href="index.php">GO TO START PAGE</a>
     </body>
 </html>

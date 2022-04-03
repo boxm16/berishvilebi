@@ -31,6 +31,7 @@ if (isset($_POST["insertChild"])) {
     $child->setParentPositionY($y);
     $child->setPositionX($x + 10);
     $child->setPositionY($y + 10);
+    $child->setGeneration($_POST["generation"]);
     $personDao = new PersonDao();
     $personDao->insertPerson($child);
 

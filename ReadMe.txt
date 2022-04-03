@@ -1,8 +1,9 @@
 database for this project is on https://remotemysql.com/
 database name is rcTGWKjpv5
 
-Username: berishvilebi.6te.net
+Username: berishvilebi.eu5.net
 Password: athina2004
+login site https://newserv.freewha.com/freewha.cpanel
 
 used email -berishvilebiOnWHA@gmail.com
 e-mail password athina2004

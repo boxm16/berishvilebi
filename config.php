@@ -25,7 +25,7 @@ $dbManController = new DbManController();
         <hr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <input hidden name="setSpace">
-            Width:   <input type="number" name="width" value="1000"> &nbsp Height: <input type="number" name="height" value="1000"> 
+            Width:   <input type="number" name="width" value="7000"> &nbsp Height: <input type="number" name="height" value="1000"> 
             <br>
             <button type="submit">Set Space</button>
         </form>

@@ -46,7 +46,7 @@ if (isset($_GET["personInFocusId"])) {
             }
         </style>
     </head>
-    <body>
+    <body style="width:7000px;background-color: skyblue;">
         <div class="container-fluid">
             <a href="config.php">GO TO CONFIG</a>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
@@ -58,9 +58,8 @@ if (isset($_GET["personInFocusId"])) {
             <hr>
             <?php
             ?>
-            <svg width="<?php echo $svgWidth; ?>" height="<?php echo $svgHeight; ?>">
-            <rect x="0" y="0"  width="<?php echo $svgWidth; ?>" height="<?php echo $svgHeight; ?>" style="fill: skyblue;"/>
-
+            <svg width="100%" height="<?php echo $svgHeight; ?>">
+           
             <?php
             foreach ($personsList as $person) {
                 if ($person->getParentId() == 0) {

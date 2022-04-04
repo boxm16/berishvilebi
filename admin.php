@@ -48,7 +48,7 @@ if (isset($_GET["personInFocusId"])) {
     </head>
     <body style="width:7000px;">
         <div class="container-fluid">
-            <a href="config.php">GO TO CONFIG</a> &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp <button type="button" class="btn btn-primary" onclick="saveAllPositions()">ცვლილებების შენახვა</button>
+            <a href="config.php">GO TO CONFIG</a> &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp <button type="button" class="btn btn-primary" onclick="saveAllPositions()">განლაგების ცვლილებების შენახვა</button>
           <!--  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <input hidden name="setSpace">
                 სივრცის სიგანე:   <input type="number" name="svgWidth" value="<?php echo $svgWidth; ?>"> &nbsp სივრცის სიმაღლე: <input type="number" name="svgHeight" value="<?php echo $svgHeight; ?>"> 

@@ -102,7 +102,7 @@ $generation = $person->getGeneration();
                         <input name="id" value="<?php echo $id ?>" hidden>
                         <input name="x" value="<?php echo $x ?>" hidden>
                         <input name="y" value="<?php echo $y ?>" hidden>
-                        <input name="generation" value="<?php echo $generation ?>" hidden>
+                        <input name="generation" value="<?php echo $generation+1 ?>" hidden>
                         სახელი <input name="firstName" type="text">
 
                         მეორე სახელი(ზედმეტსახელი) <input name="nickname" type="text">

@@ -18,8 +18,6 @@ class PersonDao {
         $generation = $person->getGeneration();
         $positionX = $person->getPositionX();
         $positionY = $person->getPositionY();
-        $parentPositionX = $person->getParentPositionX();
-        $parentPositionY = $person->getParentPositionY();
         $firstName = $person->getFirstName();
         $secondName = $person->getSecondName();
         $nickname = $person->getNickname();
@@ -29,15 +27,13 @@ class PersonDao {
 
 
 
-        $sql = "INSERT INTO person (parent_id, parent_position_X, parent_position_Y, generation, position_X, position_Y, first_name, second_name, nickname, life_status, birth_date, death_date ) "
-                . "        VALUES (:parentId, :parent_position_X, :parent_position_Y, :generation, :positionX, :positionY, :firstName, :secondName, :nickname, :lifeStatus, :birthDate, :deathDate)";
+        $sql = "INSERT INTO person (parent_id, generation, position_X, position_Y, first_name, second_name, nickname, life_status, birth_date, death_date ) "
+                . "        VALUES (:parentId, :generation, :positionX, :positionY, :firstName, :secondName, :nickname, :lifeStatus, :birthDate, :deathDate)";
 
 
         $statement = $this->connection->prepare($sql);
 
         $statement->bindValue(':parentId', $parentId);
-        $statement->bindValue(':parent_position_X', $parentPositionX);
-        $statement->bindValue(':parent_position_Y', $parentPositionY);
         $statement->bindValue(':generation', $generation);
         $statement->bindValue(':positionX', $positionX);
         $statement->bindValue(':positionY', $positionY);
@@ -104,8 +100,6 @@ class PersonDao {
             $person->setPositionX($personData["position_X"]);
             $person->setPositionY($personData["position_Y"]);
             $person->setParentId($personData["parent_id"]);
-            $person->setParentPositionX($personData["parent_position_X"]);
-            $person->setParentPositionY($personData["parent_position_Y"]);
             $person->setFirstName($personData["first_name"]);
             $person->setNickname($personData["nickname"]);
             $person->setSecondName($personData["second_name"]);
@@ -226,17 +220,6 @@ class PersonDao {
         } else {
             echo "nobody to delete";
         }
-    }
-
-    public function setPositionAsParent($id, $x, $y) {
-        $sql = "UPDATE person SET parent_position_X=:positionX, parent_position_Y=:positionY WHERE  parent_id=:id;";
-
-
-        $statement = $this->connection->prepare($sql);
-        $statement->bindValue(':positionX', $x);
-        $statement->bindValue(':positionY', $y);
-        $statement->bindValue(':id', $id);
-        $updated = $statement->execute();
     }
 
     public function saveAllPositions($allPersonsPositions) {

@@ -95,7 +95,7 @@ class PersonDao {
         }
 // var_dump($result);
         $person = new Person();
-       
+
         foreach ($result as $personData) {
             $person = new Person();
             $personId = $personData["id"];
@@ -110,17 +110,22 @@ class PersonDao {
             $person->setNickname($personData["nickname"]);
             $person->setSecondName($personData["second_name"]);
             $person->setLifeStatus($personData["life_status"]);
-            $persons[$personId] = $person;
+
             $parentId = $personData["parent_id"];
+
             $id = $personData["id"];
             if ($parentId == null) {
                 
             } else {
                 $parent = $persons[$parentId];
                 $parent->addChild($person);
-
                 $persons[$parentId] = $parent;
+                $parentPositionX = $parent->getPositionX();
+                $parentPositionY = $parent->getPositionY();
+                $person->setParentPositionX($parentPositionX);
+                $person->setParentPositionY($parentPositionY);
             }
+            $persons[$personId] = $person;
         }
 
         return $persons;
@@ -232,6 +237,25 @@ class PersonDao {
         $statement->bindValue(':positionY', $y);
         $statement->bindValue(':id', $id);
         $updated = $statement->execute();
+    }
+
+    public function saveAllPositions($allPersonsPositions) {
+
+
+        $allPersonsPositionsArrayt = explode(":", $allPersonsPositions);
+
+
+        // prepare the SQL query once
+        $stmt = $this->connection->prepare("UPDATE person SET position_x = ?, position_y = ? WHERE id= ? ;");
+
+        $this->connection->beginTransaction();
+// loop over the data array
+        foreach ($allPersonsPositionsArrayt as $personPositionCode) {
+
+            $personPositionCodeArray = explode(",", $personPositionCode);
+            $stmt->execute([$personPositionCodeArray[1], $personPositionCodeArray[2], $personPositionCodeArray[0]]);
+        }
+        $this->connection->commit();
     }
 
 }

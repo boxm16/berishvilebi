@@ -48,7 +48,7 @@ if (isset($_GET["personInFocusId"])) {
     </head>
     <body style="width:7000px;">
         <div class="container-fluid">
-            <a href="config.php">GO TO CONFIG</a>
+            <a href="config.php">GO TO CONFIG</a> &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp <button type="button" class="btn btn-primary" onclick="saveAllPositions()">ცვლილებების შენახვა</button>
           <!--  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <input hidden name="setSpace">
                 სივრცის სიგანე:   <input type="number" name="svgWidth" value="<?php echo $svgWidth; ?>"> &nbsp სივრცის სიმაღლე: <input type="number" name="svgHeight" value="<?php echo $svgHeight; ?>"> 
@@ -60,7 +60,7 @@ if (isset($_GET["personInFocusId"])) {
             <?php
             ?>
             <svg style="background-color:skyblue" width="100%"  height="<?php echo $svgHeight; ?>">
-           
+
             <?php
             foreach ($personsList as $person) {
                 if ($person->getParentId() == 0) {
@@ -117,6 +117,10 @@ if (isset($_GET["personInFocusId"])) {
 
             </svg>
         </div>
+        <form id="saveAllPositionsForm" action="requestDispatcher.php" method="POST">
+            <input id="saveAllPositionsInput" name='saveAllPositions' hidden value="">
+
+        </form>
         <script>
             //---------------------
 
@@ -200,6 +204,24 @@ if (isset($_GET["personInFocusId"])) {
                 let x = event.target.parentNode.parentNode.getAttribute("x");
                 let y = event.target.parentNode.parentNode.getAttribute("y");
                 location.href = "personSettings.php?id=" + id + "&x=" + x + "&y=" + y;
+            }
+            //----------------------------
+            function saveAllPositions() {
+                let allCircles = document.querySelectorAll(".movingCircle");
+                let postRequest = "";
+                for (let i = 0; i < allCircles.length; i++) {
+                    let circle = allCircles[i];
+                    let id = circle.id;
+                    let x = circle.getAttribute("x");
+                    let y = circle.getAttribute("y");
+                    if (i == 0) {
+                        postRequest = postRequest + id + "," + x + "," + y;
+                    } else {
+                        postRequest = postRequest + ":" + id + "," + x + "," + y;
+                    }
+                }
+                document.getElementById("saveAllPositionsInput").value = postRequest;
+                document.getElementById("saveAllPositionsForm").submit();
             }
 
         </script>

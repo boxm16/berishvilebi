@@ -50,18 +50,18 @@ if (isset($_GET["personInFocusId"])) {
         <div class="container-fluid">
             <a href="config.php">GO TO CONFIG</a> &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp 
             <button type="button" class="btn btn-primary" onclick="saveAllPositions()">განლაგების ცვლილებების შენახვა</button>&nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp
-            <input type="number" name="step">&nbsp &nbsp
-            <button type="button" class="btn btn-primary">Left</button>
-            <button type="button" class="btn btn-primary">Right</button>
-            <button type="button" class="btn btn-primary">Up</button>
-            <button type="button" class="btn btn-primary">Down</button>
-       <!--  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-             <input hidden name="setSpace">
-             სივრცის სიგანე:   <input type="number" name="svgWidth" value="<?php echo $svgWidth; ?>"> &nbsp სივრცის სიმაღლე: <input type="number" name="svgHeight" value="<?php echo $svgHeight; ?>"> 
+            <input id="moveAllPositionsInput" type="number">&nbsp &nbsp
+            <button type="button" class="btn btn-primary" onclick="moveAllPositions('left')">Left</button>
+            <button type="button" class="btn btn-primary" onclick="moveAllPositions('right')">Right</button>
+            <button type="button" class="btn btn-primary" onclick="moveAllPositions('up')">Up</button>
+            <button type="button" class="btn btn-primary" onclick="moveAllPositions('down')">Down</button>
+         <!--   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <input hidden name="setSpace">
+                სივრცის სიგანე:   <input type="number" name="svgWidth" value="<?php echo $svgWidth; ?>"> &nbsp სივრცის სიმაღლე: <input type="number" name="svgHeight" value="<?php echo $svgHeight; ?>"> 
 
-             <button type="submit">სივრცის ზომების შეცვლა</button>
-         </form>
-            -->
+                <button type="submit">სივრცის ზომების შეცვლა</button>
+            </form>
+-->
             <hr>
             <?php
             ?>
@@ -125,7 +125,9 @@ if (isset($_GET["personInFocusId"])) {
         </div>
         <form id="saveAllPositionsForm" action="requestDispatcher.php" method="POST">
             <input id="saveAllPositionsInput" name='saveAllPositions' hidden value="">
-
+        </form>
+        <form id="moveAllPositionsForm" action="requestDispatcher.php" method="POST">
+            <input id="moveAllPositionsFormInput" name='moveAllPositions' hidden value="">
         </form>
         <script>
             //---------------------
@@ -228,6 +230,35 @@ if (isset($_GET["personInFocusId"])) {
                 }
                 document.getElementById("saveAllPositionsInput").value = postRequest;
                 document.getElementById("saveAllPositionsForm").submit();
+            }
+
+            function moveAllPositions(direction) {
+                let steps = document.getElementById("moveAllPositionsInput").value;
+                if (steps == '') {
+                    return;
+                }
+                let sentValue = '';
+                if (direction == 'left') {
+                    steps = steps * (-1);
+                    sentValue = 'x:' + steps;
+                }
+                if (direction == 'right') {
+                    steps = steps * 1;
+                    sentValue = 'x:' + steps;
+
+                }
+                if (direction == 'up') {
+                    steps = steps * (-1);
+                    sentValue = 'y:' + steps;
+
+                }
+                if (direction == 'down') {
+                    steps = steps * 1;
+                    sentValue = 'y:' + steps;
+                }
+                console.log(sentValue);
+                document.getElementById("moveAllPositionsFormInput").value = sentValue;
+                document.getElementById("moveAllPositionsForm").submit();
             }
 
         </script>

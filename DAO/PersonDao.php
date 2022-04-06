@@ -241,4 +241,26 @@ class PersonDao {
         $this->connection->commit();
     }
 
+    public function moveHorizontalyAllPositions($step) {
+        $sql = "UPDATE person SET position_X=position_X+:step;";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':step', $step);
+        $updated = $statement->execute();
+        if ($updated) {
+            echo 'რუქაზე პიორვნების მდებარეობა შენახულია!<br>';
+        }
+    }
+
+    public function moveVerticallyAllPositions($step) {
+        $sql = "UPDATE person SET position_Y=position_Y+:step;";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':step', $step);
+        $updated = $statement->execute();
+        if ($updated) {
+            echo 'რუქაზე პიორვნების მდებარეობა შენახულია!<br>';
+        }
+    }
+
 }

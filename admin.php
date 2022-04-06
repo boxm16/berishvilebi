@@ -61,7 +61,7 @@ if (isset($_GET["personInFocusId"])) {
 
                 <button type="submit">სივრცის ზომების შეცვლა</button>
             </form>
--->
+            -->
             <hr>
             <?php
             ?>
@@ -122,13 +122,14 @@ if (isset($_GET["personInFocusId"])) {
             ?>
 
             </svg>
+            <form id="saveAllPositionsForm" action="requestDispatcher.php" method="POST">
+                <input id="saveAllPositionsInput" name='saveAllPositions' hidden value="">
+            </form>
+            <form id="moveAllPositionsForm" action="requestDispatcher.php" method="POST">
+                <input id="moveAllPositionsFormInput" name='moveAllPositions' hidden value="">
+            </form>
         </div>
-        <form id="saveAllPositionsForm" action="requestDispatcher.php" method="POST">
-            <input id="saveAllPositionsInput" name='saveAllPositions' hidden value="">
-        </form>
-        <form id="moveAllPositionsForm" action="requestDispatcher.php" method="POST">
-            <input id="moveAllPositionsFormInput" name='moveAllPositions' hidden value="">
-        </form>
+
         <script>
             //---------------------
 

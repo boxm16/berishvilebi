@@ -66,7 +66,7 @@ if (isset($_GET["personInFocusId"])) {
             <hr>
             <?php
             ?>
-            <svg style="background-color:skyblue" width="100%"  height="<?php echo $svgHeight; ?>">
+            <svg style="background-color:skyblue" width="100%"  height="7000">
 
             <?php
             foreach ($personsList as $person) {

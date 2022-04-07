@@ -56,13 +56,13 @@ if (isset($_GET["personInFocusId"])) {
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('right')">Right</button>
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('up')">Up</button>
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('down')">Down</button>
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+         <!--   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <input hidden name="setSpace">
                 სივრცის სიგანე:   <input type="number" name="svgWidth" value="<?php echo $svgWidth; ?>"> &nbsp სივრცის სიმაღლე: <input type="number" name="svgHeight" value="<?php echo $svgHeight; ?>"> 
 
                 <button type="submit">სივრცის ზომების შეცვლა</button>
             </form>
-
+            -->
             <hr>
             <?php
             ?>

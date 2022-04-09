@@ -10,6 +10,7 @@ require_once 'Controller/PersonController.php';
     <body>
 
         <a href="admin.php">Go Admin</a>
+        
         <hr>
         <a href="config.php">Go Config</a>
         <br>

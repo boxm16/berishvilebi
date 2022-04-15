@@ -5,8 +5,6 @@
         <title></title>
     </head>
     <body>
-        <?php
-        echo "index.php here";
-        ?>
+        <a href="config.php">Go Config</a>
     </body>
 </html>

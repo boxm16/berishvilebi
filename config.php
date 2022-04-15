@@ -1,9 +1,8 @@
+<?php
+require_once 'Controller/ConfigController.php';
+$configController = new ConfigController();
+?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -12,6 +11,18 @@ and open the template in the editor.
     <body>
         <a href="admin.php">Go Admin</a>
         <hr>
-        
+        <h1>Configurations</h1>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <input hidden name="createTables">
+            <button type="submit">Create Tables</button>
+        </form>
+        <?php
+        if (isset($_POST["createTables"])) {
+            //precedence is important, there are primary-foreign keys rstrictions
+            $configController->createTables();
+        }
+        ?>
+        <hr>
+
     </body>
 </html>

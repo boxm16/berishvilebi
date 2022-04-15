@@ -1,9 +1,12 @@
 <?php
 
+require_once 'DAO/ConfigDao.php';
+
 class ConfigController {
 
     function createTables() {
-        echo "bubu";
+        $configDao = new ConfigDao();
+        $configDao->createTables();
     }
 
 }

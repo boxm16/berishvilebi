@@ -1,5 +1,11 @@
 database for this project is on https://remotemysql.com/
-database name is rcTGWKjpv5
+this branch has another database
+
+Username: 6sxSaLPk6d
+Database name: 6sxSaLPk6d
+Password: eyL1ogMwP0
+Server: remotemysql.com
+Port: 3306
 
 
 /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/

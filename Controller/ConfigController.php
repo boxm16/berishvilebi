@@ -6,7 +6,18 @@ class ConfigController {
 
     function createTables() {
         $configDao = new ConfigDao();
-        $configDao->createTables();
+        $configDao->createPersonTable();
+        $configDao->createVersionTable();
+        $configDao->createVersionPositionTable();
+    }
+
+    function deleteTables() {
+        $configDao = new ConfigDao();
+
+
+        $configDao->deleteVersionPositionTable();
+        $configDao->deleteVersionTable();
+        $configDao->deletePersonTable();
     }
 
 }

@@ -22,7 +22,18 @@ $configController = new ConfigController();
             $configController->createTables();
         }
         ?>
+        
         <hr>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <input hidden name="deleteTables">
+            <button type="submit">Delete Tables</button>
+        </form>
+        <?php
+        if (isset($_POST["deleteTables"])) {
+            //precedence is important, there are primary-foreign keys rstrictions
+            $configController->deleteTables();
+        }
+        ?>
 
     </body>
 </html>

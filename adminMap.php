@@ -206,14 +206,16 @@ if (isset($_GET["personInFocusId"])) {
             });
 
             var checkTargetPosition = () => {
-                console.log('laka');
+
                 let anchor = document.getElementById('1');
+                let anchorRect = anchor.getBoundingClientRect();
+                let anchorDistanceFromTop = anchorRect.top;
+                let anchorDistanceFromLeft = anchorRect.left;
+
                 let y = anchor.getAttribute('y');
                 let x = anchor.getAttribute('x');
-                let distanceT = y - anchorDistanceFromTopAtStart;
-                let distanceL = x - anchorDistanceFromLeftAtStart;
-
-
+                let distanceT = y - anchorDistanceFromTop;
+                let distanceL = x - anchorDistanceFromLeft;
 
                 myCircle.style.position = 'absolute';
                 myCircle.style.top = distanceT + "px";

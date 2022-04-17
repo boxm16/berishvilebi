@@ -4,12 +4,9 @@ require_once 'Controller/PersonController.php';
 //$adminController = new adminController();
 $width = 4000;
 $height = 4000;
-$id = '1';
-$name = 'ilio';
-$firstName = 'lia';
-$secondName = 'berish';
-$x = 1000;
-$y = 1000;
+
+
+
 
 
 $personController = new PersonController();
@@ -35,17 +32,57 @@ if (isset($_GET["personInFocusId"])) {
     <body>
         <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>">
         <?php
-        echo "<svg id='$id' class='movingCircle' name='$name' style='cursor: default' x='$x' y='$y' >";
-        echo "<g id='$id' ondblclick='goPersonPage(event);'>";
-        echo "<circle   cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
-        echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
+        foreach ($personsList as $person) {
+            if ($person->getParentId() == 0) {
+                //no need for line, line goes only from child to parent  
+            } else {
+                $parentId = $person->getParentId();
+                $personId = $person->getId();
+                $x1 = $person->getParentPositionX() + 42;
+                $y1 = $person->getParentPositionY() + 42;
+                $x2 = $person->getPositionX() + 42;
+                $y2 = $person->getPositionY() + 42;
+                $lineId = 'line_' . $personId . '_' . $parentId;
+
+                echo "<line id='$lineId' x1='$x1' y1='$y1' x2='$x2' y2='$y2' style='stroke:rgb(255,0,0)'></line>";
+            }
+        }
+
+        foreach ($personsList as $person) {
+
+            $id = $person->getId();
+            $x = $person->getPositionX();
+            $y = $person->getPositionY();
+            $parentPositionX = $person->getParentPositionX();
+            $parentPositionY = $person->getParentPositionY();
+            $firstName = $person->getFirstName();
+            $secondName = $person->getSecondName();
+            $firstNameX = $x;
+            $firstdNameY = $y - 10;
+            $secondNameX = $x;
+            $secondNameY = $firstdNameY + 15;
+
+            $parentId = $person->getParentId();
+            $children = $person->getChildren();
+            $name = $parentId . ':';
+//name actually is code for for a person, it contains parent Id and children ids
+            foreach ($children as $child) {
+                $childId = $child->getId();
+                $name = $name . $childId . ',';
+            }
+
+            echo "<svg id='$id' class='movingCircle' name='$name' style='cursor: default' x='$x' y='$y' >";
+            echo "<g id='$id' ondblclick='goPersonPage(event);'>";
+            echo "<circle   cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
+            echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
         </text>;
         <text x='42' y='50' text-anchor='middle' fill='black' font-size='13px' font-family='Arial' dy='.3em'>
         $secondName      
         </text>";
-        echo "</g>";
-        echo "</svg>";
+            echo "</g>";
+            echo "</svg>";
+        }
         ?>
         </svg>
         <script>

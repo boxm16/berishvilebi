@@ -12,8 +12,8 @@
         <style>
             .box {
                 background: red;
-                width: 4vw;
-                height: 7vh;
+                width: 100%;
+                height: 5vh;
                 position: absolute;
                 top: 0vh;
                 left: 0vw;

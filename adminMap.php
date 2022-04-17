@@ -23,25 +23,17 @@ if (isset($_GET["personInFocusId"])) {
         <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <style>
-            .menuCircle {
-                height: 5vh;
-                width: 5vw;
-                border-radius: 50%;
-                background-color: blue;
-
-            }
-
             svg {
                 position: absolute;
                 left: 0;
                 top: 0;
-                z-index: -1;
+
             }
         </style>
     </head>
     <body>
-        <div class="menuCircle" >ss</div>
-        <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>" ondblclick="alert('lapuka');">
+
+        <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>" ondblclick="javascript:location.href = 'adminMenu.php'">
         <?php
         foreach ($personsList as $person) {
             if ($person->getParentId() == 0) {
@@ -170,58 +162,6 @@ if (isset($_GET["personInFocusId"])) {
                 }
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
-//--------------------------NOW MENU BUTTON -------------------------------------------
-
-
-            let myCircle = document.querySelector('.menuCircle');
-
-
-            let anchor = document.getElementById('1');
-            let anchorRect = anchor.getBoundingClientRect();
-            let anchorDistanceFromTopAtStart = anchorRect.top;
-            let anchorDistanceFromLeftAtStart = anchorRect.left;
-            let y = anchor.getAttribute('y');
-            let x = anchor.getAttribute('x');
-            let distanceT = y - anchorDistanceFromTopAtStart;
-            let distanceL = x - anchorDistanceFromLeftAtStart;
-
-
-
-            myCircle.style.position = 'absolute';
-            myCircle.style.top = distanceT + "px";
-            myCircle.style.left = distanceL + "px";
-
-            // Set event listener for window resize
-            window.addEventListener('resize', () => {
-                checkTargetPosition();
-            });
-            // Set event listener for device orientation change
-            window.addEventListener('orientationchange', () => {
-                checkTargetPosition();
-            });
-
-            window.addEventListener('scroll', () => {
-
-                checkTargetPosition();
-            });
-
-            var checkTargetPosition = () => {
-
-                let anchor = document.getElementById('1');
-                let anchorRect = anchor.getBoundingClientRect();
-                let anchorDistanceFromTop = anchorRect.top;
-                let anchorDistanceFromLeft = anchorRect.left;
-
-                let y = anchor.getAttribute('y');
-                let x = anchor.getAttribute('x');
-                let distanceT = y - anchorDistanceFromTop;
-                let distanceL = x - anchorDistanceFromLeft;
-
-                myCircle.style.position = 'absolute';
-                myCircle.style.top = distanceT + "px";
-                myCircle.style.left = distanceL + "px";
-            }
-
         </script>
     </body>
 </html>

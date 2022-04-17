@@ -171,17 +171,55 @@ if (isset($_GET["personInFocusId"])) {
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
 //--------------------------NOW MENU BUTTON -------------------------------------------
+
+
             let myCircle = document.querySelector('.menuCircle');
-            var anchorDistanceFromTopAtStart;
-            var anchorDistanceFromLeftAtStart;
-            window.addEventListener('load', () => {
+
+
+            let anchor = document.getElementById('1');
+            let anchorRect = anchor.getBoundingClientRect();
+            let anchorDistanceFromTopAtStart = anchorRect.top;
+            let anchorDistanceFromLeftAtStart = anchorRect.left;
+            let y = anchor.getAttribute('y');
+            let x = anchor.getAttribute('x');
+            let distanceT = y - anchorDistanceFromTopAtStart;
+            let distanceL = x - anchorDistanceFromLeftAtStart;
+
+
+
+            myCircle.style.position = 'absolute';
+            myCircle.style.top = distanceT + "px";
+            myCircle.style.left = distanceL + "px";
+
+            // Set event listener for window resize
+            window.addEventListener('resize', () => {
+                checkTargetPosition();
+            });
+            // Set event listener for device orientation change
+            window.addEventListener('orientationchange', () => {
+                checkTargetPosition();
+            });
+
+            window.addEventListener('scroll', () => {
+
+                checkTargetPosition();
+            });
+
+            var checkTargetPosition = () => {
+                console.log('laka');
+                let anchor = document.getElementById('1');
+                let y = anchor.getAttribute('y');
+                let x = anchor.getAttribute('x');
+                let distanceT = y - anchorDistanceFromTopAtStart;
+                let distanceL = x - anchorDistanceFromLeftAtStart;
 
 
 
                 myCircle.style.position = 'absolute';
-                myCircle.style.left = 0 + "px";
-                myCircle.style.top = 200 + "px";
-            });
+                myCircle.style.top = distanceT + "px";
+                myCircle.style.left = distanceL + "px";
+            }
+
         </script>
     </body>
 </html>

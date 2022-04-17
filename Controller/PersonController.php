@@ -13,7 +13,7 @@ class PersonController {
         $mainPerson->setFirstName('ILIA');
         $mainPerson->setSecondName('Berishvili');
         $mainPerson->setPositionX(500);
-        $mainPerson->setPositionY(2000);
+        $mainPerson->setPositionY(500);
 
         $sonPerson = new Person();
         $sonPerson->setId(2);
@@ -21,7 +21,7 @@ class PersonController {
         $sonPerson->setFirstName('GIORGI');
         $sonPerson->setSecondName('Berishvili');
         $sonPerson->setParentPositionX(500);
-        $sonPerson->setParentPositionY(2000);
+        $sonPerson->setParentPositionY(500);
         $sonPerson->setPositionX(590);
         $sonPerson->setPositionY(590);
         $mainPerson->addChild($sonPerson);

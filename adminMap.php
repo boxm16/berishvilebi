@@ -28,6 +28,7 @@ if (isset($_GET["personInFocusId"])) {
                 width: 5vw;
                 border-radius: 50%;
                 background-color: blue;
+
             }
 
             svg {
@@ -39,7 +40,7 @@ if (isset($_GET["personInFocusId"])) {
         </style>
     </head>
     <body>
-
+        <div class="menuCircle" >ss</div>
         <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>">
         <?php
         foreach ($personsList as $person) {
@@ -95,7 +96,7 @@ if (isset($_GET["personInFocusId"])) {
         }
         ?>
         </svg>
-        <div class="menuCircle">sdsds</div>
+
         <script>
             window.addEventListener("load", centerPersonInFocus());
             function centerPersonInFocus() {
@@ -170,23 +171,16 @@ if (isset($_GET["personInFocusId"])) {
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
 //--------------------------NOW MENU BUTTON -------------------------------------------
-            let anchor = document.getElementById('1');
-            var anchorRect = anchor.getBoundingClientRect();
-            var anchorDistanceFromViewportTopAtStart = anchorRect.top;
-            var anchorDistanceFromViewportLeftAtStart = anchorRect.left;
-
-            console.log(anchorDistanceFromViewportTopAtStart);
-            console.log("Y:" + anchor.getAttribute('y'));
-            var distanceFromViewPortTopToTop = anchor.getAttribute('y') - anchorDistanceFromViewportTopAtStart;
-            var distanceFromViewPortLeftToLeft = anchor.getAttribute('x') - anchorDistanceFromViewportLeftAtStart;
-
-
+            let myCircle = document.querySelector('.menuCircle');
+            var anchorDistanceFromTopAtStart;
+            var anchorDistanceFromLeftAtStart;
             window.addEventListener('load', () => {
-                let menuCircle = document.getElementById('menuCircle');
 
-                menuCircle.style.position = 'relative';
-                menuCircle.style.left = 1000;
-                menuCircle.style.top = 1000;
+
+
+                myCircle.style.position = 'absolute';
+                myCircle.style.left = 0 + "px";
+                myCircle.style.top = 200 + "px";
             });
         </script>
     </body>

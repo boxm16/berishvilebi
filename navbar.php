@@ -13,9 +13,9 @@
             .box {
                 background: red;
                 width: 100%;
-                height: 5vh;
+                height: 10vh;
                 position: absolute;
-                top: 0vh;
+                
                 left: 0vw;
             }
         </style>
@@ -24,7 +24,7 @@
 
 
 
-        <nav class="navbar fixed-top ">
+        <nav class="navbar fixed-bottom ">
             
             <div class="box" onclick="alert('lalal')"></div>
 

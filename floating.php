@@ -5,78 +5,69 @@
         <meta charset="UTF-8">
         <title></title>
         <style>
-            .box {
-                background: red;
-                width: 100%;
-                height: 7vh;
-                position: absolute;
-                top: 0vh;
-                left: 0vw;
-                position:fixed; 
-            }
-            
+            .element	{ position:fixed; top:2%; right:2%; }
         </style>
     </head>
     <body>
-        <div class="box"> </div>
+        <div class="element"> laputa</div>
         <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+          <h1>kdkdks</h1><!-- ``` -->
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+           <h1>kdkdks</h1>
         <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!-- ``` -->
-        <h1>kdkdks</h1>
-        <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
+         <h1>kdkdks</h1>
+         <h1>kdkdks</h1><!--  <h1>kdkdks</h1> -->
     </body>
 </html>

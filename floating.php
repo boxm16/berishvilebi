@@ -1,306 +1,96 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
+        <style>
+            html {
+                font-size: 200%;
+            }
+            #target, #target2 , #target3{
+                background: #ccc;
+            }
+            .circle {
+                height: 5vh;
+                width: 5vw;
+                border-radius: 50%;
+                background-color: blue;
+            }
+        </style>
     </head>
-    <body>
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-        a<br/>
-
-
-
-
-        <div id="apa" style="position:absolute">apa!</div>
-
-
-
-
+    <body style="width:1000px">
+        <div id="anchor">A</div>
+        <div class="circle"></div>
+        <p>Etiam porta sem malesuada magna mollis euismod. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p><p>Etiam porta sem malesuada magna mollis euismod. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p><p>Etiam porta sem malesuada magna mollis euismod. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+
+        <p id="target">Target element</p>
+        <p id="target2">Target 2 element</p>
+
+        <p>Etiam porta sem malesuada magna mollis euismod. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p><p>Etiam porta sem malesuada magna mollis euismod. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p><p>Etiam porta sem malesuada magna mollis euismod. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+        <p id="target3">Target 3 element</p>
         <script>
-            var mesr =
-                    {
-                        Metrics: {
-                            px: 1,
-                            measureUnits: function (target) {
-                                if (typeof (target) == 'undefined')
-                                    target = document.getElementsByTagName('body')[0];
-                                mesr.Metrics.measureUnit("em", target);
-                                mesr.Metrics.measureUnit("pt", target);
-                                mesr.Metrics.measureUnit("%", target);
-                            },
-                            measureUnit: function (unit, target) {
-                                if (typeof (target.Metrics) == 'undefined')
-                                    target.Metrics = {};
-                                var measureTarget = target;
-                                if (target.tagName == 'IMG' && typeof (target.parentNode) != 'undefined')
-                                    measureTarget = target.parentNode;
-                                var measureElement = document.createElement("div");
-                                measureElement.style.width = "1" + unit;
-                                measureElement.style.cssFloat = "left";
-                                measureElement.style.styleFloat = "left";
-                                measureElement.style.margin = "0px";
-                                measureElement.style.padding = "0px";
-                                measureTarget.appendChild(measureElement);
-                                target.Metrics[unit] = measureElement.offsetWidth;
-                                measureElement.parentNode.removeChild(measureElement);
-                                return target.Metrics[unit];
-                            },
-                            getUnitPixels: function (unitString, target) {
-                                if (typeof (target) == 'undefined')
-                                    target = document.getElementsByTagName('body')[0];
-                                if (typeof (target.Metrics) == 'undefined')
-                                    mesr.Metrics.measureUnits(target);
-                                var unit = unitString.replace(/[0-9\s]+/ig, '').toLowerCase();
-                                var size = Number(unitString.replace(/[^0-9]+/ig, ''));
-                                if (typeof (target.Metrics[unit]) == 'undefined')
-                                    return 0;
-                                var metricSize = target.Metrics[unit];
-                                var pixels = Math.floor(Number(metricSize * size));
-                                return pixels;
-                            }
-                        },
-                        getElementOffset: function (target) {
-                            var pos = [target.offsetLeft, target.offsetTop];
-                            if (target.offsetParent != null) {
-                                var offsetPos = mesr.getElementOffset(target.offsetParent);
-                                pos = [
-                                    pos[0] + offsetPos[0],
-                                    pos[1] + offsetPos[1]
-                                ];
-                            }
-                            return pos;
-                        },
-                        getElementPosition: function (target) {
+            var viewportHeight = window.innerHeight;
+            var viewportWidth = window.innerWidth;
 
-                            var offset = mesr.getElementOffset(target);
-                            var x = offset[0] +
-                                    mesr.Metrics.getUnitPixels(target.style.paddingLeft, target) +
-                                    mesr.Metrics.getUnitPixels(target.style.borderLeftWidth, target);
-                            var y = offset[1] +
-                                    mesr.Metrics.getUnitPixels(target.style.paddingTop, target) +
-                                    mesr.Metrics.getUnitPixels(target.style.borderTopWidth, target);
-                            return [x, y];
-                        },
-                        getElementSize: function (target) {
-                            var size = [target.offsetWidth, target.offsetHeight];
-                            size[0] -= mesr.Metrics.getUnitPixels(target.style.paddingLeft, target) +
-                                    mesr.Metrics.getUnitPixels(target.style.paddingRight, target) +
-                                    mesr.Metrics.getUnitPixels(target.style.borderLeftWidth, target) +
-                                    mesr.Metrics.getUnitPixels(target.style.borderRightWidth, target);
-                            size[1] -= mesr.Metrics.getUnitPixels(target.style.paddingTop, target) +
-                                    mesr.Metrics.getUnitPixels(target.style.paddingBottom, target) +
-                                    mesr.Metrics.getUnitPixels(target.style.borderTopWidth, target) +
-                                    mesr.Metrics.getUnitPixels(target.style.borderBottomWidth, target);
-                            return size;
-                        },
-                        getViewPortSize: function () {
-                            var myWidth = 0, myHeight = 0;
-                            if (typeof (window.innerWidth) == 'number') {
-                                myWidth = window.innerWidth;
-                                myHeight = window.innerHeight;
-                            } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-                                myWidth = document.documentElement.clientWidth;
-                                myHeight = document.documentElement.clientHeight;
-                            } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-                                myWidth = document.body.clientWidth;
-                                myHeight = document.body.clientHeight;
-                            }
-                            return [myWidth, myHeight];
-                        },
-                        getViewPortScrollPosition: function () {
-                            var scrOfX = 0, scrOfY = 0;
-                            if (typeof (window.pageYOffset) == 'number') {
-                                scrOfY = window.pageYOffset;
-                                scrOfX = window.pageXOffset;
-                            } else if (document.body && (document.body.scrollLeft || document.body.scrollTop)) {
-                                scrOfY = document.body.scrollTop;
-                                scrOfX = document.body.scrollLeft;
-                            } else if (document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop)) {
-                                scrOfY = document.documentElement.scrollTop;
-                                scrOfX = document.documentElement.scrollLeft;
-                            }
-                            return [scrOfX, scrOfY];
-                        },
-                        attachEvent: function (target, eventList, func) {
-                            if (typeof (target) == "undefined" || target == null)
-                                return;
-                            var events = eventList.split(",");
-                            for (var i = 0; i < events.length; i++) {
-                                var event = events[i];
-                                if (typeof (target.addEventListener) != 'undefined') {
-                                    target.addEventListener(event, func);
-                                } else if (typeof (target.attachEvent) != 'undefined') {
-                                    target.attachEvent('on' + event, func);
-                                } else {
-                                    console.log("unable to attach event listener");
-                                }
-                            }
-                        }
-                    }
+            let myCircle = document.querySelector('.circle');
+            var anchorDistanceFromTopAtStart;
+            var anchorDistanceFromLeftAtStart;
+            window.addEventListener('load', () => {
+                let anchor = document.getElementById('anchor');
+                var anchorRect = anchor.getBoundingClientRect();
+                anchorDistanceFromTopAtStart = anchorRect.top;
+                anchorDistanceFromLeftAtStart = anchorRect.left;
 
-            function position() {
-                var viewPortSize = mesr.getViewPortSize();
-                var viewPortScrollPos = mesr.getViewPortScrollPosition();
-                var size = mesr.getElementSize(document.getElementById('apa'));
-                document.getElementById('apa').style.left = Math.floor((viewPortSize[0] / 2) - (size[0] / 2) + viewPortScrollPos[0]) + "px";
-                document.getElementById('apa').style.top = Math.floor((viewPortSize[1] / 2) - (size[1] / 2) + viewPortScrollPos[1]) + "px";
+
+
+
+                myCircle.style.position = 'absolute';
+                myCircle.style.left = 0;
+                myCircle.style.top = 0;
+            });
+
+
+
+// Set event listener for window resize
+            window.addEventListener('resize', () => {
+                checkTargetPosition();
+            });
+// Set event listener for device orientation change
+            window.addEventListener('orientationchange', () => {
+                checkTargetPosition();
+            });
+
+            var checkTargetPosition = () => {
+                viewportHeight = window.innerHeight;
+                viewportWidth = window.innerWidth;
+                // get bounding client rect from element
+                var element = document.getElementById('target')
+                var rect = element.getBoundingClientRect();
+                // grab measurements and percentage conversion
+                var fromTop = rect.top;
+                var fromLeft = rect.left;
+                var fraction = rect.top / viewportHeight;
+                var percentage = fraction * 100;
+                //      console.log('target scroll:', fromTop, 'px from top.', fraction, '/', percentage, '%');
+                document.getElementById('target').innerHTML = 'target scroll:' + fromTop + 'px from top.';
+                document.getElementById('target2').innerHTML = 'target scroll:' + fromLeft + 'px from left.';
+                var targetElement = document.getElementById('target3');
+                targetElement.style.top = '500';
+
+
+                let anchor = document.getElementById('anchor');
+                var anchorRect = anchor.getBoundingClientRect();
+                var anchorDistanceFromTop = anchorRect.top;
+                var anchorDistanceFromLeft = anchorRect.left;
+
+
+                myCircle.style.top = fromTop + 'px';
             }
 
-            mesr.attachEvent(window, "resize,scroll,load", position);
-            mesr.attachEvent(document, "load", position);
-
-
+// Listen for scroll event and check position
+            window.addEventListener('scroll', () => {
+                checkTargetPosition();
+            });
 
         </script>
     </body>

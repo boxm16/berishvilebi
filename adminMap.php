@@ -1,12 +1,9 @@
 <?php
-//require_once 'Controller/AdminController.php';
+require_once 'Controller/AdminController.php';
 require_once 'Controller/PersonController.php';
-//$adminController = new adminController();
-$width = 4000;
-$height = 4000;
-
-
-
+$adminController = new adminController();
+$width = $adminController->getMapWidth();
+$height = $adminController->getMapHeight();
 
 
 $personController = new PersonController();

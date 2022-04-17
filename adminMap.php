@@ -23,10 +23,23 @@ if (isset($_GET["personInFocusId"])) {
         <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <style>
+            .menuCircle {
+                height: 5vh;
+                width: 5vw;
+                border-radius: 50%;
+                background-color: blue;
+            }
 
+            svg {
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: -1;
+            }
         </style>
     </head>
     <body>
+
         <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>">
         <?php
         foreach ($personsList as $person) {
@@ -82,6 +95,7 @@ if (isset($_GET["personInFocusId"])) {
         }
         ?>
         </svg>
+        <div class="menuCircle">sdsds</div>
         <script>
             window.addEventListener("load", centerPersonInFocus());
             function centerPersonInFocus() {
@@ -91,7 +105,7 @@ if (isset($_GET["personInFocusId"])) {
                     inline: 'center'
                 });
             }
-
+//---------------------THIS PART IS FOR MOVING CIRCLES AND LINES -----------------------------
             var allCircles = document.querySelectorAll(".movingCircle");
             allCircles.forEach(element => dragMovingCirlce(element));
 
@@ -154,8 +168,26 @@ if (isset($_GET["personInFocusId"])) {
                     document.onmousemove = null;
                 }
             }
+//---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
+//--------------------------NOW MENU BUTTON -------------------------------------------
+            let anchor = document.getElementById('1');
+            var anchorRect = anchor.getBoundingClientRect();
+            var anchorDistanceFromViewportTopAtStart = anchorRect.top;
+            var anchorDistanceFromViewportLeftAtStart = anchorRect.left;
+
+            console.log(anchorDistanceFromViewportTopAtStart);
+            console.log("Y:" + anchor.getAttribute('y'));
+            var distanceFromViewPortTopToTop = anchor.getAttribute('y') - anchorDistanceFromViewportTopAtStart;
+            var distanceFromViewPortLeftToLeft = anchor.getAttribute('x') - anchorDistanceFromViewportLeftAtStart;
 
 
+            window.addEventListener('load', () => {
+                let menuCircle = document.getElementById('menuCircle');
+
+                menuCircle.style.position = 'relative';
+                menuCircle.style.left = 1000;
+                menuCircle.style.top = 1000;
+            });
         </script>
     </body>
 </html>

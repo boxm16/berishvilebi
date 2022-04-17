@@ -41,7 +41,7 @@ if (isset($_GET["personInFocusId"])) {
     </head>
     <body>
         <div class="menuCircle" >ss</div>
-        <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>">
+        <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>" ondblclick="alert('lapuka');">
         <?php
         foreach ($personsList as $person) {
             if ($person->getParentId() == 0) {

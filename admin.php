@@ -27,13 +27,7 @@ if (isset($_GET["personInFocusId"])) {
         <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <style>
-            body
-            {
-                padding:0px;
-                margin:0px;
-                width: 3300px;
-                height: 5000px
-            }
+          
 
             svg{
 

@@ -22,7 +22,7 @@ $configController = new ConfigController();
             $configController->createTables();
         }
         ?>
-        
+
         <hr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <input hidden name="deleteTables">

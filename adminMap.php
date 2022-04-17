@@ -33,7 +33,7 @@ if (isset($_GET["personInFocusId"])) {
     </head>
     <body>
 
-        <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>" ondblclick="javascript:location.href = 'adminMenu.php'">
+        <svg style="background-color:skyblue" width="<?php echo $width ?>"  height="<?php echo $height ?>" ondblclick="redirectToAdminMenu();">
         <?php
         foreach ($personsList as $person) {
             if ($person->getParentId() == 0) {
@@ -75,7 +75,7 @@ if (isset($_GET["personInFocusId"])) {
             }
 
             echo "<svg id='$id' class='movingCircle' name='$name' style='cursor: default' x='$x' y='$y' >";
-            echo "<g id='$id' ondblclick='goPersonPage(event);'>";
+            echo "<g id='$id'  ondblclick='redirect(event, $id)'>";
             echo "<circle   cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
             echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
@@ -162,6 +162,14 @@ if (isset($_GET["personInFocusId"])) {
                 }
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
+            function redirectToAdminMenu(){
+                document.location.href = "adminMenu.php";
+            }
+            function redirect(event, targetPage) {
+                document.location.href = "person.php";
+                event.stopPropagation();
+            }
+
         </script>
     </body>
 </html>

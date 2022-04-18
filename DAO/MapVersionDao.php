@@ -37,7 +37,27 @@ class MapVersionDao {
     }
 
     public function getAllMapVersions() {
-        
+        $sql = "SELECT * FROM version";
+
+        try {
+            $result = $this->connection->query($sql)->fetchAll();
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+// var_dump($result);
+        $person = new Person();
+        foreach ($result as $personData) {
+            $person->setId($personData["id"]);
+            $person->setParentId($personData["parent_id"]);
+            $person->setGeneration($personData["generation"]);
+            $person->setFirstName($personData["first_name"]);
+            $person->setSecondName($personData["second_name"]);
+            $person->setPositionX($personData["position_X"]);
+            $person->setPositionY($personData["position_Y"]);
+        }
+
+        return $person;
     }
 
 }

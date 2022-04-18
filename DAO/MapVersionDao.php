@@ -36,4 +36,8 @@ class MapVersionDao {
         return $inserted;
     }
 
+    public function getAllMapVersions() {
+        
+    }
+
 }

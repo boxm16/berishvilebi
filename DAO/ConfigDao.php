@@ -44,6 +44,9 @@ class ConfigDao {
     public function createVersionTable() {
         $sql = "CREATE TABLE `version` (
   `id` INT(6) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20) NULL,
+  `map_width` INT(6) NOT NULL DEFAULT 7000, 
+  `map_height` INT(6) NOT NULL DEFAULT 7000, 
    PRIMARY KEY (`id`))
    ENGINE = InnoDB
    DEFAULT CHARACTER SET = utf8;

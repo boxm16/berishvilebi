@@ -11,7 +11,9 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        // put your code here
+        echo "person page here";
         ?>
+        <br>
+        <a href="adminMap.php">GO TO ADMIN MAP</a>
     </body>
 </html>

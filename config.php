@@ -9,7 +9,7 @@ $configController = new ConfigController();
         <title></title>
     </head>
     <body>
-        <a href="admin.php">Go Admin</a>
+        <a href="adminMenu.php">Go Admin</a>
         <hr>
         <h1>Configurations</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">

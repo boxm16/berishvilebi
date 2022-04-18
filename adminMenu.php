@@ -11,8 +11,13 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-       echo "Menu HERE";
+        echo "Menu HERE";
         ?>
+        <br>
+        <a href="index.php">Go INDEX</a>
+        <br>
         <a href="adminMap.php">Go MAP</a>
+        <br>
+        <a href="config.php">GO CONFIG</a>
     </body>
 </html>

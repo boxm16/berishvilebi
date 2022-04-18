@@ -8,6 +8,6 @@
         <?php
         echo "index.php here";
         ?>
-        <a href="adminMap.php">Go AdminMap</a>
+        <a href="adminMenu.php">Go Admin MENU</a>
     </body>
 </html>

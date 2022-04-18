@@ -125,4 +125,9 @@ class ConfigDao {
         }
     }
 
+    
+    //--------------------INSERT MAIN PERSON------------------------
+    public function insertMainPerson(){
+        
+    }
 }

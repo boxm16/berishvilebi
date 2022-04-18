@@ -20,4 +20,8 @@ class ConfigController {
         $configDao->deletePersonTable();
     }
 
+    function insertMainPerson() {
+        
+    }
+
 }

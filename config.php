@@ -35,5 +35,18 @@ $configController = new ConfigController();
         }
         ?>
 
+
+        <hr>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <input hidden name="insertMainPerson">
+            <button type="submit">Insert Main Person</button>
+        </form>
+        <?php
+        if (isset($_POST["insertMainPerson"])) {
+            //precedence is important, there are primary-foreign keys rstrictions
+            $configController->insertMainPerson();
+        }
+        ?>
+
     </body>
 </html>

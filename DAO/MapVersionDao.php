@@ -37,6 +37,7 @@ class MapVersionDao {
     }
 
     public function getAllMapVersions() {
+        $mapVersions = array();
         $sql = "SELECT * FROM version";
 
         try {
@@ -46,18 +47,20 @@ class MapVersionDao {
             echo $e->getCode() . "<br>";
         }
 // var_dump($result);
-        $person = new Person();
-        foreach ($result as $personData) {
-            $person->setId($personData["id"]);
-            $person->setParentId($personData["parent_id"]);
-            $person->setGeneration($personData["generation"]);
-            $person->setFirstName($personData["first_name"]);
-            $person->setSecondName($personData["second_name"]);
-            $person->setPositionX($personData["position_X"]);
-            $person->setPositionY($personData["position_Y"]);
+
+        foreach ($result as $mapVersionData) {
+
+            $mapVersion = new MapVersion();
+
+            $mapVersion->setId($mapVersionData["id"]);
+            $mapVersion->setName($mapVersionData["name"]);
+            $mapVersion->setMapWidth($mapVersionData["map_width"]);
+            $mapVersion->setMapHeight($mapVersionData["map_height"]);
+
+            array_push($mapVersions, $mapVersion);
         }
 
-        return $person;
+        return $mapVersions;
     }
 
 }

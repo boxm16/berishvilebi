@@ -1,6 +1,10 @@
 <?php
 require_once 'Controller/AdminController.php';
 require_once 'Controller/PersonController.php';
+$mapVersionId = $_POST["mapVersion"];
+echo $mapVersionId;
+exit;
+
 $adminController = new adminController();
 $width = $adminController->getMapWidth();
 $height = $adminController->getMapHeight();
@@ -162,7 +166,7 @@ if (isset($_GET["personInFocusId"])) {
                 }
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
-            function redirectToAdminMenu(){
+            function redirectToAdminMenu() {
                 document.location.href = "adminMenu.php";
             }
             function redirect(event, targetPage) {

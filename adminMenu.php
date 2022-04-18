@@ -16,8 +16,24 @@ $allVersions = $mapVersionController->getAllMapVersions();
     <a href="index.php">Go INDEX</a>
     <br>
     <a href="config.php">GO CONFIG</a>
-    <br>
-    <a href="adminMap.php">Go MAP</a>
+
+
+    <hr>
+
+    <form action="adminMap.php" method="POST">
+        <select name="mapVersion" id="cars">
+            <?php
+            foreach ($allVersions as $mapVersion) {
+                $mapVersionId = $mapVersion->getId();
+                $mapVersionName = $mapVersion->getName();
+                echo "  <option value=\"$mapVersionId\">$mapVersionName</option>";
+            }
+            ?>
+        </select>
+        <button type="submit">GO TO MAP</button>
+    </form>
+  
+   
 
 </body>
 </html>

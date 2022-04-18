@@ -23,18 +23,19 @@ $configController = new ConfigController();
         }
         ?>
 
+       
+
         <hr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-            <input hidden name="deleteTables">
-            <button type="submit">Delete Tables</button>
+            <input hidden name="insertMainMapVersion">
+            <button type="submit">Insert Main Map Version</button>
         </form>
         <?php
-        if (isset($_POST["deleteTables"])) {
+        if (isset($_POST["insertMainMapVersion"])) {
             //precedence is important, there are primary-foreign keys rstrictions
-            $configController->deleteTables();
+            $configController->insertMainMapVersion();
         }
         ?>
-
 
         <hr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
@@ -45,6 +46,18 @@ $configController = new ConfigController();
         if (isset($_POST["insertMainPerson"])) {
             //precedence is important, there are primary-foreign keys rstrictions
             $configController->insertMainPerson();
+        }
+        ?>
+
+ <hr><hr><hr>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <input hidden name="deleteTables">
+            <button type="submit">Delete Tables</button>
+        </form>
+        <?php
+        if (isset($_POST["deleteTables"])) {
+            //precedence is important, there are primary-foreign keys rstrictions
+            $configController->deleteTables();
         }
         ?>
 

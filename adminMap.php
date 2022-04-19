@@ -1,15 +1,13 @@
 <?php
 require_once 'Controller/MapVersionController.php';
 require_once 'Controller/PersonController.php';
-$mapVersionId = $_POST["mapVersion"];
+$mapVersionId = $_POST["mapVersionId"];
 if ($mapVersionId == null) {
     header("Location: errorPage.php");
 }
+$width = $_POST["mapWidth"];
+$height = $_POST["mapHeight"];
 
-$mapVersionController = new MapVersionController();
-$mapVersion = $mapVersionController->getMapVersion($mapVersionId);
-$width = $mapVersion->getMapWidth();
-$height = $mapVersion->getMapHeight();
 
 
 $personController = new PersonController();
@@ -169,7 +167,7 @@ if (isset($_GET["personInFocusId"])) {
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
             function redirectToAdminMenu() {
-                document.location.href = "adminMenu.php";
+                document.location.href = "versionMenu.php?mapVersionId=<?php echo $mapVersionId?>";
             }
             function redirect(event, targetPage) {
                 document.location.href = "person.php";

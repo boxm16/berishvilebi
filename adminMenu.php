@@ -20,7 +20,7 @@ $allVersions = $mapVersionController->getAllMapVersions();
 
     <hr>
 
-    <form action="versionMenu.php" method="POST">
+    <form action="versionMenu.php" method="GET">
         <select name="mapVersionId">
             <?php
             foreach ($allVersions as $mapVersion) {

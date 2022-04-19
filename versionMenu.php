@@ -1,6 +1,6 @@
 <?php
 require_once 'Controller/MapVersionController.php';
-$mapVersionId = $_POST["mapVersionId"];
+$mapVersionId = $_GET["mapVersionId"];
 $mapVersionController = new MapVersionController();
 $mapVersion = $mapVersionController->getMapVersion($mapVersionId);
 $versionName = $mapVersion->getName();
@@ -24,5 +24,12 @@ $height = $mapVersion->getMapHeight();
             echo "Map Dimesnisons:MAP WIDTH-$width. MAP HEIGHT-$height";
             ?>
         </h2>  
+
+        <form action="adminMap.php" method="POST">
+            <input name="mapVersionId" hidden value="<?php echo $mapVersionId ?>">
+            <input name="mapWidth" hidden value="<?php echo $width ?>">
+            <input name="mapHeight" hidden value="<?php echo $height ?>">
+            <button type="submit">გადადი რუკაზე</button>
+        </form>
     </body>
 </html>

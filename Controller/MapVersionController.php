@@ -9,4 +9,9 @@ class MapVersionController {
         return $mapVersionDao->getAllMapVersions();
     }
 
+    public function getMapVersion($mapVersionId) {
+        $mapVersionDao = new MapVersionDao();
+        return $mapVersionDao->getMapVersion($mapVersionId);
+    }
+
 }

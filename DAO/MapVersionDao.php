@@ -63,4 +63,22 @@ class MapVersionDao {
         return $mapVersions;
     }
 
+    public function getMapVersion($mapVersionId) {
+
+        $sql = "SELECT * FROM version WHERE id=$mapVersionId";
+        try {
+            $result = $this->connection->query($sql)->fetch();
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+        $mapVersion = new MapVersion();
+        $mapVersion->setId($result["id"]);
+        $mapVersion->setName($result["name"]);
+        $mapVersion->setMapWidth($result["map_width"]);
+        $mapVersion->setMapHeight($result["map_height"]);
+
+        return $mapVersion;
+    }
+
 }

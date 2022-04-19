@@ -20,8 +20,8 @@ $allVersions = $mapVersionController->getAllMapVersions();
 
     <hr>
 
-    <form action="adminMap.php" method="POST">
-        <select name="mapVersion" id="cars">
+    <form action="versionMenu.php" method="POST">
+        <select name="mapVersionId">
             <?php
             foreach ($allVersions as $mapVersion) {
                 $mapVersionId = $mapVersion->getId();
@@ -30,7 +30,7 @@ $allVersions = $mapVersionController->getAllMapVersions();
             }
             ?>
         </select>
-        <button type="submit">GO TO MAP</button>
+        <button type="submit">გადადი ვერსის სანახავად</button>
     </form>
 
     <hr>

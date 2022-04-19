@@ -1,19 +1,19 @@
 <?php
-require_once 'Controller/AdminController.php';
+require_once 'Controller/MapVersionController.php';
 require_once 'Controller/PersonController.php';
 $mapVersionId = $_POST["mapVersion"];
-if($mapVersionId==null){
-   header("Location: errorPage.php");
-    
+if ($mapVersionId == null) {
+    header("Location: errorPage.php");
 }
 
-$adminController = new adminController();
-$width = $adminController->getMapWidth();
-$height = $adminController->getMapHeight();
+$mapVersionController = new MapVersionController();
+$mapVersion = $mapVersionController->getMapVersion($mapVersionId);
+$width = $mapVersion->getMapWidth();
+$height = $mapVersion->getMapHeight();
 
 
 $personController = new PersonController();
-$personsList = $personController->getAllPersons();
+$personsList = $personController->getAllPersons($mapVersionId);
 if (isset($_GET["personInFocusId"])) {
     $personInFocusId = $_GET["personInFocusId"];
 } else {

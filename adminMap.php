@@ -2,8 +2,10 @@
 require_once 'Controller/AdminController.php';
 require_once 'Controller/PersonController.php';
 $mapVersionId = $_POST["mapVersion"];
-echo $mapVersionId;
-exit;
+if($mapVersionId==null){
+   header("Location: errorPage.php");
+    
+}
 
 $adminController = new adminController();
 $width = $adminController->getMapWidth();

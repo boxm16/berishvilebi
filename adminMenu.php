@@ -32,8 +32,10 @@ $allVersions = $mapVersionController->getAllMapVersions();
         </select>
         <button type="submit">GO TO MAP</button>
     </form>
-  
-   
+
+    <hr>
+    <h3>რუკის ახალი ვერსიის შექმნა</h3>
+    სახელი <input type="text"> <button>შექმნა</button>
 
 </body>
 </html>

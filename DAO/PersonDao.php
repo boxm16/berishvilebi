@@ -16,8 +16,6 @@ class PersonDao {
 
         $parentId = $person->getParentId();
         $generation = $person->getGeneration();
-        $positionX = $person->getPositionX();
-        $positionY = $person->getPositionY();
         $firstName = $person->getFirstName();
         $secondName = $person->getSecondName();
         $nickname = $person->getNickname();
@@ -47,7 +45,8 @@ class PersonDao {
 
         //-------------------------
 
-        $personId = $this->connection->lastInsertId();;
+        $personId = $this->connection->lastInsertId();
+      
         $positionX = $person->getPositionX();
         $positionY = $person->getPositionY();
 

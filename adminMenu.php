@@ -34,8 +34,13 @@ $allVersions = $mapVersionController->getAllMapVersions();
     </form>
 
     <hr>
-    <h3>რუკის ახალი ვერსიის შექმნა</h3>
-    სახელი <input type="text"> <button>შექმნა</button>
 
+
+    <form action="requestDispatcher.php" method="POST">
+        <h3>რუკის ახალი ვერსიის შექმნა</h3>
+        სახელი <input type="text" name="newVersionName">
+
+        <button type="submit">შექმნა</button>
+    </form>
 </body>
 </html>

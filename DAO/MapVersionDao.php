@@ -12,7 +12,7 @@ class MapVersionDao {
         $this->connection = $dbConnection->getConnection();
     }
 
-    public function insertMapVersion($mapVersion) {
+    public function insertMainMapVersion($mapVersion) {
 
 
         $name = $mapVersion->getName();
@@ -34,6 +34,30 @@ class MapVersionDao {
         $inserted = $statement->execute();
 
         return $inserted;
+    }
+
+    public function insertMapVersion($mapVersion) {
+
+
+        $name = $mapVersion->getName();
+        $mapWidth = $mapVersion->getMapWidth();
+        $mapHeight = $mapVersion->getMapHeight();
+
+
+
+        $sql = "INSERT INTO version (name, map_width, map_height ) "
+                . "        VALUES (:name, :map_width, :map_height)";
+
+
+        $statement = $this->connection->prepare($sql);
+
+        $statement->bindValue(':name', $name);
+        $statement->bindValue(':map_width', $mapWidth);
+        $statement->bindValue(':map_height', $mapHeight);
+
+        $statement->execute();
+
+        return $newMapVersionId = $this->connection->lastInsertId();
     }
 
     public function getAllMapVersions() {

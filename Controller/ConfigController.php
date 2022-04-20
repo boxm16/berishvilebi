@@ -32,7 +32,8 @@ class ConfigController {
         $mapVersion->setMapHeight(7000);
 
         $mapVersionDao = new MapVersionDao();
-        $insertionResult = $mapVersionDao->insertMapVersion($mapVersion);
+        $insertionResult = $mapVersionDao->insertMainMapVersion($mapVersion);
+       
         if ($insertionResult) {
             echo 'Main Map Version Inserted!<br>';
         }

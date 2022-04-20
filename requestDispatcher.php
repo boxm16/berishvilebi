@@ -2,6 +2,7 @@
 
 require_once 'Model/MapVersion.php';
 require_once 'Controller/MapVersionController.php';
+require_once 'DAO/PersonDao.php';
 
 if (isset($_POST["newVersionName"])) {
     $mapVersionName = $_POST["newVersionName"];
@@ -11,10 +12,9 @@ if (isset($_POST["newVersionName"])) {
     $mapVersion->setMapHeight(7000);
 
     $mapVersionDao = new MapVersionDao();
-    $insertionResult = $mapVersionDao->insertMapVersion($mapVersion);
-    if ($insertionResult) {
-        echo 'Main Map Version Inserted!<br>'; //it does not show anywhere, fix it.
-    }
+    $newMapVersionId = $mapVersionDao->insertMapVersion($mapVersion);
+    $personDao = new PersonDao();
+    $personDao->insertPersonPosition($newMapVersionId, 1, 200, 200);
     header("Location: adminMenu.php");
 }
 var_dump($_POST);

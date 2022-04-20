@@ -46,7 +46,7 @@ class PersonDao {
         //-------------------------
 
         $personId = $this->connection->lastInsertId();
-      
+
         $positionX = $person->getPositionX();
         $positionY = $person->getPositionY();
 
@@ -60,6 +60,21 @@ class PersonDao {
         $mapVersionStatement->bindValue(':positionY', $positionY);
         $mapVersionInsertionResult = $mapVersionStatement->execute();
         return $insertionResult & $mapVersionInsertionResult;
+    }
+
+    public function insertPersonPosition($mapVersionId, $personId, $positionX, $positionY) {
+
+
+        $sql = "INSERT INTO version_position (version_id, person_id, position_X, position_Y) "
+                . "                   VALUES (:mapVersionId, :personId, :positionX, :positionY)";
+
+        $mapVersionStatement = $this->connection->prepare($sql);
+        $mapVersionStatement->bindValue(':mapVersionId', $mapVersionId);
+        $mapVersionStatement->bindValue(':personId', $personId);
+        $mapVersionStatement->bindValue(':positionX', $positionX);
+        $mapVersionStatement->bindValue(':positionY', $positionY);
+        $mapVersionInsertionResult = $mapVersionStatement->execute();
+        return $mapVersionInsertionResult;
     }
 
 }

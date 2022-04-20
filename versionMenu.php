@@ -27,8 +27,6 @@ $height = $mapVersion->getMapHeight();
 
         <form action="adminMap.php" method="POST">
             <input name="mapVersionId" hidden value="<?php echo $mapVersionId ?>">
-            <input name="mapWidth" hidden value="<?php echo $width ?>">
-            <input name="mapHeight" hidden value="<?php echo $height ?>">
             <button type="submit">გადადი რუკაზე</button>
         </form>
     </body>

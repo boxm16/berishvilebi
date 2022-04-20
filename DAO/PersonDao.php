@@ -76,9 +76,9 @@ class PersonDao {
         $mapVersionInsertionResult = $mapVersionStatement->execute();
         return $mapVersionInsertionResult;
     }
-    
+
     //-----------------------
-     public function getAllPersonsForMap($mapVersionId) {
+    public function getAllPersonsForMap($mapVersionId) {
         $persons = array();
         $sql = "SELECT * FROM person INNER JOIN version_position ON person.id=version_position.person_id WHERE version_id=$mapVersionId";
 
@@ -123,10 +123,30 @@ class PersonDao {
 
         return $persons;
     }
-    
+
     public function getPerson($personId) {
-        
-        
+
+        $sql = "SELECT * FROM person WHERE id=$personId";
+
+        try {
+            $result = $this->connection->query($sql)->fetchAll();
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+// var_dump($result);
+        $person = new Person();
+        foreach ($result as $personData) {
+            $person->setId($personData["id"]);
+            $person->setParentId($personData["parent_id"]);
+            $person->setGeneration($personData["generation"]);
+            $person->setFirstName($personData["first_name"]);
+            $person->setSecondName($personData["second_name"]);
+            //$person->setPositionX($personData["position_X"]);
+           // $person->setPositionY($personData["position_Y"]);
+        }
+
+        return $person;
     }
 
 }

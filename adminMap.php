@@ -5,8 +5,10 @@ $mapVersionId = $_POST["mapVersionId"];
 if ($mapVersionId == null) {
     header("Location: errorPage.php");
 }
-$width = $_POST["mapWidth"];
-$height = $_POST["mapHeight"];
+$mapVersionController = new MapVersionController();
+$mapVersion = $mapVersionController->getMapVersion($mapVersionId);
+$width = $mapVersion->getMapWidth();
+$height = $mapVersion->getMapHeight();
 
 
 
@@ -17,6 +19,7 @@ if (isset($_GET["personInFocusId"])) {
 } else {
     $personInFocusId = 1;
 }
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -19,7 +19,7 @@ $firstName = $person->getFirstName();
 $nickname = $person->getNickname();
 $secondName = $person->getSecondName();
 $generation = $person->getGeneration();
-$children=$person->getChildren();
+$children = $person->getChildren();
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,16 +41,18 @@ $children=$person->getChildren();
         <div class="container">
             <div class="row">
                 <div class="col">
-
+                    <hr>
+                    <center>
                     <form action="adminMap.php" method="POST">
                         <input name="mapVersionId" hidden value="<?php echo $mapVersionId ?>">
                         <button type="submit">GO TO ADMIN MAP</button>
                     </form>
-
+                    </center>
+                    <hr>
                     <h1><center> 
                             <table>
                                 <tr>
-                                    <td>id</td><td><?php echo $id ?></td> 
+                                    <td>id</td><td><?php echo $personId ?></td> 
                                 </tr>
                                 <tr>
                                     <td>მშობლის id</td><td><?php echo $parentId ?></td> 
@@ -70,7 +72,7 @@ $children=$person->getChildren();
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" <?php if ($id == 1) echo "disabled" ?>>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" <?php if ($personId == 1) echo "disabled" ?>>
                                             პიროვნების წაშლა
                                         </button> 
                                     </td>

@@ -124,9 +124,9 @@ class PersonDao {
         return $persons;
     }
 
-    public function getPerson($personId) {
+    public function getPerson($personId, $mapVersionId) {
 
-        $sql = "SELECT * FROM person WHERE id=$personId";
+        $sql = "SELECT * FROM person INNER JOIN version_position ON person.id=version_position.person_id WHERE (id=$personId OR parent_id=$personId) AND (version_id=$mapVersionId);";
 
         try {
             $result = $this->connection->query($sql)->fetchAll();
@@ -137,15 +137,26 @@ class PersonDao {
 // var_dump($result);
         $person = new Person();
         foreach ($result as $personData) {
-            $person->setId($personData["id"]);
-            $person->setParentId($personData["parent_id"]);
-            $person->setGeneration($personData["generation"]);
-            $person->setFirstName($personData["first_name"]);
-            $person->setSecondName($personData["second_name"]);
-            //$person->setPositionX($personData["position_X"]);
-           // $person->setPositionY($personData["position_Y"]);
+            if ($personData["id"] == $personId) {
+                $person->setId($personData["id"]);
+                $person->setParentId($personData["parent_id"]);
+                $person->setGeneration($personData["generation"]);
+                $person->setFirstName($personData["first_name"]);
+                $person->setSecondName($personData["second_name"]);
+                $person->setPositionX($personData["position_X"]);
+                $person->setPositionY($personData["position_Y"]);
+            } else {
+                $child = new Person();
+                $child->setId($personData["id"]);
+                $child->setParentId($personData["parent_id"]);
+                $child->setGeneration($personData["generation"]);
+                $child->setFirstName($personData["first_name"]);
+                $child->setSecondName($personData["second_name"]);
+                $child->setPositionX($personData["position_X"]);
+                $child->setPositionY($personData["position_Y"]);
+                $person->addChild($child);
+            }
         }
-
         return $person;
     }
 

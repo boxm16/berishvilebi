@@ -12,7 +12,7 @@ $mapVersionId = $_GET["mapVersionId"];
 $personId = $_GET["personId"];
 
 $personController = new PersonController;
-$person = $personController->getPerson($personId);
+$person = $personController->getPerson($personId, $mapVersionId);
 
 $parentId = $person->getParentId();
 $firstName = $person->getFirstName();
@@ -20,6 +20,7 @@ $nickname = $person->getNickname();
 $secondName = $person->getSecondName();
 $generation = $person->getGeneration();
 $children = $person->getChildren();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,10 +44,10 @@ $children = $person->getChildren();
                 <div class="col">
                     <hr>
                     <center>
-                    <form action="adminMap.php" method="POST">
-                        <input name="mapVersionId" hidden value="<?php echo $mapVersionId ?>">
-                        <button type="submit">GO TO ADMIN MAP</button>
-                    </form>
+                        <form action="adminMap.php" method="POST">
+                            <input name="mapVersionId" hidden value="<?php echo $mapVersionId ?>">
+                            <button type="submit">GO TO ADMIN MAP</button>
+                        </form>
                     </center>
                     <hr>
                     <h1><center> 
@@ -93,9 +94,9 @@ $children = $person->getChildren();
                     <h1>შვილის დამატება</h1>
                     <form action="requestDispatcher.php" method="POST">
                         <input name="insertChild" hidden>
-                        <input name="id" value="<?php echo $id ?>" hidden>
-                        <input name="x" value="<?php echo $x ?>" hidden>
-                        <input name="y" value="<?php echo $y ?>" hidden>
+                        <input name="parentId" value="<?php echo $personId ?>" hidden>
+                        <input name="mapVersinId" value="<?php echo $mapVersionId ?>" hidden>
+
                         <input name="generation" value="<?php echo $generation + 1 ?>" hidden>
                         სახელი <input name="firstName" type="text">
 

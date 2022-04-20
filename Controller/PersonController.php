@@ -10,9 +10,18 @@ class PersonController {
         return $personDao->getAllPersonsForMap($mapVersionId);
     }
 
-    public function getPerson($personId) {
+    public function getPerson($personId, $mapVersionId) {
         $personDao = new PersonDao();
-        return $personDao->getPerson($personId);
+        return $personDao->getPerson($personId, $mapVersionId);
+    }
+
+    public function insertChild($person, $mapVersionId) {
+        $personDao = new PersonDao();
+        $parentId = $person->getParentId();
+        $parent = $personDao->getPerson($parentId, $mapVersionId);
+        $person->setPositionX($parent->getPositionX()+50);
+        $person->setPositionY($parent->getPositionY()+50);
+        $personDao->insertPerson($person, $mapVersionId);
     }
 
 }

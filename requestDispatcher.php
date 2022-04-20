@@ -3,6 +3,8 @@
 require_once 'Model/MapVersion.php';
 require_once 'Controller/MapVersionController.php';
 require_once 'DAO/PersonDao.php';
+require_once 'Model/Person.php';
+require_once 'Controller/PersonController.php';
 
 if (isset($_POST["newVersionName"])) {
     $mapVersionName = $_POST["newVersionName"];
@@ -16,6 +18,25 @@ if (isset($_POST["newVersionName"])) {
     $personDao = new PersonDao();
     $personDao->insertPersonPosition($newMapVersionId, 1, 200, 200);
     header("Location: adminMenu.php");
+}
+
+if (isset($_POST["insertChild"])) {
+    $mapVersionId = $_POST["mapVersinId"];
+    $parentId = $_POST["parentId"];
+
+    $newPerson = new Person();
+    $newPerson->setParentId($parentId);
+    $newPerson->setGeneration($_POST["generation"]);
+    $newPerson->setFirstName($_POST["firstName"]);
+    $newPerson->setNickname($_POST["nickname"]);
+    $newPerson->setSecondName($_POST["secondName"]);
+    $newPerson->setLifeStatus($_POST["lifeStatus"]);
+    $newPerson->setBirthDate($_POST["birthDate"]);
+    $newPerson->setDeathDate($_POST["deathDate"]);
+
+    $personController = new PersonController();
+    $personController->insertChild($newPerson, $mapVersionId);
+    header("Location: personPage.php?personId=$parentId&mapVersionId=$mapVersionId");
 }
 var_dump($_POST);
 var_dump($_GET);

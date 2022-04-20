@@ -123,5 +123,10 @@ class PersonDao {
 
         return $persons;
     }
+    
+    public function getPerson($personId) {
+        
+        
+    }
 
 }

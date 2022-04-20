@@ -170,10 +170,13 @@ if (isset($_GET["personInFocusId"])) {
                 document.location.href = "versionMenu.php?mapVersionId=<?php echo $mapVersionId ?>";
             }
             function redirect(event, personId) {
-                document.location.href = "person.php?mapVersionId=<?php echo $mapVersionId ?> &personId=" + personId;
+                document.location.href = "personPage.php?mapVersionId=<?php echo $mapVersionId ?> &personId=" + personId;
                 event.stopPropagation();
             }
 
         </script>
     </body>
 </html>
+
+
+

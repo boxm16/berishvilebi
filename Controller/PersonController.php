@@ -10,4 +10,9 @@ class PersonController {
         return $personDao->getAllPersonsForMap($mapVersionId);
     }
 
+    public function getPerson($personId) {
+        $personDao = new PersonDao();
+        return $personDao->getPerson($personId);
+    }
+
 }

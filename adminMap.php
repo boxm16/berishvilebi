@@ -11,7 +11,7 @@ $height = $_POST["mapHeight"];
 
 
 $personController = new PersonController();
-$personsList = $personController->getAllPersons($mapVersionId);
+$personsList = $personController->getAllPersonsMap($mapVersionId);
 if (isset($_GET["personInFocusId"])) {
     $personInFocusId = $_GET["personInFocusId"];
 } else {

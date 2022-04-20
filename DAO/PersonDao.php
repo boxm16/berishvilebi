@@ -76,5 +76,52 @@ class PersonDao {
         $mapVersionInsertionResult = $mapVersionStatement->execute();
         return $mapVersionInsertionResult;
     }
+    
+    //-----------------------
+     public function getAllPersonsForMap($mapVersionId) {
+        $persons = array();
+        $sql = "SELECT * FROM person INNER JOIN version_position ON person.id=version_position.person_id WHERE version_id=$mapVersionId";
+
+        try {
+            $result = $this->connection->query($sql)->fetchAll();
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+// var_dump($result);
+        $person = new Person();
+
+        foreach ($result as $personData) {
+            $person = new Person();
+            $personId = $personData["id"];
+            $person->setId($personId);
+            $person->setGeneration($personData["generation"]);
+            $person->setPositionX($personData["position_X"]);
+            $person->setPositionY($personData["position_Y"]);
+            $person->setParentId($personData["parent_id"]);
+            $person->setFirstName($personData["first_name"]);
+            $person->setNickname($personData["nickname"]);
+            $person->setSecondName($personData["second_name"]);
+            $person->setLifeStatus($personData["life_status"]);
+
+            $parentId = $personData["parent_id"];
+
+            $id = $personData["id"];
+            if ($parentId == null) {
+                
+            } else {
+                $parent = $persons[$parentId];
+                $parent->addChild($person);
+                $persons[$parentId] = $parent;
+                $parentPositionX = $parent->getPositionX();
+                $parentPositionY = $parent->getPositionY();
+                $person->setParentPositionX($parentPositionX);
+                $person->setParentPositionY($parentPositionY);
+            }
+            $persons[$personId] = $person;
+        }
+
+        return $persons;
+    }
 
 }

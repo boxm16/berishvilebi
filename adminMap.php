@@ -11,7 +11,7 @@ $height = $_POST["mapHeight"];
 
 
 $personController = new PersonController();
-$personsList = $personController->getAllPersonsMap($mapVersionId);
+$personsList = $personController->getAllPersonsForMap($mapVersionId);
 if (isset($_GET["personInFocusId"])) {
     $personInFocusId = $_GET["personInFocusId"];
 } else {
@@ -167,10 +167,10 @@ if (isset($_GET["personInFocusId"])) {
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
             function redirectToAdminMenu() {
-                document.location.href = "versionMenu.php?mapVersionId=<?php echo $mapVersionId?>";
+                document.location.href = "versionMenu.php?mapVersionId=<?php echo $mapVersionId ?>";
             }
-            function redirect(event, targetPage) {
-                document.location.href = "person.php";
+            function redirect(event, personId) {
+                document.location.href = "person.php?mapVersionId=<?php echo $mapVersionId ?> &personId=" + personId;
                 event.stopPropagation();
             }
 

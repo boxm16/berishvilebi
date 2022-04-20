@@ -1,9 +1,9 @@
+<?php
+$mapVersionId = $_GET["mapVersionId"];
+$personId = $_GET["personId"];
+?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -14,6 +14,9 @@ and open the template in the editor.
         echo "person page here";
         ?>
         <br>
-        <a href="adminMap.php">GO TO ADMIN MAP</a>
+        <form action="adminMap.php" method="POST">
+            <input name="mapVersionId" hidden value="<?php echo $mapVersionId?>">
+            <button type="submit">GO TO ADMIN MAP</button>
+        </form>
     </body>
 </html>

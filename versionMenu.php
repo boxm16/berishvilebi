@@ -4,6 +4,8 @@ if (isset($_GET["mapVersionId"])) {
     $mapVersionId = $_GET["mapVersionId"];
 } else {
     $mapVersionId = $_POST["mapVersionId"];
+    echo $_POST["mapPositioningChanged"];
+    echo $_POST["allPositions"];
 }
 
 $mapVersionController = new MapVersionController();

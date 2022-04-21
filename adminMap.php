@@ -95,7 +95,10 @@ if (isset($_GET["personInFocusId"])) {
         ?>
         </svg>
         <form action="versionMenu.php" method="POST">
-            <input id="" name="mapVersionId" hidden value="<?php echo $mapVersionId; ?>">
+            <input  name="mapVersionId" hidden value="<?php echo $mapVersionId; ?>">
+            <input id="mapPositioningChanged" name="mapPositioningChanged" hidden value="false">
+            <input id="allPositions" name="allPositions" hidden value="">
+
         </form>
 
         <script>
@@ -111,7 +114,10 @@ if (isset($_GET["personInFocusId"])) {
             var allCircles = document.querySelectorAll(".movingCircle");
             allCircles.forEach(element => dragMovingCirlce(element));
 
+            var mapPositioningChanged = false;
+
             function dragMovingCirlce(elmnt) {
+
 
                 var mousePosStartX = 0, mousePosStartY = 0, mousePosEndX = 0, mousePosEndY = 0;
                 var movingCirclePosStartX = 0, movingCirclePosStartY = 0, movingCirclePosEndX = 0, movingCirclePosEndY = 0;
@@ -168,6 +174,13 @@ if (isset($_GET["personInFocusId"])) {
                     /* stop moving when mouse button is released:*/
                     document.onmouseup = null;
                     document.onmousemove = null;
+
+                    if (mapPositioningChanged == true) {
+//do nothing
+                    } else {
+                        mapPositioningChanged = true;
+                        document.getElementById("mapPositioningChanged").value = true;
+                    }
                 }
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
@@ -175,6 +188,9 @@ if (isset($_GET["personInFocusId"])) {
 //------------------------REDIRECTION START ---------------------------------------
             function redirectToAdminMenu() {
                 var form = document.querySelector("form");
+                if (mapPositioningChanged == true) {
+                    document.getElementById("allPositions").value = getAllPositions();
+                }
                 form.submit();
 
             }
@@ -186,22 +202,21 @@ if (isset($_GET["personInFocusId"])) {
 //------------------------REDIRECTING END ------------------------------
 
 //----------------------------
-            function saveAllPositions() {
+            function getAllPositions() {
                 let allCircles = document.querySelectorAll(".movingCircle");
-                let postRequest = "";
+                let allPostitions = "";
                 for (let i = 0; i < allCircles.length; i++) {
                     let circle = allCircles[i];
                     let id = circle.id;
                     let x = circle.getAttribute("x");
                     let y = circle.getAttribute("y");
                     if (i == 0) {
-                        postRequest = postRequest + id + "," + x + "," + y;
+                        allPostitions = allPostitions + id + "," + x + "," + y;
                     } else {
-                        postRequest = postRequest + ":" + id + "," + x + "," + y;
+                        allPostitions = allPostitions + ":" + id + "," + x + "," + y;
                     }
                 }
-                document.getElementById("saveAllPositionsInput").value = postRequest;
-                document.getElementById("saveAllPositionsForm").submit();
+                return allPostitions;
             }
         </script>
     </body>

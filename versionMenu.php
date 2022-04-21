@@ -1,7 +1,7 @@
 <?php
 require_once 'Controller/MapVersionController.php';
 
-$mapPositioningChanged = false;
+$mapPositioningChanged = "false";
 $allPositions;
 if (isset($_GET["mapVersionId"])) {
     $mapVersionId = $_GET["mapVersionId"];
@@ -10,7 +10,7 @@ if (isset($_GET["mapVersionId"])) {
     $mapPositioningChanged = $_POST["mapPositioningChanged"];
     $allPositions = $_POST["allPositions"];
 }
-
+echo $mapPositioningChanged;
 $mapVersionController = new MapVersionController();
 $mapVersion = $mapVersionController->getMapVersion($mapVersionId);
 $versionName = $mapVersion->getName();
@@ -30,6 +30,18 @@ $height = $mapVersion->getMapHeight();
         <h2>
             <?php
             echo "Version Name:$versionName";
+
+
+
+            if ($mapPositioningChanged == "true") {
+                echo "<center><h2 style='background-color:red'>რუქაზე პიროვნების/პიროვნებების მდებარეობა შეიცვალა</h2><center>"
+                . "<form action='requestDispatcher.php' method='POST'>"
+                . "<input type='submit' value='შეინახე ცვლილებები' style='color:green; font-size:20px;font-weight:bold'>"
+                . "</form>"
+                . "<hr>";
+            }
+
+
             echo "<br>";
             echo "Map Dimesnisons:MAP WIDTH-$width. MAP HEIGHT-$height";
             ?>

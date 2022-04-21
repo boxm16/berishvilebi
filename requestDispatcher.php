@@ -38,5 +38,12 @@ if (isset($_POST["insertChild"])) {
     $personController->insertChild($newPerson, $mapVersionId);
     header("Location: personPage.php?personId=$parentId&mapVersionId=$mapVersionId");
 }
+
+if (isset($_POST["saveAllPositions"])) {
+    $personDao = new PersonDao();
+   // $personDao->saveAllPositions($_POST["saveAllPositions"]);
+    //header("Location: admin.php");
+   
+}
 var_dump($_POST);
 var_dump($_GET);

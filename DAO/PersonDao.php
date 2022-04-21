@@ -160,4 +160,23 @@ class PersonDao {
         return $person;
     }
 
+    public function saveAllPositions($allPersonsPositions, $mapVersionId) {
+
+
+        $allPersonsPositionsArrayt = explode(":", $allPersonsPositions);
+
+
+        // prepare the SQL query once
+        $stmt = $this->connection->prepare("UPDATE version_position SET position_x = ?, position_y = ? WHERE person_id= ? and version_id=?;");
+
+        $this->connection->beginTransaction();
+// loop over the data array
+        foreach ($allPersonsPositionsArrayt as $personPositionCode) {
+
+            $personPositionCodeArray = explode(",", $personPositionCode);
+            $stmt->execute([$personPositionCodeArray[1], $personPositionCodeArray[2], $personPositionCodeArray[0], $mapVersionId] );
+        }
+        $this->connection->commit();
+    }
+
 }

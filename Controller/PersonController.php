@@ -19,9 +19,14 @@ class PersonController {
         $personDao = new PersonDao();
         $parentId = $person->getParentId();
         $parent = $personDao->getPerson($parentId, $mapVersionId);
-        $person->setPositionX($parent->getPositionX()+50);
-        $person->setPositionY($parent->getPositionY()+50);
+        $person->setPositionX($parent->getPositionX() + 50);
+        $person->setPositionY($parent->getPositionY() + 50);
         $personDao->insertPerson($person, $mapVersionId);
+    }
+
+    public function saveAllPositions($allPersonsPositions, $mapVersionId) {
+        $personDao = new PersonDao();
+        $personDao->saveAllPositions($allPersonsPositions, $mapVersionId);
     }
 
 }

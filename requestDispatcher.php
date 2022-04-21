@@ -40,10 +40,11 @@ if (isset($_POST["insertChild"])) {
 }
 
 if (isset($_POST["saveAllPositions"])) {
-    $personDao = new PersonDao();
-   // $personDao->saveAllPositions($_POST["saveAllPositions"]);
-    //header("Location: admin.php");
-   
+    $personDao = new PersonController();
+    $saveAllPositions = $_POST["saveAllPositions"];
+    $mapVersionId = $_POST["mapVersionId"];
+    $personDao->saveAllPositions($saveAllPositions, $mapVersionId);
+    header("Location: versionMenu.php?mapVersionId=$mapVersionId");
 }
 var_dump($_POST);
 var_dump($_GET);

@@ -19,7 +19,6 @@ if (isset($_GET["personInFocusId"])) {
 } else {
     $personInFocusId = 1;
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -95,6 +94,9 @@ if (isset($_GET["personInFocusId"])) {
         }
         ?>
         </svg>
+        <form action="versionMenu.php" method="POST">
+            <input id="" name="mapVersionId" hidden value="<?php echo $mapVersionId; ?>">
+        </form>
 
         <script>
             window.addEventListener("load", centerPersonInFocus());
@@ -169,14 +171,38 @@ if (isset($_GET["personInFocusId"])) {
                 }
             }
 //---------------------- END OF MOVING CIRCLES AND LINES ----------------------------
+
+//------------------------REDIRECTION START ---------------------------------------
             function redirectToAdminMenu() {
-                document.location.href = "versionMenu.php?mapVersionId=<?php echo $mapVersionId ?>";
+                var form = document.querySelector("form");
+                form.submit();
+
             }
             function redirect(event, personId) {
+
                 document.location.href = "personPage.php?mapVersionId=<?php echo $mapVersionId ?> &personId=" + personId;
                 event.stopPropagation();
             }
+//------------------------REDIRECTING END ------------------------------
 
+//----------------------------
+            function saveAllPositions() {
+                let allCircles = document.querySelectorAll(".movingCircle");
+                let postRequest = "";
+                for (let i = 0; i < allCircles.length; i++) {
+                    let circle = allCircles[i];
+                    let id = circle.id;
+                    let x = circle.getAttribute("x");
+                    let y = circle.getAttribute("y");
+                    if (i == 0) {
+                        postRequest = postRequest + id + "," + x + "," + y;
+                    } else {
+                        postRequest = postRequest + ":" + id + "," + x + "," + y;
+                    }
+                }
+                document.getElementById("saveAllPositionsInput").value = postRequest;
+                document.getElementById("saveAllPositionsForm").submit();
+            }
         </script>
     </body>
 </html>

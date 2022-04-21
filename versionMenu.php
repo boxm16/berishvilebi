@@ -1,6 +1,11 @@
 <?php
 require_once 'Controller/MapVersionController.php';
-$mapVersionId = $_GET["mapVersionId"];
+if (isset($_GET["mapVersionId"])) {
+    $mapVersionId = $_GET["mapVersionId"];
+} else {
+    $mapVersionId = $_POST["mapVersionId"];
+}
+
 $mapVersionController = new MapVersionController();
 $mapVersion = $mapVersionController->getMapVersion($mapVersionId);
 $versionName = $mapVersion->getName();

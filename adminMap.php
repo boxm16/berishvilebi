@@ -60,6 +60,7 @@ if (isset($_GET["personInFocusId"])) {
         foreach ($personsList as $person) {
 
             $id = $person->getId();
+            $generation = $person->getGeneration();
             $x = $person->getPositionX();
             $y = $person->getPositionY();
             $parentPositionX = $person->getParentPositionX();
@@ -88,7 +89,10 @@ if (isset($_GET["personInFocusId"])) {
         </text>;
         <text x='42' y='50' text-anchor='middle' fill='black' font-size='13px' font-family='Arial' dy='.3em'>
         $secondName      
-        </text>";
+        </text>
+        <text x='42' y='70' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
+        $generation 
+        </text>;";
             echo "</g>";
             echo "</svg>";
         }

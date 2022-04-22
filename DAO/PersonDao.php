@@ -179,8 +179,8 @@ class PersonDao {
         $this->connection->commit();
     }
 
-    public function moveHorizontalyAllPositions($step) {
-        $sql = "UPDATE person SET position_X=position_X+:step;";
+    public function moveHorizontalyAllPositions($step, $mapVersionId) {
+        $sql = "UPDATE version_position SET position_X=position_X+:step WHERE version_id=$mapVersionId;";
 
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(':step', $step);
@@ -190,8 +190,8 @@ class PersonDao {
         }
     }
 
-    public function moveVerticallyAllPositions($step) {
-        $sql = "UPDATE person SET position_Y=position_Y+:step;";
+    public function moveVerticallyAllPositions($step, $mapVersionId) {
+        $sql = "UPDATE version_position SET position_Y=position_Y+:step WHERE version_id=$mapVersionId;";
 
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(':step', $step);

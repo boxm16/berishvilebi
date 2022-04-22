@@ -58,13 +58,18 @@ $height = $mapVersion->getMapHeight();
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('right')">მარჯვნივ</button>
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('up')">ზემოთ</button>
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('down')">ქვემოთ</button>
-        </h2>  
-        <hr>
-        <form action="adminMap.php" method="POST">
-            <input name="mapVersionId" hidden value="<?php echo $mapVersionId
+            <form id="moveAllPositionsForm" action="requestDispatcher.php" method="POST">
+                <input id="moveAllPositionsFormInput" name='moveAllPositions' hidden value="">
+                <input id="mapVersionId" name='mapVersionId' hidden value="<?php echo $mapVersionId ?>">
+
+            </form>
+
+            <hr>
+            <form action="adminMap.php" method="POST">
+                <input name="mapVersionId" hidden value="<?php echo $mapVersionId
             ?>">
-            <button type="submit">რუქის ნახვა</button>
-        </form>
+                <button type="submit">რუქის ნახვა</button>
+            </form>
     </body>
     <script>
         function moveAllPositions(direction) {

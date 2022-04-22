@@ -47,16 +47,17 @@ if (isset($_POST["saveAllPositions"])) {
     header("Location: versionMenu.php?mapVersionId=$mapVersionId");
 }
 if (isset($_POST["moveAllPositions"])) {
+    $mapVersionId = $_POST["mapVersionId"];
     $personDao = new PersonDao();
     $c = explode(":", $_POST["moveAllPositions"]);
 
     if ($c[0] == "x") {
-        $personDao->moveHorizontalyAllPositions($c[1] * 1);
+        $personDao->moveHorizontalyAllPositions($c[1] * 1, $mapVersionId);
     }
     if ($c[0] == "y") {
-        $personDao->moveVerticallyAllPositions($c[1] * 1);
+        $personDao->moveVerticallyAllPositions($c[1] * 1, $mapVersionId);
     }
-    header("Location: admin.php");
+    header("Location: versionMenu.php?mapVersionId=$mapVersionId");
 }
 var_dump($_POST);
 var_dump($_GET);

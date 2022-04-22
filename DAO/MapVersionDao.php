@@ -105,4 +105,26 @@ class MapVersionDao {
         return $mapVersion;
     }
 
+    public function changeMapWidth($mapVersionId, $mapWidth) {
+        $sql = "UPDATE version SET map_width=:width WHERE id=:id";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':width', $mapWidth);
+        $statement->bindValue(':id', $mapVersionId);
+        $updated = $statement->execute();
+        if ($updated) {
+            echo 'რუქის სიგანე წარმატებით შეიცვალა!<br>';
+        }
+    }
+
+    public function changeMapHeight($mapVersionId, $mapHeight) {
+        $sql = "UPDATE version SET map_height=:height WHERE id=:id";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':height', $mapHeight);
+        $statement->bindValue(':id', $mapVersionId);
+        $updated = $statement->execute();
+        if ($updated) {
+            echo 'რუქის სიმაღლე წარმატებით შეიცვალა!<br>';
+        }
+    }
+
 }

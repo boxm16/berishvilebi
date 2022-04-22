@@ -59,5 +59,20 @@ if (isset($_POST["moveAllPositions"])) {
     }
     header("Location: versionMenu.php?mapVersionId=$mapVersionId");
 }
+
+if (isset($_GET["changeMapWidth"])) {
+    $mapVersionId = $_GET["mapVersionId"];
+    $mapWidth = $_GET["changeMapWidth"];
+    $mapVersionController = new MapVersionController();
+    $mapVersionController->changeMapWidth($mapVersionId, $mapWidth);
+    header("Location: versionMenu.php?mapVersionId=$mapVersionId");
+}
+if (isset($_GET["changeMapHeight"])) {
+    $mapVersionId = $_GET["mapVersionId"];
+    $mapHeight = $_GET["changeMapHeight"];
+    $mapVersionController = new MapVersionController();
+    $mapVersionController->changeMapHeight($mapVersionId, $mapHeight);
+    header("Location: versionMenu.php?mapVersionId=$mapVersionId");
+}
 var_dump($_POST);
 var_dump($_GET);

@@ -63,22 +63,22 @@ $height = $mapVersion->getMapHeight();
                 <tbody>
                     <tr>
                         <td>სიგანე</td>
-                        <td><input type='number'  value='<?php echo $width ?>'></td>
-                        <td><button>შეცვლა</button></td>
+                        <td><input id='mapWidth' type='number'  value='<?php echo $width ?>'></td>
+                        <td><button onclick="changeWidth()">შეცვლა</button></td>
                     </tr>
                     <tr>
                         <td>სიმღლე</td>
-                        <td><input type='number' value='<?php echo $height ?>'></td>
-                        <td><button>შეცვლა</button></td>
+                        <td><input id="mapHeight" type='number' value='<?php echo $height ?>'></td>
+                        <td><button onclick="changeHeight()"> შეცვლა </button></td >
                     </tr>
                 </tbody>
             </table>
             <hr>
-            <h2>ყველა პიროვნების გადაადგილება</h2>
-            <input id="moveAllPositionsInput" type="number"> ნაბიჯი
+            <h2>ყველა            პიროვნების გადაადგილება</h2>
+            <input id="move        AllPositionsInput" type="number"> ნაბიჯი
+            <br>        
             <br>
-            <br>
-            <button type="button" class="btn btn-primary" onclick="moveAllPositions('left')">მარცხნივ</button>
+            <button type="button" class="btn bt        n-primary" onclick="moveAllPositions('left')">მარცხნივ</button>
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('right')">მარჯვნივ</button>
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('up')">ზემოთ</button>
             <button type="button" class="btn btn-primary" onclick="moveAllPositions('down')">ქვემოთ</button>
@@ -109,12 +109,10 @@ $height = $mapVersion->getMapHeight();
             if (direction == 'right') {
                 steps = steps * 1;
                 sentValue = 'x:' + steps;
-
             }
             if (direction == 'up') {
                 steps = steps * (-1);
                 sentValue = 'y:' + steps;
-
             }
             if (direction == 'down') {
                 steps = steps * 1;
@@ -123,6 +121,15 @@ $height = $mapVersion->getMapHeight();
             console.log(sentValue);
             document.getElementById("moveAllPositionsFormInput").value = sentValue;
             document.getElementById("moveAllPositionsForm").submit();
+        }
+
+        function changeWidth() {
+            let newWidth = document.getElementById("mapWidth").value;
+            document.location.href = "requestDispatcher.php?changeMapWidth=" + newWidth + "&mapVersionId=<?php echo $mapVersionId ?>";
+        }
+        function changeHeight() {
+            let newHeight = document.getElementById("mapHeight").value;
+            document.location.href = "requestDispatcher.php?changeMapHeight=" + newHeight + "&mapVersionId=<?php echo $mapVersionId ?>";
         }
     </script>
 </html>

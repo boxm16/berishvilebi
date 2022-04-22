@@ -23,6 +23,9 @@ $height = $mapVersion->getMapHeight();
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <style>
+
+        </style>
     </head>
     <body>
 
@@ -47,8 +50,29 @@ $height = $mapVersion->getMapHeight();
 
 
             echo "<br>";
-            echo "რუქის ზომები:   სიგანე-$width. სიმაღლე-$height";
             ?>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            რუქის ზომები
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>სიგანე</td>
+                        <td><input type='number'  value='<?php echo $width ?>'></td>
+                        <td><button>შეცვლა</button></td>
+                    </tr>
+                    <tr>
+                        <td>სიმღლე</td>
+                        <td><input type='number' value='<?php echo $height ?>'></td>
+                        <td><button>შეცვლა</button></td>
+                    </tr>
+                </tbody>
+            </table>
             <hr>
             <h2>ყველა პიროვნების გადაადგილება</h2>
             <input id="moveAllPositionsInput" type="number"> ნაბიჯი

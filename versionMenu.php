@@ -54,11 +54,11 @@ $height = $mapVersion->getMapHeight();
 
                         <?php
                         if ($mapPositioningChanged == "true") {
-                            echo "<center><h2 style='background-color:red'>რუქაზე პიროვნების/პიროვნებების მდებარეობა შეიცვალა</h2><center>"
+                            echo "<center><h2><span class='label label-danger'>რუქაზე პიროვნების/პიროვნებების მდებარეობა შეიცვალა</span></h2><center>"
                             . "<form action='requestDispatcher.php' method='POST'>"
                             . "<input name='saveAllPositions'  hidden value='$allPositions'>"
                             . "<input name='mapVersionId'  hidden value='$mapVersionId'>"
-                            . "<input type = 'submit' value = 'შეინახე ცვლილებები' style = 'color:green; font-size:20px;font-weight:bold'>"
+                            . "<button class='btn btn-success' type = 'submit' style='font-size:20px;font-weight:bold'>შეინახე ცვლილებები </button>"
                             . "</form>";
                         }
                         ?>

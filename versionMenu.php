@@ -10,7 +10,7 @@ if (isset($_GET["mapVersionId"])) {
     $mapPositioningChanged = $_POST["mapPositioningChanged"];
     $allPositions = $_POST["allPositions"];
 }
-echo $mapPositioningChanged;
+
 $mapVersionController = new MapVersionController();
 $mapVersion = $mapVersionController->getMapVersion($mapVersionId);
 $versionName = $mapVersion->getName();
@@ -25,11 +25,13 @@ $height = $mapVersion->getMapHeight();
         <title></title>
     </head>
     <body>
-        <h1>ვერსიის მენუ</h1>
-        <a href="adminMenu.php">Go Admin Menu</a>
+
+        <a href="adminMenu.php">მთავარი (ადმინისტრატორის) მენიუ</a>
+        <hr>
+        <h1>რუქის ვერსიის მენიუ</h1>
         <h2>
             <?php
-            echo "Version Name:$versionName";
+            echo "ვერსიის დასახელება:   $versionName";
 
 
 
@@ -45,14 +47,23 @@ $height = $mapVersion->getMapHeight();
 
 
             echo "<br>";
-            echo "Map Dimesnisons:MAP WIDTH-$width. MAP HEIGHT-$height";
+            echo "რუქის ზომები:   სიგანე-$width. სიმაღლე-$height";
             ?>
+            <hr>
+            <h2>ყველა პიროვნების გადაადგილება</h2>
+            <input id="moveAllPositionsInput" type="number"> ნაბიჯი
+            <br>
+            <br>
+            <button type="button" class="btn btn-primary" onclick="moveAllPositions('left')">მარცხნივ</button>
+            <button type="button" class="btn btn-primary" onclick="moveAllPositions('right')">მარჯვნივ</button>
+            <button type="button" class="btn btn-primary" onclick="moveAllPositions('up')">ზემოთ</button>
+            <button type="button" class="btn btn-primary" onclick="moveAllPositions('down')">ქვემოთ</button>
         </h2>  
-
+        <hr>
         <form action="adminMap.php" method="POST">
             <input name="mapVersionId" hidden value="<?php echo $mapVersionId
             ?>">
-            <button type="submit">გადადი რუკაზე</button>
+            <button type="submit">რუქის ნახვა</button>
         </form>
     </body>
 </html>

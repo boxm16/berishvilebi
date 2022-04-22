@@ -35,9 +35,15 @@ $height = $mapVersion->getMapHeight();
         <h2>
             <?php
             echo "ვერსიის დასახელება:   $versionName";
-
-
-
+            ?>
+            <hr>
+            <form action="adminMap.php" method="POST">
+                <input name="mapVersionId" hidden value="<?php echo $mapVersionId
+            ?>">
+                <button type="submit">რუქის ნახვა</button>
+            </form>
+            <hr>
+            <?php
             if ($mapPositioningChanged == "true") {
                 echo "<center><h2 style='background-color:red'>რუქაზე პიროვნების/პიროვნებების მდებარეობა შეიცვალა</h2><center>"
                 . "<form action='requestDispatcher.php' method='POST'>"
@@ -89,47 +95,43 @@ $height = $mapVersion->getMapHeight();
             </form>
 
             <hr>
-            <form action="adminMap.php" method="POST">
-                <input name="mapVersionId" hidden value="<?php echo $mapVersionId
-            ?>">
-                <button type="submit">რუქის ნახვა</button>
-            </form>
-    </body>
-    <script>
-        function moveAllPositions(direction) {
-            let steps = document.getElementById("moveAllPositionsInput").value;
-            if (steps == '') {
-                return;
-            }
-            let sentValue = '';
-            if (direction == 'left') {
-                steps = steps * (-1);
-                sentValue = 'x:' + steps;
-            }
-            if (direction == 'right') {
-                steps = steps * 1;
-                sentValue = 'x:' + steps;
-            }
-            if (direction == 'up') {
-                steps = steps * (-1);
-                sentValue = 'y:' + steps;
-            }
-            if (direction == 'down') {
-                steps = steps * 1;
-                sentValue = 'y:' + steps;
-            }
-            console.log(sentValue);
-            document.getElementById("moveAllPositionsFormInput").value = sentValue;
-            document.getElementById("moveAllPositionsForm").submit();
-        }
 
-        function changeWidth() {
-            let newWidth = document.getElementById("mapWidth").value;
-            document.location.href = "requestDispatcher.php?changeMapWidth=" + newWidth + "&mapVersionId=<?php echo $mapVersionId ?>";
-        }
-        function changeHeight() {
-            let newHeight = document.getElementById("mapHeight").value;
-            document.location.href = "requestDispatcher.php?changeMapHeight=" + newHeight + "&mapVersionId=<?php echo $mapVersionId ?>";
-        }
-    </script>
+            </body>
+            <script>
+                function moveAllPositions(direction) {
+                    let steps = document.getElementById("moveAllPositionsInput").value;
+                    if (steps == '') {
+                        return;
+                    }
+                    let sentValue = '';
+                    if (direction == 'left') {
+                        steps = steps * (-1);
+                        sentValue = 'x:' + steps;
+                    }
+                    if (direction == 'right') {
+                        steps = steps * 1;
+                        sentValue = 'x:' + steps;
+                    }
+                    if (direction == 'up') {
+                        steps = steps * (-1);
+                        sentValue = 'y:' + steps;
+                    }
+                    if (direction == 'down') {
+                        steps = steps * 1;
+                        sentValue = 'y:' + steps;
+                    }
+                    console.log(sentValue);
+                    document.getElementById("moveAllPositionsFormInput").value = sentValue;
+                    document.getElementById("moveAllPositionsForm").submit();
+                }
+
+                function changeWidth() {
+                    let newWidth = document.getElementById("mapWidth").value;
+                    document.location.href = "requestDispatcher.php?changeMapWidth=" + newWidth + "&mapVersionId=<?php echo $mapVersionId ?>";
+                }
+                function changeHeight() {
+                    let newHeight = document.getElementById("mapHeight").value;
+                    document.location.href = "requestDispatcher.php?changeMapHeight=" + newHeight + "&mapVersionId=<?php echo $mapVersionId ?>";
+                }
+            </script>
 </html>

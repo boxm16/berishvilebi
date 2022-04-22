@@ -66,4 +66,34 @@ $height = $mapVersion->getMapHeight();
             <button type="submit">რუქის ნახვა</button>
         </form>
     </body>
+    <script>
+        function moveAllPositions(direction) {
+            let steps = document.getElementById("moveAllPositionsInput").value;
+            if (steps == '') {
+                return;
+            }
+            let sentValue = '';
+            if (direction == 'left') {
+                steps = steps * (-1);
+                sentValue = 'x:' + steps;
+            }
+            if (direction == 'right') {
+                steps = steps * 1;
+                sentValue = 'x:' + steps;
+
+            }
+            if (direction == 'up') {
+                steps = steps * (-1);
+                sentValue = 'y:' + steps;
+
+            }
+            if (direction == 'down') {
+                steps = steps * 1;
+                sentValue = 'y:' + steps;
+            }
+            console.log(sentValue);
+            document.getElementById("moveAllPositionsFormInput").value = sentValue;
+            document.getElementById("moveAllPositionsForm").submit();
+        }
+    </script>
 </html>

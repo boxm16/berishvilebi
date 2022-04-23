@@ -212,4 +212,8 @@ class PersonDao {
         }
     }
 
+    public function getAllPersons() {
+        
+    }
+
 }

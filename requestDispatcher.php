@@ -86,8 +86,8 @@ if (isset($_GET["deleteId"])) {
     $personsDescendantsList = $personController->getPersonsDescendantsList($deleteId);
     $personDao = new PersonDao();
     $personDao->deletePersons($personsDescendantsList);
-    header("Location: admin.php");
-    exit;
+    //header("Location: admin.php");
+    //exit;
 }
 var_dump($_POST);
 var_dump($_GET);

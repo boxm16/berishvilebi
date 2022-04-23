@@ -216,7 +216,7 @@ $children = $person->getChildren();
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2"><button type="submit">დამატება</button></td>
+                            <td colspan="2"><button type="submit" class="btn btn-primary btn-block">დამატება</button></td>
                         </tr>
                     </table>
                 </form>
@@ -268,7 +268,7 @@ $children = $person->getChildren();
 
                 <!-------------------------- HIDDEN FORM FOR UPDATE ----------------->
                 <form id="hiddenForm" action="requestDispatcher.php" method="POST">
-                    <input name="updateId">
+                    <input hidden name="updateId">
                     <input hidden id="personId" name="personId" value="<?php echo $personId ?>">
                     <input hidden id="firstNameOutput" name="firstName" value="">
                     <input hidden id="nicknameOutput" name="nickname" value="">

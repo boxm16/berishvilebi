@@ -76,10 +76,18 @@ if (isset($_GET["changeMapHeight"])) {
 }
 
 if (isset($_GET["deleteId"])) {
-    $personId = $_GET["deleteId"];
+    $deleteId = $_GET["deleteId"];
+    if ($deleteId == 1) {
+        echo "You cant delete Main Person. This should not happen.";
+        exit;
+    }
+    $personController = new PersonController();
+
+    $personsDescendantsList = $personController->getPersonsDescendantsList($deleteId);
     $personDao = new PersonDao();
-    $personDao->deletePerson($personId);
-    echo "deletion";
+    $personDao->deletePersons($personsDescendantsList);
+    header("Location: admin.php");
+    exit;
 }
 var_dump($_POST);
 var_dump($_GET);

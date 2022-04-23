@@ -16,6 +16,12 @@ $mapVersion = $mapVersionController->getMapVersion($mapVersionId);
 $versionName = $mapVersion->getName();
 $width = $mapVersion->getMapWidth();
 $height = $mapVersion->getMapHeight();
+if ($mapVersionId == 1) {
+    $mapAddress = "adminMap.php";
+} else {
+    $mapAddress = "adminMapVersion.php";
+}
+
 ?>
 <!DOCTYPE html>
 
@@ -44,7 +50,7 @@ $height = $mapVersion->getMapHeight();
                         </h3>
 
                         <hr>
-                        <form action="adminMap.php" method="POST">
+                        <form action="<?php echo $mapAddress ?>" method="POST">
                             <input name="mapVersionId" hidden value="<?php echo $mapVersionId
                             ?>">
                             <button class="btn btn-primary btn-block"  style="font-size:40px" type="submit">რუქის ნახვა</button>

@@ -138,7 +138,7 @@ $children = $person->getChildren();
                                 </td>
 
                             </tr>
-                            </form>
+                           
                             <tr>
                                 <td>
                             <center>  

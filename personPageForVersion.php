@@ -37,7 +37,6 @@ $children = $person->getChildren();
     </head>
 </head>
 <body>
-    <h1>aaaaaaaaaaaaaaa</h1>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -147,6 +146,9 @@ $children = $person->getChildren();
                         $childsSecondName = $child->getSecondName();
                         echo "<tr><td> $childsFirstName $childsNickname  $childsSecondName</td></tr>";
                     }
+                    if (count($children) == 0) {
+                        echo "<tr><td><button class='btn btn-block btn-primary' style='font-size:30px' onclick='searchForChildren()'>შვილების მოძიება</button></td></tr>";
+                    }
                     ?>
                 </table>
                 <hr>
@@ -170,6 +172,10 @@ $children = $person->getChildren();
             deathDateOutput.value = deathDateInput.value;
 
             hiddenForm.submit();
+        }
+
+        function searchForChildren() {
+            document.location.href = 'requestDispatcher.php?searchChildrenFor=<?php echo $personId ?>&mapVersionId=<?php echo $mapVersionId ?>';
         }
     </script>
 </body>

@@ -124,7 +124,6 @@ class PersonDao {
         return $persons;
     }
 
-    
     public function getPerson($personId, $mapVersionId) {
 
         $sql = "SELECT * FROM person INNER JOIN version_position ON person.id=version_position.person_id WHERE (id=$personId OR parent_id=$personId) AND (version_id=$mapVersionId);";
@@ -301,6 +300,46 @@ class PersonDao {
         $updated = $statement->execute();
         if ($updated) {
             echo 'პიროვნების მონაცემები შეცვლილია წარმატებით!<br>';
+        }
+    }
+
+    public function addPersonsChildrenToMapVersion($personId, $mapVersionId) {
+        $sqlParent = "SELECT * FROM person INNER JOIN version_position ON person.id=version_position.person_id WHERE id=$personId  AND version_id=$mapVersionId;";
+        try {
+            $result = $this->connection->query($sqlParent)->fetch();
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+
+        $parentPositionX = $result["position_X"];
+        $parentPositionY = $result["position_Y"];
+
+
+        $children = array();
+        $sql = "SELECT * FROM person WHERE parent_id=$personId";
+
+        try {
+            $result = $this->connection->query($sql)->fetchAll();
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+
+        foreach ($result as $personData) {
+            $parentPositionX = $parentPositionX + 50;
+            $parentPositionY = $parentPositionY + 50;
+            $childId = $personData["id"];
+
+            $sql = "INSERT INTO version_position (version_id, person_id, position_X, position_Y) "
+                    . "                   VALUES (:mapVersionId, :childId, :positionX, :positionY)";
+
+            $statement = $this->connection->prepare($sql);
+            $statement->bindValue(':mapVersionId', $mapVersionId);
+            $statement->bindValue(':childId', $childId);
+            $statement->bindValue(':positionX', $parentPositionX);
+            $statement->bindValue(':positionY', $parentPositionY);
+            $insertionResult = $statement->execute();
         }
     }
 

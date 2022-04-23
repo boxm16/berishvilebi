@@ -21,7 +21,6 @@ if ($mapVersionId == 1) {
 } else {
     $mapAddress = "adminMapVersion.php";
 }
-
 ?>
 <!DOCTYPE html>
 

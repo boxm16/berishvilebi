@@ -106,5 +106,13 @@ if (isset($_POST["updateId"])) {
     $personDao->updatePerson($person);
     header("Location: personPage.php?personId=$personId&mapVersionId=1");
 }
+
+if (isset($_GET["searchChildrenFor"])) {
+    $personId = $_GET["searchChildrenFor"];
+    $mapVersionId = $_GET["mapVersionId"];
+    $personDao = new PersonDao();
+    $personDao->addPersonsChildrenToMapVersion($personId, $mapVersionId);
+    header("Location: personPageForVersion.php?personId=$personId&mapVersionId=$mapVersionId");
+}
 var_dump($_POST);
 var_dump($_GET);

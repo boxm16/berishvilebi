@@ -52,7 +52,8 @@ class PersonController {
     }
 
     public function getPersonsDescendantsTree($id) {
-        $personsArray = $this->personDao->getAllPersons();
+        $personDao = new PersonDao();
+        $personsArray = $personDao->getAllPersons();
         $personsMap = array();
 
         while (count($personsArray) > 1) {

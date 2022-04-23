@@ -124,6 +124,7 @@ class PersonDao {
         return $persons;
     }
 
+    
     public function getPerson($personId, $mapVersionId) {
 
         $sql = "SELECT * FROM person INNER JOIN version_position ON person.id=version_position.person_id WHERE (id=$personId OR parent_id=$personId) AND (version_id=$mapVersionId);";

@@ -87,7 +87,24 @@ if (isset($_GET["deleteId"])) {
     $personDao = new PersonDao();
     $personDao->deletePersons($personsDescendantsList);
     header("Location: versionMenu.php?mapVersionId=1");
-    
+}
+
+if (isset($_POST["updateId"])) {
+    $personId = $_POST["personId"];
+
+    $person = new Person();
+
+    $person->setId($_POST["personId"]);
+    $person->setFirstName($_POST["firstName"]);
+    $person->setNickname($_POST["nickname"]);
+    $person->setSecondName($_POST["secondName"]);
+    $person->setLifeStatus($_POST["lifeStatus"]);
+    $person->setBirthDate($_POST["birthDate"]);
+    $person->setDeathDate($_POST["deathDate"]);
+
+    $personDao = new PersonDao();
+    $personDao->updatePerson($person);
+    header("Location: personPage.php?personId=$personId&mapVersionId=1");
 }
 var_dump($_POST);
 var_dump($_GET);

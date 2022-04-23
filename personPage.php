@@ -28,9 +28,7 @@ if ($lifeStatus == "dead") {
     $dead = "";
 }
 $birthDate = $person->getBirthDate();
-echo "BIRTHDATE" . $birthDate . "<br>";
 $deathDate = $person->getDeathDate();
-echo "DEATHDATE" . $deathDate;
 $children = $person->getChildren();
 ?>
 <!DOCTYPE html>
@@ -58,6 +56,7 @@ $children = $person->getChildren();
                 </center>
                 <hr>
                 <h3><center> 
+
                         <table class="table">
                             <tr>
                                 <td>
@@ -89,7 +88,7 @@ $children = $person->getChildren();
                                     <label>სახელი </label>
                                 </td>
                                 <td>
-                                    <input type="text" value="<?php echo $firstName ?>">
+                                    <input id="firstNameInput" type="text" value="<?php echo $firstName ?>">
                                 </td> 
 
                             </tr>
@@ -98,7 +97,7 @@ $children = $person->getChildren();
                                     <label>მეტსახელი </label>
                                 </td>
                                 <td>
-                                    <input type="text" value="<?php echo $nickname ?>">
+                                    <input id="nicknameInput" type="text" value="<?php echo $nickname ?>">
                                 </td>
 
                             </tr>
@@ -108,7 +107,7 @@ $children = $person->getChildren();
                                     <label>გვარი </label>
                                 </td>
                                 <td>
-                                    <input type="text" value="<?php echo $secondName ?>">
+                                    <input id="secondNameInput" type="text" value="<?php echo $secondName ?>">
                                 </td>
 
                             </tr>
@@ -117,7 +116,7 @@ $children = $person->getChildren();
                                     <label>სტატუსი </label>
                                 </td>
                                 <td>
-                                    <select name="lifeStatus" >
+                                    <select id="lifeStatusInput">
                                         <option value="alive" <?php echo $alive ?> >ცოცხალი</option>
                                         <option value="dead" <?php echo $dead ?> >გარდაცვლილი</option>
                                     </select>
@@ -128,17 +127,18 @@ $children = $person->getChildren();
                             <tr>
                                 <td>  დაბადების თარიღი</td>
                                 <td> 
-                                    <input type='date' name='birthDate'>
+                                    <input id="birthDateInput" type='date'  name='birthDate' value="<?php echo $birthDate ?>">
                                 </td>
 
                             </tr>
                             <tr>
                                 <td>   გარდაცვალების თარიღი</td>
                                 <td> 
-                                    <input type='date' name='deathDate'>
+                                    <input id="deathDateInput" type='date' name='deathDate' value="<?php echo $deathDate ?>">
                                 </td>
 
                             </tr>
+                            </form>
                             <tr>
                                 <td>
                             <center>  
@@ -149,7 +149,7 @@ $children = $person->getChildren();
                             </td>
                             <td >
                             <center>  
-                                <button type="button" class="btn btn-success"  <?php if ($personId == 1) echo "disabled" ?>>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModal" <?php if ($personId == 1) echo "disabled" ?>>
                                     ცვლილებების შენახვა
                                 </button> 
                             </center>
@@ -219,25 +219,12 @@ $children = $person->getChildren();
                             <td colspan="2"><button type="submit">დამატება</button></td>
                         </tr>
                     </table>
-
-
-
-
-
-
-
-
-
-
                 </form>
-
                 <hr>
 
 
 
-                <!-- MODAL WINDOW --->
-
-
+                <!-- MODAL WINDOW  FOR DELETION--->
                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -258,7 +245,38 @@ $children = $person->getChildren();
                     </div>
                 </div>
 
+                <!-- MODAL WINDOW  FOR UPDATE--->
+                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title" style ="background-color: lime" id="exampleModalLongTitle"><center>ყურადღება</center></h1>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h2><p style="color:red"></p> დარწმუნებული ხარ რომ გსურს პიროვნების მონაცემების შეცვლა?</h2>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">უკან დაბრუნება</button>
+                                <button type="button" class="btn btn-primary" onclick="updatePerson()">სურვილის დადასტურება</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-------------------------- HIDDEN FORM FOR UPDATE ----------------->
+                <form id="hiddenForm" action="requestDispatcher.php" method="POST">
+                    <input name="updateId">
+                    <input hidden id="personId" name="personId" value="<?php echo $personId ?>">
+                    <input hidden id="firstNameOutput" name="firstName" value="">
+                    <input hidden id="nicknameOutput" name="nickname" value="">
+                    <input hidden id="secondNameOutput" name="secondName" value="">
+                    <input hidden id="lifeStatusOutput" name="lifeStatus" value="">
+                    <input hidden id="birthDateOutput" name="birthDate" value="">
+                    <input hidden id="deathDateOutput" name="deathDate" value="">
+                </form>
             </div>
         </div>
     </div>
@@ -267,6 +285,18 @@ $children = $person->getChildren();
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+                                    function updatePerson() {
 
+                                        firstNameOutput.value = firstNameInput.value;
+                                        nicknameOutput.value = nicknameInput.value;
+                                        secondNameOutput.value = secondNameInput.value;
+                                        lifeStatusOutput.value = lifeStatusInput.value;
+                                        birthDateOutput.value = birthDateInput.value;
+                                        deathDateOutput.value = deathDateInput.value;
+
+                                        hiddenForm.submit();
+                                    }
+    </script>
 </body>
 </html>

@@ -142,7 +142,11 @@ class PersonDao {
                 $person->setParentId($personData["parent_id"]);
                 $person->setGeneration($personData["generation"]);
                 $person->setFirstName($personData["first_name"]);
+                $person->setNickname($personData["nickname"]);
                 $person->setSecondName($personData["second_name"]);
+                $person->setLifeStatus($personData["life_status"]);
+                $person->setBirthDate($personData["birth_date"]);
+                $person->setDeathDate($personData["death_date"]);
                 $person->setPositionX($personData["position_X"]);
                 $person->setPositionY($personData["position_Y"]);
             } else {
@@ -151,7 +155,11 @@ class PersonDao {
                 $child->setParentId($personData["parent_id"]);
                 $child->setGeneration($personData["generation"]);
                 $child->setFirstName($personData["first_name"]);
+                $child->setNickname($personData["nickname"]);
                 $child->setSecondName($personData["second_name"]);
+                $child->setLifeStatus($personData["life_status"]);
+                $child->setBirthDate($personData["birth_date"]);
+                $child->setDeathDate($personData["death_date"]);
                 $child->setPositionX($personData["position_X"]);
                 $child->setPositionY($personData["position_Y"]);
                 $person->addChild($child);
@@ -269,6 +277,29 @@ class PersonDao {
             }
         } else {
             echo "nobody to delete";
+        }
+    }
+
+    public function updatePerson($person) {
+        $personId = $person->getId();
+        $firstName = $person->getFirstName();
+        $nickname = $person->getNickname();
+        $secondName = $person->getSecondName();
+        $lifeStatus = $person->getLifeStatus();
+        $birthDate = $person->getBirthDate();
+        $deathDate = $person->getDeathDate();
+        $sql = "UPDATE person SET first_name=:firstName, nickname=:nickname, second_name=:secondName, life_status=:lifeStatus, birth_date=:birthDate, death_date=:deathDate WHERE id=:id";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':firstName', $firstName);
+        $statement->bindValue(':nickname', $nickname);
+        $statement->bindValue(':secondName', $secondName);
+        $statement->bindValue(':lifeStatus', $lifeStatus);
+        $statement->bindValue(':birthDate', $birthDate);
+        $statement->bindValue(':deathDate', $deathDate);
+        $statement->bindValue(':id', $personId);
+        $updated = $statement->execute();
+        if ($updated) {
+            echo 'პიროვნების მონაცემები შეცვლილია წარმატებით!<br>';
         }
     }
 

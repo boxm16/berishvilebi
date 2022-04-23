@@ -52,6 +52,7 @@ $children = $person->getChildren();
                 <center>
                     <form action="adminMap.php" method="POST">
                         <input  name="mapVersionId" hidden value="<?php echo $mapVersionId ?>">
+                        <input  name="personInFocusId" hidden value="<?php echo $personId ?>">
                         <button class="btn btn-info" type="submit">რუქაზე დაბრუნება</button>
                     </form>
                 </center>

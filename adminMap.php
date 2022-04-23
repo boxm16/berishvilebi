@@ -16,6 +16,8 @@ $personController = new PersonController();
 $personsList = $personController->getAllPersonsForMap($mapVersionId);
 if (isset($_GET["personInFocusId"])) {
     $personInFocusId = $_GET["personInFocusId"];
+} else if (isset($_POST["personInFocusId"])) {
+    $personInFocusId = $_POST["personInFocusId"];
 } else {
     $personInFocusId = 1;
 }

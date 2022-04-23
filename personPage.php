@@ -19,6 +19,18 @@ $firstName = $person->getFirstName();
 $nickname = $person->getNickname();
 $secondName = $person->getSecondName();
 $generation = $person->getGeneration();
+$lifeStatus = $person->getLifeStatus();
+if ($lifeStatus == "dead") {
+    $alive = "";
+    $dead = "selected";
+} else {
+    $alive = "selected";
+    $dead = "";
+}
+$birthDate = $person->getBirthDate();
+echo "BIRTHDATE" . $birthDate . "<br>";
+$deathDate = $person->getDeathDate();
+echo "DEATHDATE" . $deathDate;
 $children = $person->getChildren();
 ?>
 <!DOCTYPE html>
@@ -105,8 +117,8 @@ $children = $person->getChildren();
                                 </td>
                                 <td>
                                     <select name="lifeStatus" >
-                                        <option value="alive">ცოცხალი</option>
-                                        <option value="dead">გარდაცვლილი</option>
+                                        <option value="alive" <?php echo $alive ?> >ცოცხალი</option>
+                                        <option value="dead" <?php echo $dead ?> >გარდაცვლილი</option>
                                     </select>
 
                                 </td>
@@ -129,7 +141,7 @@ $children = $person->getChildren();
                             <tr>
                                 <td>
                             <center>  
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" <?php if ($personId == 1) echo "disabled" ?>>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" <?php if ($personId == 1) echo "disabled" ?>>
                                     პიროვნების წაშლა
                                 </button> 
                             </center>
@@ -225,17 +237,17 @@ $children = $person->getChildren();
                 <!-- MODAL WINDOW --->
 
 
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title" id="exampleModalLongTitle"><center>ყურადღება</center></h1>
+                                <h1 class="modal-title" style ="background-color: red" id="exampleModalLongTitle"><center>ყურადღება</center></h1>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <h2><p style="background-color: red">პიროვნების წაშლით იშლება მისი ყველა არსებული შთამომავალი.</p> დარწმუნებული ხარ რომ გსურს პიროვნების წაშლა?</h2>
+                                <h2><p style="color:red">პიროვნების წაშლით იშლება მისი ყველა არსებული შთამომავალი.</p> დარწმუნებული ხარ რომ გსურს პიროვნების წაშლა?</h2>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">უკან დაბრუნება</button>

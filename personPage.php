@@ -251,7 +251,7 @@ $children = $person->getChildren();
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">უკან დაბრუნება</button>
-                                <button type="button" class="btn btn-primary" onclick="window.location.href = 'requestDispatcher.php?deleteId=<?php echo $id ?>';">წაშლის დადასტურება</button>
+                                <button type="button" class="btn btn-primary" onclick="window.location.href = 'requestDispatcher.php?deleteId=<?php echo $personId ?>';">წაშლის დადასტურება</button>
                             </div>
                         </div>
                     </div>

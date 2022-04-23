@@ -74,5 +74,12 @@ if (isset($_GET["changeMapHeight"])) {
     $mapVersionController->changeMapHeight($mapVersionId, $mapHeight);
     header("Location: versionMenu.php?mapVersionId=$mapVersionId");
 }
+
+if (isset($_GET["deleteId"])) {
+    $personId = $_GET["deleteId"];
+    $personDao = new PersonDao();
+    $personDao->deletePerson($personId);
+    echo "deletion";
+}
 var_dump($_POST);
 var_dump($_GET);

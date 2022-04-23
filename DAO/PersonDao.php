@@ -201,4 +201,15 @@ class PersonDao {
         }
     }
 
+    public function deletePerson($personId) {
+        $sql = "DELETE FROM person WHERE id=:id;";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':id', $personId);
+        $updated = $statement->execute();
+        if ($updated) {
+            echo 'რუქაზე პიორვნების მდებარეობა შენახულია!<br>';
+        }
+    }
+
 }

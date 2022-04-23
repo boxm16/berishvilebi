@@ -60,6 +60,9 @@ $configController = new ConfigController();
             $configController->deleteTables();
         }
         ?>
+ 
+ <hr>
+ <a href="justForMigration.php"><h3>Click To Migrate Database</h3></a>
 
     </body>
 </html>

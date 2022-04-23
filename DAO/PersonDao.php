@@ -239,4 +239,37 @@ class PersonDao {
         return $persons;
     }
 
+    public function deletePersons($personsDescendantsList) {
+        if (count($personsDescendantsList) > 0) {
+            $sql = "DELETE FROM person WHERE id IN ";
+            $sqlInPart = "(";
+            $index = 0;
+            foreach ($personsDescendantsList as $person) {
+                $perdonId = $person->getId();
+                $sqlInPart .= $perdonId;
+                if ($index == count($personsDescendantsList) - 1) {
+                    $sqlInPart .= ")";
+                } else {
+                    $sqlInPart .= ",";
+                }
+
+                $index++;
+            }
+            $sql .= $sqlInPart;
+
+
+            try {
+                $deleted = $this->connection->query($sql);
+                if ($deleted) {
+                    echo "Persons Deleted.";
+                }
+            } catch (\PDOException $e) {
+                echo $e->getMessage() . " Error Code:";
+                echo $e->getCode() . "<br>";
+            }
+        } else {
+            echo "nobody to delete";
+        }
+    }
+
 }

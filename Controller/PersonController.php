@@ -93,4 +93,10 @@ class PersonController {
         } return false;
     }
 
+    public function getAllPersonsPerGeneration() {
+        $personDao = new PersonDao();
+        $allPersonsList = $personDao->getAllPersons();
+        return $allPersonsList;
+    }
+
 }

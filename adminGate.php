@@ -29,6 +29,7 @@ if (isset($_SESSION["authorized"]) && $_SESSION["authorized"] == "true") {
     <body><div class="container">
             <div class="row">
                 <div class="col-md-auto">
+                    <a href="index.php">საწყისი გვერდი</a>
                     <center><h1>გაიარეთ ავტორიზაცია</h1></center>
                     <hr>
                     <form action="requestDispatcher.php" method="POST">

@@ -1,6 +1,13 @@
 <?php
+session_start();
 require_once 'Controller/MapVersionController.php';
 require_once 'Controller/PersonController.php';
+
+if ($_SESSION["authorized"] == "true") {
+    //you can go on
+} else {
+    header("Location: adminGate.php?authorizationResult=notAuthorized");
+}
 $mapVersionId = $_POST["mapVersionId"];
 if ($mapVersionId == null) {
     header("Location: errorPage.php");

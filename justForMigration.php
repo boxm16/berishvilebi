@@ -1,8 +1,16 @@
 <?php
 
+session_start();
+
 require_once 'Model/Person.php';
 require_once 'Dao/PersonDao.php';
 require_once 'Dao/DataBaseConnection.php';
+
+if ($_SESSION["authorized"] == "true") {
+    //you can go on
+} else {
+    header("Location: adminGate.php?authorizationResult=notAuthorized");
+}
 $host = 'remotemysql.com';
 $db = 'rcTGWKjpv5';
 $user = 'rcTGWKjpv5';

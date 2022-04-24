@@ -1,6 +1,13 @@
 <?php
+session_start();
+
 require_once 'Controller/PersonController.php';
 
+if ($_SESSION["authorized"] == "true") {
+    //you can go on
+} else {
+    header("Location: adminGate.php?authorizationResult=notAuthorized");
+}
 if (isset($_GET["mapVersionId"]) && isset($_GET["personId"])) {
     //do nothing
 } else {
@@ -138,7 +145,7 @@ $children = $person->getChildren();
                                 </td>
 
                             </tr>
-                           
+
                             <tr>
                                 <td>
                             <center>  

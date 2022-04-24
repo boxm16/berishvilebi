@@ -1,11 +1,12 @@
 <?php
 session_start();
+require_once 'Controller/MapVersionController.php';
 if ($_SESSION["authorized"] == "true") {
     //you can go on
 } else {
     header("Location: adminGate.php?authorizationResult=notAuthorized");
 }
-require_once 'Controller/MapVersionController.php';
+
 $mapVersionController = new MapVersionController();
 $allVersions = $mapVersionController->getAllMapVersions();
 ?>

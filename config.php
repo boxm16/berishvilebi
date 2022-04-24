@@ -1,5 +1,11 @@
 <?php
+session_start();
 require_once 'Controller/ConfigController.php';
+if ($_SESSION["authorized"] == "true") {
+    //you can go on
+} else {
+    header("Location: adminGate.php?authorizationResult=notAuthorized");
+}
 $configController = new ConfigController();
 ?>
 <!DOCTYPE html>
@@ -23,7 +29,7 @@ $configController = new ConfigController();
         }
         ?>
 
-       
+
 
         <hr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
@@ -49,7 +55,7 @@ $configController = new ConfigController();
         }
         ?>
 
- <hr><hr><hr>
+        <hr><hr><hr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <input hidden name="deleteTables">
             <button type="submit">Delete Tables</button>
@@ -60,9 +66,9 @@ $configController = new ConfigController();
             $configController->deleteTables();
         }
         ?>
- 
- <hr>
- <a href="justForMigration.php"><h3>Click To Migrate Database</h3></a>
+
+        <hr>
+        <a href="justForMigration.php"><h3>Click To Migrate Database</h3></a>
 
     </body>
 </html>

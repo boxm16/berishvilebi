@@ -38,7 +38,7 @@ $allVersions = $mapVersionController->getAllMapVersions();
                                             }
                                             ?>
                                         </select>
-                                        <h1> <button class="btn btn-primary" type="submit">გადადი ვერსის სანახავად</button></h1>
+                                        <h1> <button class="btn btn-primary" type="submit">გადადი რუქის სანახავად</button></h1>
                                     </td>
                                 </tr>
                             </table>

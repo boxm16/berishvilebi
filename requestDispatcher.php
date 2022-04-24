@@ -10,7 +10,7 @@ require_once 'Controller/PersonController.php';
 if (isset($_POST["authorization"])) {
     $username = $_POST["username"];
     $paswword = $_POST["password"];
-    if ($username == '' && $paswword == '') {
+    if ($username == 'maxo_beri' && $paswword == 'beri!maxo') {
         $_SESSION["authorized"] = "true";
         header("Location: adminMenu.php");
         exit;

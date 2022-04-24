@@ -23,25 +23,25 @@ $allPersons = $personController->getAllPersonsPerGeneration();
                     <center><h1>საბერიშვილო</h1></center>
                     <hr>
                     <center>
-                        <button class="btn btn-primary btn-block">რუქაზე გადასვლა</button>
+                        <button class="btn btn-secondary btn-block" ><a href="menu.php" >მენუში გადასვლა</a></button>
                         <hr>
                         <h3> <input type="text" id="myInput" onkeyup="myFunction()" placeholder="მოიძიე პიროვნება" title="Type in a name">  </h3>
-                    <hr>
-                    <table id="myTable" class="table table-bordered" style="width:700px; font-size:25px" >
-                        <tr class="header">
-                            <th style="width:80%;">სახელი და გვარი</th>
-                            <th style="width:20%;">თაობა</th>
-                        </tr>
-                        <?php
-                        foreach ($allPersons as $person) {
-                            $personId=$person->getId();
-                            $firstName = $person->getFirstName();
-                            $secondName = $person->getSecondName();
-                            $generations = $person->getGeneration();
-                            echo "<tr><td ><a href='personDisplay.php?personId=$personId'>$firstName $secondName</a></td><td>$generations</td></tr>";
-                        }
-                        ?>
-                    </table>
+                        <hr>
+                        <table id="myTable" class="table table-bordered" style="width:700px; font-size:25px" >
+                            <tr class="header">
+                                <th style="width:80%;">სახელი და გვარი</th>
+                                <th style="width:20%;">თაობა</th>
+                            </tr>
+                            <?php
+                            foreach ($allPersons as $person) {
+                                $personId = $person->getId();
+                                $firstName = $person->getFirstName();
+                                $secondName = $person->getSecondName();
+                                $generations = $person->getGeneration();
+                                echo "<tr><td ><a href='personDisplay.php?personId=$personId'>$firstName $secondName</a></td><td>$generations</td></tr>";
+                            }
+                            ?>
+                        </table>
 
                     </center>
                 </div>

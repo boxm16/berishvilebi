@@ -8,6 +8,6 @@
         <?php
         echo "index.php here";
         ?>
-        <h1> <a href="adminMenu.php">ადმინისტრატორის გვერდზე გადასვლა</a></h1>
+        <a href="adminGate.php">ადმინისტრატორისთვის</a>
     </body>
 </html>

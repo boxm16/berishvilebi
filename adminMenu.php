@@ -1,4 +1,10 @@
 <?php
+session_start();
+if ($_SESSION["authorized"] == "true") {
+    //you can go on
+} else {
+    header("Location: adminGate.php?authorizationResult=notAuthorized");
+}
 require_once 'Controller/MapVersionController.php';
 $mapVersionController = new MapVersionController();
 $allVersions = $mapVersionController->getAllMapVersions();
@@ -18,6 +24,8 @@ $allVersions = $mapVersionController->getAllMapVersions();
             <div class="row">
                 <div class="col-sm-12">
                     <center>
+                        <a href="requestDispatcher.php?adminStatus=signOut">ადმინისტრატიული ფუნქციებთან გათიშვა</a>
+                        <hr>
                         <a href="index.php">საწყის გვერდზე გადასვლა</a>
                         <hr>
                         <h1>ადმინისტრატორის მენიუ</h1>

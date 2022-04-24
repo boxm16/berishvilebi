@@ -1,10 +1,39 @@
 <?php
 
+session_start();
 require_once 'Model/MapVersion.php';
 require_once 'Controller/MapVersionController.php';
 require_once 'DAO/PersonDao.php';
 require_once 'Model/Person.php';
 require_once 'Controller/PersonController.php';
+
+if (isset($_POST["authorization"])) {
+    $username = $_POST["username"];
+    $paswword = $_POST["password"];
+    if ($username == '' && $paswword == '') {
+        $_SESSION["authorized"] = "true";
+        header("Location: adminMenu.php");
+        exit;
+    } else {
+        $_SESSION["authorized"] = "false";
+        header("Location: adminGate.php?authorizationResult=fail");
+        exit;
+    }
+}
+if (isset($_GET["adminStatus"])) {
+    if ($_GET["adminStatus"] == "signOut") {
+        unset($_SESSION['authorized']);
+        session_destroy();
+        header("Location: adminGate.php?");
+        exit;
+    }
+}
+
+if ($_SESSION["authorized"] == "true") {
+    //you can go on
+} else {
+    header("Location: adminGate.php?authorizationResult=notAuthorized");
+}
 
 if (isset($_POST["newVersionName"])) {
     $mapVersionName = $_POST["newVersionName"];

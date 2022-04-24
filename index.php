@@ -27,17 +27,18 @@ $allPersons = $personController->getAllPersonsPerGeneration();
                         <hr>
                         <h3> <input type="text" id="myInput" onkeyup="myFunction()" placeholder="მოიძიე პიროვნება" title="Type in a name">  </h3>
                     <hr>
-                    <table id="myTable" class="table table-bordered" style="width:700px">
+                    <table id="myTable" class="table table-bordered" style="width:700px; font-size:25px" >
                         <tr class="header">
                             <th style="width:80%;">სახელი და გვარი</th>
                             <th style="width:20%;">თაობა</th>
                         </tr>
                         <?php
                         foreach ($allPersons as $person) {
+                            $personId=$person->getId();
                             $firstName = $person->getFirstName();
                             $secondName = $person->getSecondName();
                             $generations = $person->getGeneration();
-                            echo "<tr><td>$firstName $secondName</td><td>$generations</td></tr>";
+                            echo "<tr><td ><a href='personDisplay.php?personId=$personId'>$firstName $secondName</a></td><td>$generations</td></tr>";
                         }
                         ?>
                     </table>

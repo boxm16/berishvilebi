@@ -47,7 +47,7 @@ $parentSecondName = $parent->getSecondName()
                 <center>
                     <a href="index.php">საწყისი გვერდი</a>
                     <hr>
-                    <form action="adminMapVersion.php" method="POST">
+                    <form action="map.php" method="POST">
                         <input  name="mapVersionId" hidden value="<?php echo $mapVersionId ?>">
                         <input  name="personInFocusId" hidden value="<?php echo $personId ?>">
                         <button class="btn btn-info" type="submit">რუქაზე ნახვა</button>

@@ -1,5 +1,7 @@
 <?php
-
+echo "opa, που πας";
+exit;
+exit;
 session_start();
 
 require_once 'Model/Person.php';

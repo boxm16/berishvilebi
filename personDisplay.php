@@ -107,7 +107,7 @@ $parentSecondName = $parent->getSecondName()
                                 </td>
                                 <td>
                                     <?php
-                                    if ($lifeStatus == "alice") {
+                                    if ($lifeStatus == "alive") {
                                         echo "ცოცხალი";
                                     } else {
                                         echo "გარდაცვლილი";

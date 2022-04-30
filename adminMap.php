@@ -94,10 +94,13 @@ if (isset($_GET["personInFocusId"])) {
             echo "<svg id='$id' class='movingCircle' name='$name' style='cursor: default' x='$x' y='$y' >";
             echo "<g id='$id'  ondblclick='redirect(event, $id)'>";
            if ($id == 1) {
+                echo "<circle   cx='42' cy='42' r='40' stroke='red' stroke-width='4' fill='yellow' />";
+            } else if ($personInFocusId == $id) {
                 echo "<circle   cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='lime' />";
             } else {
                 echo "<circle   cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='yellow' />";
             }
+
             echo "<text x='42' y='30' text-anchor='middle' fill='black' font-size='15px' font-family='Arial' dy='.3em'>
         $firstName 
         </text>;

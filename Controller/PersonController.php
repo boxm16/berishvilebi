@@ -99,4 +99,20 @@ class PersonController {
         return $allPersonsList;
     }
 
+    public function getGenerationsStatistic() {
+        $generationsStatistic = array();
+        $personDao = new PersonDao();
+        $allPersons = $personDao->getAllPersons();
+        foreach ($allPersons as $person) {
+            $generation = $person->getGeneration();
+            if (array_key_exists($generation, $generationsStatistic)) {
+                $generationsStatistic[$generation] = $generationsStatistic[$generation] + 1;
+            } else {
+                $generationsStatistic[$generation] = 1;
+            }
+        }
+        $generationsStatistic["სულ"] = count($allPersons);
+        return $generationsStatistic;
+    }
+
 }

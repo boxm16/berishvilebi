@@ -25,7 +25,8 @@ $allVersions = $mapVersionController->getAllMapVersions();
                         <h1>მენიუ</h1>
                         <br>
                         <hr>
-                        <form action="map.php" method="GET">
+                        <form action="requestDispatcher.php" method="GET">
+                            <input type ="hidden" name = "map" value="map">
                             <table>
                                 <tr>
                                     <td>
@@ -43,6 +44,8 @@ $allVersions = $mapVersionController->getAllMapVersions();
                                 </tr>
                             </table>
                         </form>
+                        <hr>
+                        <a href="statistics.php">სტატისტიკის ნახვა</a>
                         <hr>
                     </center>
                 </div>  

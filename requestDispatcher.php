@@ -7,6 +7,19 @@ require_once 'DAO/PersonDao.php';
 require_once 'Model/Person.php';
 require_once 'Controller/PersonController.php';
 
+if (isset($_GET["map"])) {
+    if (isset($_SESSION["mapVersionId"])) {
+        
+    } else {
+        $mapVersionId = $_GET["mapVersionId"];
+        $_SESSION["mapVersionId"] = $mapVersionId;
+    }
+    header("Location: map.php");
+    exit;
+}
+
+//----------------BELOW ARE ADMIN FUNCTIONS ----------------
+
 if (isset($_POST["authorization"])) {
     $username = $_POST["username"];
     $paswword = $_POST["password"];
@@ -143,5 +156,7 @@ if (isset($_GET["searchChildrenFor"])) {
     $personDao->addPersonsChildrenToMapVersion($personId, $mapVersionId);
     header("Location: personPageForVersion.php?personId=$personId&mapVersionId=$mapVersionId");
 }
+
+
 var_dump($_POST);
 var_dump($_GET);

@@ -1,9 +1,10 @@
 <?php
+session_start();
 require_once 'Controller/MapVersionController.php';
 require_once 'Controller/PersonController.php';
 
 
-$mapVersionId = 1;
+$mapVersionId = $_SESSION["mapVersionId"];
 
 $mapVersionController = new MapVersionController();
 $mapVersion = $mapVersionController->getMapVersion($mapVersionId);
@@ -85,7 +86,7 @@ if (isset($_GET["personInFocusId"])) {
 
             echo "<svg id='$id' class='movingCircle' name='$name' style='cursor: default' x='$x' y='$y' >";
             echo "<g id='$id'  ondblclick='redirect(event, $id)'>";
-             if ($id == 1) {
+            if ($id == 1) {
                 echo "<circle   cx='42' cy='42' r='40' stroke='red' stroke-width='4' fill='yellow' />";
             } else if ($personInFocusId == $id) {
                 echo "<circle   cx='42' cy='42' r='40' stroke='green' stroke-width='4' fill='lime' />";

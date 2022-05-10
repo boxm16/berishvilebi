@@ -14,10 +14,9 @@ if (isset($_POST["map"])) {
         $mapVersionId = $_POST["mapVersionId"];
         $_SESSION["mapVersionId"] = $mapVersionId;
     }
-
-    header("Location: map.php");
-
+    var_dump($_POST);
     exit;
+    header("Location: map.php");
 }
 
 //----------------BELOW ARE ADMIN FUNCTIONS ----------------

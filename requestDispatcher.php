@@ -7,14 +7,16 @@ require_once 'DAO/PersonDao.php';
 require_once 'Model/Person.php';
 require_once 'Controller/PersonController.php';
 
-if (isset($_GET["map"])) {
+if (isset($_POST["map"])) {
     if (isset($_SESSION["mapVersionId"])) {
         
     } else {
-        $mapVersionId = $_GET["mapVersionId"];
+        $mapVersionId = $_POST["mapVersionId"];
         $_SESSION["mapVersionId"] = $mapVersionId;
     }
+
     header("Location: map.php");
+
     exit;
 }
 

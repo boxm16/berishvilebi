@@ -25,7 +25,7 @@ $allVersions = $mapVersionController->getAllMapVersions();
                         <h1>მენიუ</h1>
                         <br>
                         <hr>
-                        <form action="requestDispatcher.php" method="GET">
+                        <form action="requestDispatcher.php" method="POST">
                             <input type ="hidden" name = "map" value="map">
                             <table>
                                 <tr>

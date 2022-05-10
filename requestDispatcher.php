@@ -8,15 +8,15 @@ require_once 'Model/Person.php';
 require_once 'Controller/PersonController.php';
 
 if (isset($_POST["map"])) {
-    if (isset($_SESSION["mapVersionId"])) {
-        
-    } else {
+    if (isset($_POST["mapVersionId"])) {
         $mapVersionId = $_POST["mapVersionId"];
         $_SESSION["mapVersionId"] = $mapVersionId;
+    } else {
+        header("Location: errorPage.php");
+        exit;
     }
-    var_dump($_POST);
-    exit;
     header("Location: map.php");
+    exit;
 }
 
 //----------------BELOW ARE ADMIN FUNCTIONS ----------------

@@ -5,6 +5,8 @@ require_once 'Model/Person.php';
 
 class PersonController {
 
+    private $descendantsList;
+
     public function getAllPersonsForMap($mapVersionId) {
         $personDao = new PersonDao();
         return $personDao->getAllPersonsForMap($mapVersionId);
@@ -13,6 +15,24 @@ class PersonController {
     public function getPerson($personId, $mapVersionId) {
         $personDao = new PersonDao();
         return $personDao->getPerson($personId, $mapVersionId);
+    }
+
+    public function getPersonAndDescendants($personId) {
+        $generationsMap = array();
+        $descendantsList = $this->getPersonsDescendantsList($personId);
+        foreach ($descendantsList as $person) {
+            $generation = $person->getGeneration();
+            if (array_key_exists($generation, $generationsMap)) {
+                $generationArray = $generationsMap[$generation];
+                array_unshift($generationArray, $person);
+                $generationsMap[$generation] = $generationArray;
+            } else {
+                $generationArray = array();
+                array_push($generationArray, $person);
+                $generationsMap[$generation] = $generationArray;
+            }
+        }
+        return $generationsMap;
     }
 
     public function insertChild($person, $mapVersionId) {
@@ -32,7 +52,7 @@ class PersonController {
     public function getPersonsDescendantsList($id) {
 
         $mainPerson = $this->getPersonsDescendantsTree($id);
-        $this->descendantsList = array($mainPerson);
+        $this->descendantsList = array();
         $this->recurs($mainPerson);
 
         return $this->descendantsList;

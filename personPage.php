@@ -180,6 +180,7 @@ $children = $person->getChildren();
                     ?>
                 </table>
                 <hr>
+                
 
                 <center> <h1>შვილის დამატება</h1></center>
                 <form action="requestDispatcher.php" method="POST">

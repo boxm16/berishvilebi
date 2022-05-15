@@ -13,6 +13,9 @@ $personId = $_GET["personId"];
 $personController = new PersonController;
 $person = $personController->getPerson($personId, $mapVersionId);
 
+$personAndDescendants = $personController->getPersonAndDescendants($personId);
+
+
 $parentId = $person->getParentId();
 $firstName = $person->getFirstName();
 $nickname = $person->getNickname();
@@ -22,7 +25,7 @@ $lifeStatus = $person->getLifeStatus();
 
 $birthDate = $person->getBirthDate();
 $deathDate = $person->getDeathDate();
-$children = $person->getChildren();
+
 
 $parent = $personController->getPerson($parentId, $mapVersionId);
 $parentFirstName = $parent->getFirstName();
@@ -132,21 +135,37 @@ $parentSecondName = $parent->getSecondName()
                     </center>
                 </h3>
                 <hr>
-                <center><h1>შვილები</h1></center>
+                <center><h1>შთამოვავლები</h1></center>
                 <br>
-                <table class="table table-bordered table-striped table-hover table-sm" style="font-size:30px" >
+                <table class="table table-bordered table-hover table-sm" style="font-size:30px" >
 
                     <?php
-                    foreach ($children as $child) {
-                        $childId = $child->getId();
-                        $childsFirstName = $child->getFirstName();
-                        $childsNickname = $child->getNickname();
-                        $childsSecondName = $child->getSecondName();
-                        echo "<tr><td><a href='personDisplay.php?personId=$childId'> $childsFirstName $childsNickname  $childsSecondName</a></td></tr>";
+                    $index = 0;
+                    foreach ($personAndDescendants as $generationArray) {
+                        $innerIndex = $index + 1;
+                        if ($index == 0) {
+                            echo "<tr style='background-color:lightgray '><td>პირველი თაობის შთამომავლები (შვილები) </td></tr>";
+                        } else if ($index == 1) {
+
+                            echo "<tr style='background-color:lightgray '><td>მე $innerIndex თაობის შთამომავლები (შვილიშვილები)</td></tr>";
+                        } else {
+                            echo "<tr style='background-color:lightgray '><td>მე $innerIndex თაობის შთამომავლები</td></tr>";
+                        }
+
+                        foreach ($generationArray as $person) {
+                            $descendantId = $person->getId();
+                            $descendantFirstName = $person->getFirstName();
+                            $descendantNickname = $person->getNickname();
+                            $descendantSecondName = $person->getSecondName();
+                            echo "<tr><td><a href='personDisplay.php?personId=$descendantId'> $descendantFirstName $descendantNickname  $descendantSecondName</a></td></tr>";
+                        }
+                        $index++;
                     }
                     ?>
                 </table>
                 <hr>
+
+
 
             </div>
         </div>

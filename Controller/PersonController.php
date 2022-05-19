@@ -110,7 +110,8 @@ class PersonController {
                 $persons[$x] = $potentialParent;
                 return true;
             }
-        } return false;
+        }
+        return false;
     }
 
     public function getAllPersonsPerGeneration() {
@@ -133,6 +134,42 @@ class PersonController {
         }
         $generationsStatistic["სულ"] = count($allPersons);
         return $generationsStatistic;
+    }
+
+    public function getRelationsip($firstPersonId, $secondPersonId) {
+        echo $firstPersonId;
+        echo "<br>";
+        echo $secondPersonId;
+        $personDao = new PersonDao();
+        $allPersons = $personDao->getAllPersons();
+
+        $firstPerson = $allPersons[$firstPersonId];
+        $secondPerson = $allPersons[$secondPersonId];
+        $firstPersonGeneration = $firstPerson->getGeneration();
+        $secondPersonGeneration = $secondPerson->getGeneration();
+        echo "<hr>";
+        echo $firstPersonGeneration;
+        echo "<br>";
+        echo $secondPersonGeneration;
+        $pathFinder;
+        $stopFlag = true;
+        if ($firstPersonGeneration > $secondPersonGeneration) {
+            //   echo "<br>bolesh";
+            $pathFinder = $firstPerson;
+            while ($stopFlag) {
+                $parentId = $pathFinder->getParentId();
+
+                $stopFlag = false;
+            }
+        }
+        if ($firstPersonGeneration < $secondPersonGeneration) {
+            //    echo "<br>menshe";
+            $pathFinder = $secondPerson;
+        }
+        if ($firstPersonGeneration == $secondPersonGeneration) {
+            //   echo "<br>ison";
+            // echo $firstPersonGeneration."<br>".$secondPersonGeneration;
+        }
     }
 
 }

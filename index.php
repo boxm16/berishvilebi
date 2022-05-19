@@ -18,12 +18,12 @@ $allPersons = $personController->getAllPersonsPerGeneration();
         <div class="container">
             <div class="row">
                 <div class="col-md-auto">
-                    <a href="adminGate.php">ადმინისტრატორისთვის</a>
+                    <a href="index.php">საწყისი გვერდი</a>
                     <hr>
                     <center><h1>საბერიშვილო</h1></center>
                     <hr>
                     <center>
-                        <button class="btn btn-secondary btn-block" ><a href="menu.php" >მენუში გადასვლა</a></button>
+                        <button class="btn btn-secondary btn-block" ><a href="menu.php" ><h2>მენიუში გადასვლა</h2></a></button>
                         <hr>
                         <h3> <input type="text" id="myInput" onkeyup="myFunction()" placeholder="მოიძიე პიროვნება" title="Type in a name">  </h3>
                         <hr>

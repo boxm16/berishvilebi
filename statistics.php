@@ -19,6 +19,9 @@ $generationsStatistic = $personController->getGenerationsStatistic();
             <div class="row">
                 <div class="col-md-auto">
                     <center>  
+                          <a href="index.php"><h4>საწყის გვერდზე გადასვლა</h4></a>
+                          <hr>
+                            <a href="menu.php"><h4>მენიუში დაბრუნება</h4></a>
                         <table style="width: 400px; font-size: 20px" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>  <th>თაობა</th> <th>წარმომადგენელი</th></tr>

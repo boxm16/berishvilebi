@@ -20,11 +20,12 @@ $allVersions = $mapVersionController->getAllMapVersions();
                 <div class="col-sm-12">
                     <center>
 
-                        <a href="index.php">საწყის გვერდზე გადასვლა</a>
+                        <a href="index.php"><h4>საწყის გვერდზე გადასვლა</h4></a>
                         <hr>
                         <h1>მენიუ</h1>
                         <br>
                         <hr>
+                        <h3>რუქები</h3>
                         <form action="requestDispatcher.php" method="POST">
                             <input type ="hidden" name = "map" value="map">
                             <table>
@@ -45,8 +46,9 @@ $allVersions = $mapVersionController->getAllMapVersions();
                             </table>
                         </form>
                         <hr>
-                        <a href="statistics.php">სტატისტიკის ნახვა</a>
+                        <a href="statistics.php"><h3>სტატისტიკის ნახვა</h3></a>
                         <hr>
+                        <a href="relatives.php"> <h3>ნათესაური კავშირები</h3></a>
                     </center>
                 </div>  
             </div>

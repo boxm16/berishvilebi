@@ -2,6 +2,7 @@
 
 require_once 'DAO/PersonDao.php';
 require_once 'Model/Person.php';
+require_once 'Model/Relationship.php';
 
 class PersonController {
 
@@ -137,39 +138,81 @@ class PersonController {
     }
 
     public function getRelationsip($firstPersonId, $secondPersonId) {
-        echo $firstPersonId;
-        echo "<br>";
-        echo $secondPersonId;
-        $personDao = new PersonDao();
-        $allPersons = $personDao->getAllPersons();
+        $relationship;
+        $firstPersonPredecessors = $this->findAllPredecessors($firstPersonId);
+        $secondPersonPredecessors = $this->findAllPredecessors($secondPersonId);
+        if (array_key_exists($firstPersonId, $secondPersonPredecessors)) {
+            $relationship = new Relationship();
+            $relationship->setType("lineal_A");
+            $linealRelatianshipVector = array();
+            foreach ($secondPersonPredecessors as $predecessor) {
 
-        $firstPerson = $allPersons[$firstPersonId];
-        $secondPerson = $allPersons[$secondPersonId];
-        $firstPersonGeneration = $firstPerson->getGeneration();
-        $secondPersonGeneration = $secondPerson->getGeneration();
-        echo "<hr>";
-        echo $firstPersonGeneration;
-        echo "<br>";
-        echo $secondPersonGeneration;
-        $pathFinder;
-        $stopFlag = true;
-        if ($firstPersonGeneration > $secondPersonGeneration) {
-            //   echo "<br>bolesh";
-            $pathFinder = $firstPerson;
-            while ($stopFlag) {
-                $parentId = $pathFinder->getParentId();
+                array_push($linealRelatianshipVector, $predecessor);
+                if ($predecessor->getId() == $firstPersonId) {
+                    $relationship->setLinealRelatianshipVector($linealRelatianshipVector);
+                    break;
+                }
+            }
+            return $relationship;
+        }
+        if (array_key_exists($secondPersonId, $firstPersonPredecessors)) {
+            $relationship = new Relationship();
+            $relationship->setType("lineal_B");
+            $linealRelatianshipVector = array();
+            foreach ($firstPersonPredecessors as $predecessor) {
+                array_push($linealRelatianshipVector, $predecessor);
+                if ($predecessor->getId() == $secondPersonId) {
+                    $relationship->setLinealRelatianshipVector($linealRelatianshipVector);
+                    break;
+                }
+            }
+            return $relationship;
+        }
 
-                $stopFlag = false;
+
+        $relationship = new Relationship();
+        $relationship->setType("Collateral");
+        foreach ($firstPersonPredecessors as $predecessor) {
+            if (array_key_exists($predecessor->getId(), $secondPersonPredecessors)) {
+                $mutualPredecessor = $predecessor;
+                $relationship->setCollatarealRelationshipHead($mutualPredecessor);
+                $mutualPredecessorId = $mutualPredecessor->getId();
+                $collateralRelationshipVector_A = array();
+                $collateralRelationshipVector_B = array();
+
+                foreach ($firstPersonPredecessors as $firstPersonPredecessor) {
+                    array_push($collateralRelationshipVector_A, $firstPersonPredecessor);
+                    if ($firstPersonPredecessor->getId() == $mutualPredecessorId) {
+                        $relationship->setCollateralRelationshipVector_A($collateralRelationshipVector_A);
+                        break;
+                    }
+                }
+                foreach ($secondPersonPredecessors as $secondPersonPredecessor) {
+                    array_push($collateralRelationshipVector_B, $secondPersonPredecessor);
+                    if ($secondPersonPredecessor->getId() == $mutualPredecessorId) {
+                        $relationship->setCollateralRelationshipVector_B($collateralRelationshipVector_B);
+                        break;
+                    }
+                }
+                break;
             }
         }
-        if ($firstPersonGeneration < $secondPersonGeneration) {
-            //    echo "<br>menshe";
-            $pathFinder = $secondPerson;
+        return $relationship;
+    }
+
+    public function findAllPredecessors($personId) {
+        $predecessors = array();
+        $personDao = new PersonDao();
+        $allPersons = $personDao->getAllPersonsMap();
+        $person = $allPersons[$personId];
+        $parentId = $person->getParentId();
+        array_push($predecessors, $person);
+        while ($parentId != 0) {
+            $person = $allPersons[$parentId];
+            $parentId = $person->getParentId();
+            array_push($predecessors, $person);
         }
-        if ($firstPersonGeneration == $secondPersonGeneration) {
-            //   echo "<br>ison";
-            // echo $firstPersonGeneration."<br>".$secondPersonGeneration;
-        }
+        return $predecessors;
     }
 
 }

@@ -243,7 +243,32 @@ class PersonDao {
             $person->setLifeStatus($personData["life_status"]);
             array_push($persons, $person);
         }
+        return $persons;
+    }
 
+    public function getAllPersonsMap() {
+        $persons = array();
+        $sql = "SELECT * FROM person";
+
+        try {
+            $result = $this->connection->query($sql)->fetchAll();
+        } catch (\PDOException $e) {
+            echo $e->getMessage() . " Error Code:";
+            echo $e->getCode() . "<br>";
+        }
+// var_dump($result);
+        $person = new Person();
+        foreach ($result as $personData) {
+            $person = new Person();
+            $person->setId($personData["id"]);
+            $person->setGeneration($personData["generation"]);
+            $person->setParentId($personData["parent_id"]);
+            $person->setFirstName($personData["first_name"]);
+            $person->setNickname($personData["nickname"]);
+            $person->setSecondName($personData["second_name"]);
+            $person->setLifeStatus($personData["life_status"]);
+            $persons[$personData["id"]] = $person;
+        }
         return $persons;
     }
 

@@ -18,7 +18,7 @@ $allPersons = $personController->getAllPersonsPerGeneration();
         <div class="container">
             <div class="row">
                 <div class="col-md-auto">
-                    <a href="index.php">საწყისი გვერდი</a>
+                    <a href="adminGate.php">ადმინისტრატორისთვის</a>
                     <hr>
                     <center><h1>საბერიშვილო</h1></center>
                     <hr>

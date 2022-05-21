@@ -141,6 +141,7 @@ class PersonController {
         $relationship;
         $firstPersonPredecessors = $this->findAllPredecessors($firstPersonId);
         $secondPersonPredecessors = $this->findAllPredecessors($secondPersonId);
+
         if (array_key_exists($firstPersonId, $secondPersonPredecessors)) {
             $relationship = new Relationship();
             $relationship->setType("lineal_A");
@@ -149,6 +150,7 @@ class PersonController {
 
                 array_push($linealRelatianshipVector, $predecessor);
                 if ($predecessor->getId() == $firstPersonId) {
+                    $linealRelatianshipVector = array_reverse($linealRelatianshipVector);
                     $relationship->setLinealRelatianshipVector($linealRelatianshipVector);
                     break;
                 }
@@ -156,12 +158,14 @@ class PersonController {
             return $relationship;
         }
         if (array_key_exists($secondPersonId, $firstPersonPredecessors)) {
+
             $relationship = new Relationship();
             $relationship->setType("lineal_B");
             $linealRelatianshipVector = array();
             foreach ($firstPersonPredecessors as $predecessor) {
                 array_push($linealRelatianshipVector, $predecessor);
                 if ($predecessor->getId() == $secondPersonId) {
+                    $linealRelatianshipVector = array_reverse($linealRelatianshipVector);
                     $relationship->setLinealRelatianshipVector($linealRelatianshipVector);
                     break;
                 }
@@ -169,10 +173,13 @@ class PersonController {
             return $relationship;
         }
 
-
+        //now collateral
         $relationship = new Relationship();
-        $relationship->setType("Collateral");
+        $relationship->setType("collateral");
+
+        //  exit;
         foreach ($firstPersonPredecessors as $predecessor) {
+
             if (array_key_exists($predecessor->getId(), $secondPersonPredecessors)) {
                 $mutualPredecessor = $predecessor;
                 $relationship->setCollatarealRelationshipHead($mutualPredecessor);
@@ -181,17 +188,19 @@ class PersonController {
                 $collateralRelationshipVector_B = array();
 
                 foreach ($firstPersonPredecessors as $firstPersonPredecessor) {
-                    array_push($collateralRelationshipVector_A, $firstPersonPredecessor);
                     if ($firstPersonPredecessor->getId() == $mutualPredecessorId) {
                         $relationship->setCollateralRelationshipVector_A($collateralRelationshipVector_A);
                         break;
+                    } else {
+                        array_push($collateralRelationshipVector_A, $firstPersonPredecessor);
                     }
                 }
                 foreach ($secondPersonPredecessors as $secondPersonPredecessor) {
-                    array_push($collateralRelationshipVector_B, $secondPersonPredecessor);
                     if ($secondPersonPredecessor->getId() == $mutualPredecessorId) {
                         $relationship->setCollateralRelationshipVector_B($collateralRelationshipVector_B);
                         break;
+                    } else {
+                        array_push($collateralRelationshipVector_B, $secondPersonPredecessor);
                     }
                 }
                 break;
@@ -202,15 +211,24 @@ class PersonController {
 
     public function findAllPredecessors($personId) {
         $predecessors = array();
+
         $personDao = new PersonDao();
         $allPersons = $personDao->getAllPersonsMap();
+
         $person = $allPersons[$personId];
+        $predecessors[$personId] = $person;
         $parentId = $person->getParentId();
-        array_push($predecessors, $person);
-        while ($parentId != 0) {
-            $person = $allPersons[$parentId];
-            $parentId = $person->getParentId();
-            array_push($predecessors, $person);
+        if ($parentId != 0) {
+            $predecessors[$parentId] = $allPersons[$parentId];
+
+            while (true) {
+                $person = $allPersons[$parentId];
+                $parentId = $person->getParentId();
+                if ($parentId == 0) {
+                    return $predecessors;
+                }
+                $predecessors[$parentId] = $allPersons[$parentId];
+            }
         }
         return $predecessors;
     }

@@ -29,6 +29,7 @@ if ($relationship->getLinealRelatianshipVector() != null) {
         <title></title>
     </head>
     <body>
+    <center>
         <a href="relatives.php"><h4>უკან დაბრუნება</h4></a>
         <svg style="background-color:skyblue" width="600"  height="<?php echo $svgHeight ?>" ondblclick="redirectToRelativesMenu();">
         <?php
@@ -281,13 +282,13 @@ if ($relationship->getLinealRelatianshipVector() != null) {
         }
         ?>
         </svg>
+    </center>
+    <script>
+        function redirectToRelativesMenu() {
+            document.location.href = "relatives.php";
+            event.stopPropagation();
+        }
 
-        <script>
-            function redirectToRelativesMenu() {
-                document.location.href = "relatives.php";
-                event.stopPropagation();
-            }
-
-        </script>
-    </body>
+    </script>
+</body>
 </html>

@@ -274,23 +274,12 @@ class PersonDao {
 
     public function deletePersons($personsDescendantsList) {
         if (count($personsDescendantsList) > 0) {
-            $sql = "DELETE FROM person WHERE id IN ";
-            $sqlInPart = "(";
-            $index = 0;
+
+            $sql = "";
             foreach ($personsDescendantsList as $person) {
-                $perdonId = $person->getId();
-                $sqlInPart .= $perdonId;
-                if ($index == count($personsDescendantsList) - 1) {
-                    $sqlInPart .= ")";
-                } else {
-                    $sqlInPart .= ",";
-                }
-
-                $index++;
+                $idpersonId = $person->getId();
+                $sql += "DELETE FROM person WHERE id =" + $idpersonId + " ;";
             }
-            $sql .= $sqlInPart;
-
-
             try {
                 $deleted = $this->connection->query($sql);
                 if ($deleted) {
@@ -304,6 +293,41 @@ class PersonDao {
             echo "nobody to delete";
         }
     }
+
+    /*
+      public function deletePersons($personsDescendantsList) {
+      if (count($personsDescendantsList) > 0) {
+      $sql = "DELETE FROM person WHERE id IN ";
+      $sqlInPart = "(";
+      $index = 0;
+      foreach ($personsDescendantsList as $person) {
+      $perdonId = $person->getId();
+      $sqlInPart .= $perdonId;
+      if ($index == count($personsDescendantsList) - 1) {
+      $sqlInPart .= ")";
+      } else {
+      $sqlInPart .= ",";
+      }
+
+      $index++;
+      }
+      $sql .= $sqlInPart;
+
+
+      try {
+      $deleted = $this->connection->query($sql);
+      if ($deleted) {
+      echo "Persons Deleted.";
+      }
+      } catch (\PDOException $e) {
+      echo $e->getMessage() . " Error Code:";
+      echo $e->getCode() . "<br>";
+      }
+      } else {
+      echo "nobody to delete";
+      }
+      }
+     */
 
     public function updatePerson($person) {
         $personId = $person->getId();
@@ -328,7 +352,8 @@ class PersonDao {
         }
     }
 
-    public function addPersonsChildrenToMapVersion($personId, $mapVersionId) {
+    public
+            function addPersonsChildrenToMapVersion($personId, $mapVersionId) {
         $sqlParent = "SELECT * FROM person INNER JOIN version_position ON person.id=version_position.person_id WHERE id=$personId  AND version_id=$mapVersionId;";
         try {
             $result = $this->connection->query($sqlParent)->fetch();

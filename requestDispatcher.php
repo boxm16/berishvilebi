@@ -125,10 +125,14 @@ if (isset($_GET["deleteId"])) {
         exit;
     }
     $personController = new PersonController();
-
-    $personsDescendantsList = $personController->getPersonsDescendantsList($deleteId);
-    $personDao = new PersonDao();
-    $personDao->deletePersons($personsDescendantsList);
+    $person = $personController->getPerson(deleteId, 1);
+    $children = $person->getChildren();
+    if (count($children) > 0) {
+        //do nothing
+    } else {
+        $personDao = new PersonDao();
+        $personDao->deletePerson($deleteId);
+    }
     header("Location: versionMenu.php?mapVersionId=1");
 }
 

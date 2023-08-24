@@ -271,6 +271,7 @@ class PersonDao {
         }
         return $persons;
     }
+    
 
     public function deletePersons($personsDescendantsList) {
         if (count($personsDescendantsList) > 0) {

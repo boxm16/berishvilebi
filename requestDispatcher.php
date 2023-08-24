@@ -127,6 +127,7 @@ if (isset($_GET["deleteId"])) {
     $personController = new PersonController();
     $person = $personController->getPerson(deleteId, 1);
     $children = $person->getChildren();
+    echo ( "COUNT:" + count($children));
     if (count($children) > 0) {
         //do nothing
     } else {
